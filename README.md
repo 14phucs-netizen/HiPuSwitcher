@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <a href="https://14phucs-netizen.github.io/HiPuSwitcher/">
+  <a href="https://phucvang.github.io/HiPuSwitcher/">
     <img src="https://img.shields.io/badge/Website-Trang%20chủ-0071e3?style=for-the-badge" alt="Website" />
   </a>
-  <a href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/latest">
-    <img src="https://img.shields.io/github/v/release/14phucs-netizen/HiPuSwitcher?style=for-the-badge&color=1d1d1f&label=Tải%20về" alt="Latest Release" />
+  <a href="https://github.com/Phucvang/HiPuSwitcher/releases/latest">
+    <img src="https://img.shields.io/github/v/release/Phucvang/HiPuSwitcher?style=for-the-badge&color=1d1d1f&label=Tải%20về" alt="Latest Release" />
   </a>
   <img src="https://img.shields.io/badge/macOS-14%2B-86868b?style=for-the-badge&logo=apple&logoColor=white" alt="macOS 14+" />
 </p>
@@ -77,7 +77,7 @@ Chuyển đổi tức thì giữa **Liquid Glass**, **Blur-Fan**, **Blur-Rectang
 
 ## Tải về & Cài đặt
 
-Tải bản mới nhất tại [**Trang chủ**](https://14phucs-netizen.github.io/HiPuSwitcher/) hoặc [**Releases**](https://github.com/14phucs-netizen/HiPuSwitcher/releases/latest):
+Tải bản mới nhất tại [**Trang chủ**](https://phucvang.github.io/HiPuSwitcher/) hoặc [**Releases**](https://github.com/Phucvang/HiPuSwitcher/releases/latest):
 
 1. Mở file `.dmg` và kéo **HiPu Switcher** vào thư mục **Applications**.
 2. Nếu macOS Gatekeeper hỏi ở lần mở đầu tiên, vào **Cài đặt hệ thống → Quyền riêng tư & Bảo mật → Vẫn mở (Open Anyway)** đúng 1 lần.

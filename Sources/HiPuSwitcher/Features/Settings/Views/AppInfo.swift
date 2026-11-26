@@ -8,13 +8,13 @@ enum AppInfo {
     static let copyright = "© 2026 PhucVang. Bảo lưu mọi quyền."
 
     // Cấu hình nguồn kiểm tra cập nhật (hỗ trợ cả 2: ưu tiên updateManifestURL, dự phòng githubRepo):
-    // 1. GitHub Releases: điền dạng "owner/repo", ví dụ: "14phucs-netizen/HiPuSwitcher"
-    static let githubRepo: String? = "14phucs-netizen/HiPuSwitcher"
+    // 1. GitHub Releases: điền dạng "owner/repo", ví dụ: "Phucvang/HiPuSwitcher"
+    static let githubRepo: String? = "Phucvang/HiPuSwitcher"
     // 2. File JSON riêng: URL HTTPS tới latest.json có dạng {"version":"1.1.0","downloadURL":"https://.../HiPuSwitcher-1.1.0.dmg","releaseNotes":"..."}
-    static let updateManifestURL: URL? = URL(string: "https://raw.githubusercontent.com/14phucs-netizen/HiPuSwitcher/main/latest.json")
+    static let updateManifestURL: URL? = URL(string: "https://raw.githubusercontent.com/Phucvang/HiPuSwitcher/main/latest.json")
 
     // TODO(phát hành): điền thông tin thật.
-    static let websiteURL: URL? = URL(string: "https://github.com/14phucs-netizen/HiPuSwitcher")
+    static let websiteURL: URL? = URL(string: "https://phucvang.github.io/HiPuSwitcher/")
     static let supportEmail: String? = nil                  // ví dụ "support@hipu.app"
     static let privacyPolicyURL: URL? = nil                 // bắt buộc khi đưa lên App Store
     static let termsURL: URL? = nil
