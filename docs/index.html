@@ -4,26 +4,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HiPu Switcher — Chuyển ứng dụng tức thì cho macOS</title>
-  <meta name="description" content="HiPu Switcher — Ứng dụng chuyển đổi và mở nhanh ứng dụng trên macOS theo dạng cánh quạt & thẻ nổi chuẩn Liquid Glass. Phát triển bởi PhucVang." />
+  <meta name="description" content="HiPu Switcher — Launcher cánh quạt & thẻ nổi Liquid Glass cho macOS 14+. Siêu nhẹ, 100% Swift gốc, miễn phí." />
   <link rel="icon" type="image/png" href="assets/app-icon.png" />
-  <meta property="og:title" content="HiPu Switcher — Instant Radial App Switcher for macOS" />
-  <meta property="og:description" content="Chuyển đổi và mở nhanh ứng dụng trên macOS chuẩn Liquid Glass. Miễn phí, siêu nhẹ, 100% Native Swift." />
+  <meta property="og:title" content="HiPu Switcher — Switch apps. Instantly." />
+  <meta property="og:description" content="Launcher cánh quạt Liquid Glass cho macOS 14+. Phát triển bởi PhucVang." />
   <meta property="og:image" content="screenshots/hero-banner.png" />
   <style>
     :root {
-      --bg: #000000;
-      --surface: rgba(255, 255, 255, 0.045);
-      --surface-hover: rgba(255, 255, 255, 0.075);
-      --border: rgba(255, 255, 255, 0.10);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --text: #f5f5f7;
-      --muted: #86868b;
-      --accent: #2997ff;
-      --accent-glow: rgba(41, 151, 255, 0.35);
-      --blue-grad: linear-gradient(135deg, #2563eb 0%, #4f46e5 55%, #38bdf8 100%);
-      --radius-lg: 28px;
-      --radius-md: 20px;
-      --max-w: 1120px;
+      /* Colors */
+      --color-gallery-white: #ffffff;
+      --color-studio-mist: #f5f5f7;
+      --color-paper-frost: #fafafc;
+      --color-hairline-silver: #d6d6d6;
+      --color-control-gray: #e6e6e8;
+      --color-ink: #1d1d1f;
+      --color-slate: #707070;
+      --color-steel: #86868b;
+      --color-apple-blue: #0066cc;
+      --color-pricing-blue: #0071e3;
+      --color-launch-orange: #b64400;
+
+      /* Typography — Font Families */
+      --font-sf-pro-display: 'SF Pro Display', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-sf-pro-text: 'SF Pro Text', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      /* Typography — Scale */
+      --text-global-nav: 12px;
+      --leading-global-nav: 1;
+      --tracking-global-nav: -0.12px;
+      --text-compact-control: 12px;
+      --leading-compact-control: 1.33;
+      --tracking-compact-control: -0.12px;
+      --text-body-small: 14px;
+      --leading-body-small: 1.29;
+      --tracking-body-small: -0.224px;
+      --text-body: 17px;
+      --leading-body: 1.47;
+      --tracking-body: -0.374px;
+      --text-feature-copy: 17px;
+      --leading-feature-copy: 1.24;
+      --tracking-feature-copy: -0.374px;
+      --text-product-nav-title: 19px;
+      --leading-product-nav-title: 1.21;
+      --tracking-product-nav-title: 0.228px;
+      --text-product-kicker: 21px;
+      --leading-product-kicker: 1;
+      --tracking-product-kicker: 0.231px;
+      --text-feature-heading: 40px;
+      --leading-feature-heading: 1.08;
+      --tracking-feature-heading: 0px;
+      --text-hero-display: 80px;
+      --leading-hero-display: 1.05;
+      --tracking-hero-display: -1.2px;
+
+      /* Spacing & Layout */
+      --section-gap: 90px;
+      --card-padding: 28px;
+      --element-gap: 20px;
+      --max-w: 1080px;
+
+      /* Border Radius */
+      --radius-cards: 28px;
+      --radius-links: 10px;
+      --radius-pills: 36px;
+      --radius-images: 28px;
+      --radius-buttons: 9999px;
+      --radius-navigation: 20px;
+
+      /* Hairline Elevation (No cast shadows) */
+      --shadow-subtle: rgb(230, 230, 232) 0px 0px 0px 1px;
+      --shadow-subtle-2: rgb(134, 134, 139) 0px 0px 0px 1px;
     }
 
     * {
@@ -34,18 +84,18 @@
 
     html {
       scroll-behavior: smooth;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--color-gallery-white);
+      color: var(--color-ink);
+      font-family: var(--font-sf-pro-text);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      font-feature-settings: "numr" 0;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--color-gallery-white);
+      color: var(--color-ink);
       overflow-x: hidden;
-      line-height: 1.5;
     }
 
     a {
@@ -53,162 +103,6 @@
       text-decoration: none;
     }
 
-    /* Ambient top aurora */
-    .ambient-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        radial-gradient(60% 45% at 50% -5%, rgba(37, 99, 235, 0.24), transparent 70%),
-        radial-gradient(40% 35% at 85% 20%, rgba(99, 102, 241, 0.14), transparent 70%),
-        radial-gradient(35% 30% at 15% 65%, rgba(14, 165, 233, 0.09), transparent 70%);
-    }
-
-    /* Floating Glass Navbar */
-    .nav-wrap {
-      position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      padding: 0 20px;
-    }
-
-    nav {
-      width: 100%;
-      max-width: var(--max-w);
-      height: 56px;
-      padding: 0 14px 0 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-radius: 999px;
-      background: rgba(18, 18, 22, 0.68);
-      backdrop-filter: saturate(180%) blur(24px);
-      -webkit-backdrop-filter: saturate(180%) blur(24px);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 650;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
-
-    .brand img {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      font-size: 13.5px;
-      color: rgba(245, 245, 247, 0.78);
-    }
-
-    .nav-links a {
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: #ffffff;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .lang-toggle {
-      display: inline-flex;
-      padding: 3px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-    }
-
-    .lang-btn {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 4px 9px;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .lang-btn.active {
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-      white-space: nowrap;
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn-sm {
-      font-size: 13px;
-      padding: 8px 16px;
-    }
-
-    .btn-lg {
-      font-size: 15.5px;
-      padding: 14px 26px;
-    }
-
-    .btn-primary {
-      background: #0071e3;
-      color: #ffffff;
-      box-shadow: 0 6px 24px rgba(0, 113, 227, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.28);
-    }
-
-    .btn-primary:hover {
-      background: #0077ed;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 30px rgba(0, 113, 227, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    }
-
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.08);
-      color: #f5f5f7;
-      border-color: rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(12px);
-    }
-
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.13);
-      border-color: rgba(255, 255, 255, 0.24);
-      transform: translateY(-1px);
-    }
-
-    /* Layout Container */
     .container {
       width: 100%;
       max-width: var(--max-w);
@@ -216,464 +110,690 @@
       padding: 0 24px;
     }
 
-    /* Hero Section */
-    .hero {
-      padding: 144px 0 88px;
-      text-align: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      font-size: 12.5px;
-      font-weight: 500;
-      color: rgba(245, 245, 247, 0.85);
-      margin-bottom: 24px;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #30d158;
-      box-shadow: 0 0 10px #30d158;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.04;
-      margin: 0 auto 20px;
-      max-width: 900px;
-      background: linear-gradient(180deg, #ffffff 15%, #b6b8c4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p.lead {
-      font-size: clamp(17px, 2.2vw, 21px);
-      color: var(--muted);
-      max-width: 650px;
-      margin: 0 auto 34px;
-      letter-spacing: -0.01em;
-    }
-
-    .hero-cta {
+    /* =========================================
+       1. Global Utility Navigation (44px white)
+       ========================================= */
+    .global-nav {
+      height: 44px;
+      background: var(--color-gallery-white);
+      border-bottom: 1px solid var(--color-control-gray);
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 16px;
     }
 
-    .hero-meta {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 52px;
+    .global-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    /* Interactive Stage */
-    .stage-shell {
-      position: relative;
-      border-radius: var(--radius-lg);
-      padding: 10px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.03));
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.75), 0 0 120px rgba(37, 99, 235, 0.18);
+    .global-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: var(--text-global-nav);
+      line-height: var(--leading-global-nav);
+      letter-spacing: var(--tracking-global-nav);
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 400;
     }
 
-    .stage-frame {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #060914;
-      aspect-ratio: 16 / 9;
+    .global-links a:hover {
+      color: var(--color-ink);
     }
 
-    .stage-frame img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.015);
-      transition: opacity 0.45s ease, transform 0.55s ease;
-    }
-
-    .stage-frame img.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .stage-tabs {
+    .global-apple {
       display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      align-items: center;
       gap: 6px;
-      margin-top: 22px;
-      padding: 5px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
+      color: var(--color-ink);
     }
 
-    .stage-tab {
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: var(--text-global-nav);
+      letter-spacing: var(--tracking-global-nav);
+    }
+
+    .lang-btn {
       border: 0;
       background: transparent;
-      color: var(--muted);
-      font-size: 13.5px;
-      font-weight: 600;
-      padding: 9px 18px;
-      border-radius: 999px;
+      color: var(--color-slate);
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-global-nav);
+      letter-spacing: var(--tracking-global-nav);
       cursor: pointer;
-      transition: all 0.22s ease;
+      padding: 4px 2px;
     }
 
-    .stage-tab:hover {
-      color: #ffffff;
-    }
-
-    .stage-tab.active {
-      background: rgba(255, 255, 255, 0.14);
-      color: #ffffff;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    }
-
-    /* Section Headings */
-    section {
-      padding: 84px 0;
-    }
-
-    .sec-head {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .sec-kicker {
-      font-size: 13px;
+    .lang-btn.active {
+      color: var(--color-ink);
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--accent);
+    }
+
+    /* =========================================
+       2. Product Local Navigation (sticky)
+       ========================================= */
+    .local-nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-hairline-silver);
+    }
+
+    .local-nav-inner {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .product-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-sf-pro-display);
+      font-size: var(--text-product-nav-title);
+      font-weight: 600;
+      line-height: var(--leading-product-nav-title);
+      letter-spacing: var(--tracking-product-nav-title);
+      color: var(--color-ink);
+    }
+
+    .product-title img {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+    }
+
+    .local-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Outlined Explore Pill */
+    .pill-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      padding: 0 14px;
+      border-radius: var(--radius-buttons);
+      background: transparent;
+      color: var(--color-ink);
+      box-shadow: var(--shadow-subtle-2);
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-compact-control);
+      font-weight: 400;
+      line-height: var(--leading-compact-control);
+      letter-spacing: var(--tracking-compact-control);
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .pill-outline:hover {
+      background: var(--color-ink);
+      color: var(--color-gallery-white);
+    }
+
+    /* Pricing Blue Pill */
+    .pill-blue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+      padding: 0 14px;
+      border-radius: var(--radius-buttons);
+      background: var(--color-pricing-blue);
+      color: var(--color-gallery-white);
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-compact-control);
+      font-weight: 400;
+      line-height: var(--leading-compact-control);
+      letter-spacing: var(--tracking-compact-control);
+      transition: background 0.18s ease;
+    }
+
+    .pill-blue:hover {
+      background: #0077ed;
+    }
+
+    .pill-blue-md {
+      height: 36px;
+      padding: 0 20px;
+      font-size: var(--text-body-small);
+      letter-spacing: var(--tracking-body-small);
+    }
+
+    /* Apple Blue Inline Link */
+    .apple-link {
+      color: var(--color-apple-blue);
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-body);
+      font-weight: 400;
+      letter-spacing: var(--tracking-body);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .apple-link:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================================
+       3. Hero Product Stage (#ffffff)
+       ========================================= */
+    .hero {
+      background: var(--color-gallery-white);
+      padding: 64px 0 40px;
+      text-align: center;
+    }
+
+    .launch-status {
+      display: block;
+      font-family: var(--font-sf-pro-text);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.33;
+      letter-spacing: -0.12px;
+      color: var(--color-launch-orange);
       margin-bottom: 10px;
     }
 
-    .sec-title {
-      font-size: clamp(30px, 4.6vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.08;
+    .hero-kicker {
+      font-family: var(--font-sf-pro-display);
+      font-size: var(--text-product-kicker);
+      font-weight: 600;
+      line-height: var(--leading-product-kicker);
+      letter-spacing: var(--tracking-product-kicker);
+      color: var(--color-ink);
       margin-bottom: 14px;
     }
 
-    .sec-sub {
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 620px;
+    .hero-display {
+      font-family: var(--font-sf-pro-display);
+      font-size: clamp(44px, 7.2vw, var(--text-hero-display));
+      font-weight: 600;
+      line-height: var(--leading-hero-display);
+      letter-spacing: var(--tracking-hero-display);
+      color: var(--color-ink);
+      max-width: 900px;
+      margin: 0 auto 16px;
+    }
+
+    .hero-sub {
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-slate);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    /* Direct unboxed product visual + floating shadowless callout */
+    .hero-media-wrap {
+      position: relative;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
-    /* Apple Bento Grid */
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
-    }
-
-    .card {
-      position: relative;
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 32px;
-      overflow: hidden;
-      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-    }
-
-    .card:hover {
-      border-color: var(--border-strong);
-      background: var(--surface-hover);
-      transform: translateY(-2px);
-    }
-
-    .span-12 { grid-column: span 12; }
-    .span-7  { grid-column: span 7; }
-    .span-6  { grid-column: span 6; }
-    .span-5  { grid-column: span 5; }
-    .span-4  { grid-column: span 4; }
-
-    .card-badge {
-      display: inline-block;
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #60a5fa;
-      background: rgba(59, 130, 246, 0.14);
-      border: 1px solid rgba(59, 130, 246, 0.28);
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-    }
-
-    .card h3 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.55;
-    }
-
-    .card-media {
-      margin-top: 24px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.10);
-    }
-
-    .card-media img {
+    .hero-media {
       display: block;
       width: 100%;
       height: auto;
+      border-radius: var(--radius-images);
     }
 
-    /* Keycaps mini-showcase */
-    .keycap-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .keycap-item {
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .kbd-row {
+    .floating-callout {
+      position: relative;
+      margin: -34px auto 0;
+      width: fit-content;
+      max-width: calc(100% - 32px);
+      background: var(--color-gallery-white);
+      border-radius: var(--radius-cards);
+      box-shadow: var(--shadow-subtle);
+      padding: 12px 16px 12px 22px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 18px;
+      z-index: 2;
     }
 
-    kbd {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 34px;
-      height: 32px;
-      padding: 0 10px;
-      border-radius: 9px;
-      font-family: inherit;
-      font-size: 13px;
+    .callout-copy {
+      text-align: left;
+    }
+
+    .callout-primary {
+      font-size: var(--text-body-small);
       font-weight: 600;
-      color: #ffffff;
-      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.22);
+      line-height: var(--leading-body-small);
+      letter-spacing: var(--tracking-body-small);
+      color: var(--color-ink);
     }
 
-    .keycap-item span {
-      font-size: 12.5px;
-      color: var(--muted);
+    .callout-secondary {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.33;
+      letter-spacing: -0.12px;
+      color: var(--color-slate);
     }
 
-    /* Stats strip */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    /* =========================================
+       4. In-Page Section Anchor Navigation
+       ========================================= */
+    .anchor-nav {
+      background: var(--color-gallery-white);
+      padding: 28px 0;
+      border-bottom: 1px solid var(--color-control-gray);
+    }
+
+    .anchor-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .anchor-list a {
+      font-family: var(--font-sf-pro-text);
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 25px;
+      letter-spacing: -0.374px;
+      color: var(--color-ink);
+      transition: color 0.18s ease;
+    }
+
+    .anchor-list a:hover {
+      color: var(--color-apple-blue);
+    }
+
+    /* =========================================
+       5. Highlights Carousel Stage (#f5f5f7)
+       ========================================= */
+    .band-mist {
+      background: var(--color-studio-mist);
+      padding: var(--section-gap) 0;
+    }
+
+    .band-white {
+      background: var(--color-gallery-white);
+      padding: var(--section-gap) 0;
+    }
+
+    .section-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
       gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .section-heading {
+      font-family: var(--font-sf-pro-display);
+      font-size: clamp(28px, 4vw, var(--text-feature-heading));
+      font-weight: 600;
+      line-height: var(--leading-feature-heading);
+      letter-spacing: var(--tracking-feature-heading);
+      color: var(--color-ink);
+    }
+
+    /* Shadowless 28px White Feature Media Card */
+    .highlight-stage {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-cards);
+      background: var(--color-gallery-white);
+    }
+
+    .highlight-slide {
+      display: none;
+      padding: 36px 36px 28px;
+    }
+
+    .highlight-slide.active {
+      display: block;
+    }
+
+    .highlight-caption {
+      font-family: var(--font-sf-pro-display);
+      font-size: clamp(21px, 2.4vw, 28px);
+      font-weight: 600;
+      line-height: 1.21;
+      letter-spacing: 0px;
+      color: var(--color-ink);
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-slide img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-images);
+    }
+
+    /* Carousel Playback Control (Apple translucent 36px pill) */
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
       margin-top: 24px;
     }
 
-    .stat {
-      padding: 20px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
+    .carousel-track {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      height: 40px;
+      padding: 0 18px;
+      border-radius: var(--radius-pills);
+      background: rgba(210, 210, 215, 0.64);
     }
 
-    .stat strong {
-      display: block;
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: linear-gradient(180deg, #fff, #9ca3af);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 4px;
+    .dot-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .stat span {
-      font-size: 13px;
-      color: var(--muted);
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      border: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.24);
+      cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease;
     }
 
-    /* Install Steps */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .dot.active {
+      width: 24px;
+      background: var(--color-ink);
     }
 
-    .step-num {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+    .play-btn {
+      width: 24px;
+      height: 24px;
+      border: 0;
+      background: transparent;
+      color: rgba(0, 0, 0, 0.56);
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 15px;
-      background: rgba(0, 113, 227, 0.18);
-      color: #60a5fa;
-      border: 1px solid rgba(96, 165, 250, 0.35);
+      font-size: 11px;
+    }
+
+    /* =========================================
+       6. Editorial Feature Blocks
+       ========================================= */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .editorial-kicker {
+      font-family: var(--font-sf-pro-display);
+      font-size: var(--text-product-kicker);
+      font-weight: 600;
+      line-height: var(--leading-product-kicker);
+      letter-spacing: var(--tracking-product-kicker);
+      color: var(--color-ink);
+      margin-bottom: 12px;
+    }
+
+    .editorial-title {
+      font-family: var(--font-sf-pro-display);
+      font-size: clamp(28px, 3.6vw, var(--text-feature-heading));
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: 0px;
+      color: var(--color-ink);
       margin-bottom: 16px;
     }
 
-    /* Coffee Support Card */
-    .coffee-card {
+    .editorial-copy {
+      font-family: var(--font-sf-pro-text);
+      font-size: var(--text-feature-copy);
+      font-weight: 400;
+      line-height: var(--leading-feature-copy);
+      letter-spacing: var(--tracking-feature-copy);
+      color: var(--color-slate);
+      margin-bottom: 20px;
+    }
+
+    .editorial-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--color-hairline-silver);
+    }
+
+    .editorial-points li {
+      font-size: var(--text-body-small);
+      line-height: var(--leading-body-small);
+      letter-spacing: var(--tracking-body-small);
+      color: var(--color-ink);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .editorial-points li span.dim {
+      color: var(--color-slate);
+    }
+
+    .editorial-media {
+      width: 100%;
+      border-radius: var(--radius-images);
+      display: block;
+    }
+
+    /* Keycap inline tokens (clean light Apple style) */
+    .kbd-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .kbd-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 9999px;
+      background: var(--color-gallery-white);
+      box-shadow: var(--shadow-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink);
+    }
+
+    /* =========================================
+       7. Specs Hairline Strip + 3-Step Install
+       ========================================= */
+    .spec-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--color-hairline-silver);
+      border-bottom: 1px solid var(--color-hairline-silver);
+      margin-bottom: 64px;
+    }
+
+    .spec-cell {
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .spec-cell + .spec-cell {
+      border-left: 1px solid var(--color-control-gray);
+    }
+
+    .spec-val {
+      font-family: var(--font-sf-pro-display);
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--color-ink);
+      margin-bottom: 6px;
+    }
+
+    .spec-lbl {
+      font-size: 13px;
+      color: var(--color-slate);
+      letter-spacing: -0.12px;
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--element-gap);
+    }
+
+    .install-card {
+      background: var(--color-studio-mist);
+      border-radius: var(--radius-cards);
+      padding: var(--card-padding);
+    }
+
+    .step-index {
+      font-family: var(--font-sf-pro-text);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.12px;
+      color: var(--color-apple-blue);
+      margin-bottom: 10px;
+    }
+
+    .install-card h3 {
+      font-family: var(--font-sf-pro-display);
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--color-ink);
+      margin-bottom: 8px;
+    }
+
+    .install-card p {
+      font-size: var(--text-body-small);
+      line-height: 1.45;
+      letter-spacing: var(--tracking-body-small);
+      color: var(--color-slate);
+    }
+
+    /* =========================================
+       8. Support & FAQ (#f5f5f7)
+       ========================================= */
+    .support-card {
+      background: var(--color-gallery-white);
+      border-radius: var(--radius-cards);
+      padding: 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 32px;
-      padding: 36px 40px;
-      border-radius: var(--radius-lg);
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(96, 165, 250, 0.25);
+      margin-bottom: 64px;
     }
 
-    .coffee-qr {
+    .support-qr {
       flex-shrink: 0;
-      background: #ffffff;
       padding: 10px;
-      border-radius: 16px;
+      border-radius: 20px;
+      background: var(--color-gallery-white);
+      box-shadow: var(--shadow-subtle);
       cursor: zoom-in;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
-      transition: transform 0.2s ease;
     }
 
-    .coffee-qr:hover {
-      transform: scale(1.04);
-    }
-
-    .coffee-qr img {
+    .support-qr img {
       display: block;
-      width: 132px;
-      height: 132px;
-      border-radius: 8px;
+      width: 124px;
+      height: 124px;
+      border-radius: 10px;
     }
 
-    /* FAQ Accordion */
-    .faq-list {
-      max-width: 780px;
+    .faq-wrap {
+      max-width: 760px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
     }
 
-    details {
-      border-radius: 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 20px 24px;
-      transition: background 0.2s ease, border-color 0.2s ease;
+    .faq-wrap details {
+      border-top: 1px solid var(--color-hairline-silver);
+      padding: 20px 0;
     }
 
-    details[open] {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--border-strong);
+    .faq-wrap details:last-child {
+      border-bottom: 1px solid var(--color-hairline-silver);
     }
 
-    summary {
+    .faq-wrap summary {
       list-style: none;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
+      font-family: var(--font-sf-pro-text);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.374px;
+      color: var(--color-ink);
     }
 
-    summary::-webkit-details-marker {
+    .faq-wrap summary::-webkit-details-marker {
       display: none;
     }
 
-    summary::after {
+    .faq-wrap summary::after {
       content: "+";
       font-size: 20px;
       font-weight: 400;
-      color: var(--muted);
-      transition: transform 0.25s ease;
+      color: var(--color-slate);
+      transition: transform 0.2s ease;
     }
 
-    details[open] summary::after {
+    .faq-wrap details[open] summary::after {
       transform: rotate(45deg);
-      color: #ffffff;
     }
 
-    details p {
-      margin-top: 12px;
-      font-size: 14.5px;
-      color: var(--muted);
-      line-height: 1.65;
+    .faq-wrap details p {
+      margin-top: 10px;
+      font-size: var(--text-body-small);
+      line-height: 1.5;
+      letter-spacing: var(--tracking-body-small);
+      color: var(--color-slate);
     }
 
-    /* Final CTA + Footer */
-    .final-cta {
-      text-align: center;
-      padding: 96px 24px;
-      border-radius: 36px;
-      background: radial-gradient(75% 90% at 50% 0%, rgba(37, 99, 235, 0.24), rgba(255, 255, 255, 0.02));
-      border: 1px solid var(--border);
-    }
-
-    .final-cta img {
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 12px 36px rgba(37, 99, 235, 0.45);
-    }
-
-    .final-cta h2 {
-      font-size: clamp(30px, 4.5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 14px;
-    }
-
-    .final-cta p {
-      color: var(--muted);
-      font-size: 17px;
-      margin-bottom: 28px;
-    }
-
+    /* =========================================
+       9. Footer (#f5f5f7)
+       ========================================= */
     footer {
-      padding: 40px 0 56px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 72px;
-      color: var(--muted);
-      font-size: 13px;
+      background: var(--color-studio-mist);
+      border-top: 1px solid var(--color-hairline-silver);
+      padding: 28px 0 40px;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: -0.12px;
+      color: var(--color-slate);
     }
 
     .footer-inner {
@@ -690,10 +810,11 @@
     }
 
     .footer-links a:hover {
-      color: #ffffff;
+      color: var(--color-ink);
+      text-decoration: underline;
     }
 
-    /* QR Zoom Modal */
+    /* QR Modal */
     .modal {
       position: fixed;
       inset: 0;
@@ -701,8 +822,8 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(14px);
+      background: rgba(29, 29, 31, 0.48);
+      backdrop-filter: blur(12px);
       padding: 24px;
     }
 
@@ -711,370 +832,363 @@
     }
 
     .modal-box {
-      background: #141418;
-      border: 1px solid var(--border-strong);
-      border-radius: 24px;
+      background: var(--color-gallery-white);
+      border-radius: var(--radius-cards);
       padding: 24px;
       text-align: center;
-      max-width: 340px;
-    }
-
-    .modal-box .qr-wrap {
-      background: #ffffff;
-      padding: 14px;
-      border-radius: 16px;
-      margin-bottom: 14px;
+      max-width: 320px;
     }
 
     .modal-box img {
       display: block;
       width: 240px;
       height: 240px;
-      margin: 0 auto;
+      margin: 0 auto 12px;
+      border-radius: 12px;
     }
 
     .modal-box p {
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    /* Scroll Reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+      font-size: 13px;
+      color: var(--color-slate);
     }
 
     /* Responsive */
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; }
-      .steps { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-      .coffee-card { flex-direction: column; text-align: center; padding: 28px 24px; }
+    @media (max-width: 860px) {
+      .global-links a:not(.global-apple) { display: none; }
+      .editorial-grid { grid-template-columns: 1fr; gap: 28px; }
+      .spec-strip { grid-template-columns: repeat(2, 1fr); }
+      .spec-cell:nth-child(3) { border-left: 0; border-top: 1px solid var(--color-control-gray); }
+      .spec-cell:nth-child(4) { border-top: 1px solid var(--color-control-gray); }
+      .install-grid { grid-template-columns: 1fr; }
+      .support-card { flex-direction: column; text-align: center; }
+      .floating-callout { flex-direction: column; text-align: center; padding: 16px 20px; gap: 10px; margin-top: 16px; }
+      .callout-copy { text-align: center; }
+      .highlight-slide { padding: 24px 20px 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="ambient-bg"></div>
 
-  <!-- Floating Apple Glass Header -->
-  <div class="nav-wrap">
-    <nav>
-      <a href="#" class="brand">
-        <img src="assets/app-icon.png" alt="HiPu Switcher Icon" />
-        <span>HiPu Switcher</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="#features" data-i18n="nav_features">Tính năng</a>
+  <!-- 1. Global Utility Navigation (44px) -->
+  <div class="global-nav">
+    <div class="container global-nav-inner">
+      <div class="global-links">
+        <a href="#" class="global-apple" aria-label="HiPu Switcher">
+          <svg width="13" height="15" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
+            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.13-1.9-14.34-6.08-3.69-3.03-7.61-7.82-11.77-14.37-5.93-9.27-10.72-20.03-14.38-32.28-3.66-12.24-5.49-23.97-5.49-35.19 0-13.18 3.31-24.16 9.93-32.92 6.62-8.76 15.05-13.31 25.29-13.66 4.92 0 10.67 1.48 17.26 4.44 6.59 2.96 10.83 4.47 12.73 4.53 1.45 0 6.13-1.76 14.03-5.28 7.9-3.52 14.56-4.97 19.99-4.36 14.77 1.19 25.88 7.01 33.33 17.46-13.21 8.01-19.72 19.22-19.53 33.62.19 11.22 4.21 20.56 12.06 28.01 3.63 3.45 7.83 6.12 12.61 8.02-1.01 2.95-2.07 5.79-3.18 8.53zM119.22 31.01c0 8.8-3.21 17.01-9.62 24.61-7.73 9.03-17.09 14.24-27.25 13.42-.13-1.05-.21-2.16-.21-3.32 0-8.44 3.67-17.48 11.01-25.8 3.5-3.99 7.95-7.31 13.35-9.96 5.4-2.64 10.5-4.1 15.3-4.36.28 1.84.42 3.64.42 5.41z"/>
+          </svg>
+        </a>
+        <a href="#highlights" data-i18n="nav_highlights">Điểm nổi bật</a>
+        <a href="#styles" data-i18n="nav_styles">Phong cách</a>
+        <a href="#triggers" data-i18n="nav_triggers">Kích hoạt</a>
         <a href="#install" data-i18n="nav_install">Cài đặt</a>
-        <a href="#support" data-i18n="nav_support">Ủng hộ</a>
         <a href="#faq">FAQ</a>
       </div>
 
-      <div class="nav-actions">
-        <div class="lang-toggle" role="group" aria-label="Language">
-          <button class="lang-btn active" data-lang="vi">VN</button>
-          <button class="lang-btn" data-lang="en">EN</button>
-        </div>
-        <a class="btn btn-primary btn-sm download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
-          <span data-i18n="nav_download">Tải về</span>
-        </a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="vi">Tiếng Việt</button>
+        <span style="color: var(--color-hairline-silver);">|</span>
+        <button class="lang-btn" data-lang="en">English</button>
       </div>
-    </nav>
+    </div>
   </div>
 
-  <!-- Hero Section -->
+  <!-- 2. Product Local Navigation -->
+  <nav class="local-nav" aria-label="HiPu Switcher">
+    <div class="container local-nav-inner">
+      <a href="#" class="product-title">
+        <img src="assets/app-icon.png" alt="HiPu Switcher" />
+        <span>HiPu Switcher</span>
+      </a>
+      <div class="local-controls">
+        <a class="pill-outline" href="https://github.com/14phucs-netizen/HiPuSwitcher" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill-blue download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg" data-i18n="nav_download">Tải miễn phí</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 3. Hero Product Stage (#ffffff) -->
   <header class="hero">
     <div class="container">
-      <div class="eyebrow">
-        <span class="eyebrow-dot"></span>
-        <span data-i18n="hero_eyebrow">macOS 14+ · Chuẩn Liquid Glass · Miễn phí 100%</span>
-      </div>
-
-      <h1 data-i18n="hero_title">Chuyển ứng dụng.<br />Nhanh như suy nghĩ.</h1>
-      <p class="lead" data-i18n="hero_sub">
-        Launcher cánh quạt &amp; thẻ nổi Liquid Glass dành riêng cho macOS. Mở ngay tại con trỏ chuột, chuyển Space tức thì, gọn nhẹ chuẩn Apple Native.
+      <span class="launch-status" id="launch-status" data-i18n="hero_new">Mới · v1.0.0</span>
+      <p class="hero-kicker">HiPu Switcher</p>
+      <h1 class="hero-display" data-i18n="hero_title">Chuyển ứng dụng.<br />Tức thì.</h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        Launcher cánh quạt chuẩn Liquid Glass cho macOS. Gọi ngay tại con trỏ, lướt đúng Space, gọn nhẹ 3 MB.
       </p>
 
-      <div class="hero-cta">
-        <a class="btn btn-primary btn-lg download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
-          <svg width="16" height="18" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true">
-            <path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.13-1.9-14.34-6.08-3.69-3.03-7.61-7.82-11.77-14.37-5.93-9.27-10.72-20.03-14.38-32.28-3.66-12.24-5.49-23.97-5.49-35.19 0-13.18 3.31-24.16 9.93-32.92 6.62-8.76 15.05-13.31 25.29-13.66 4.92 0 10.67 1.48 17.26 4.44 6.59 2.96 10.83 4.47 12.73 4.53 1.45 0 6.13-1.76 14.03-5.28 7.9-3.52 14.56-4.97 19.99-4.36 14.77 1.19 25.88 7.01 33.33 17.46-13.21 8.01-19.72 19.22-19.53 33.62.19 11.22 4.21 20.56 12.06 28.01 3.63 3.45 7.83 6.12 12.61 8.02-1.01 2.95-2.07 5.79-3.18 8.53zM119.22 31.01c0 8.8-3.21 17.01-9.62 24.61-7.73 9.03-17.09 14.24-27.25 13.42-.13-1.05-.21-2.16-.21-3.32 0-8.44 3.67-17.48 11.01-25.8 3.5-3.99 7.95-7.31 13.35-9.96 5.4-2.64 10.5-4.1 15.3-4.36.28 1.84.42 3.64.42 5.41z"/>
-          </svg>
-          <span data-i18n="hero_download">Tải về cho macOS (.dmg)</span>
-        </a>
-        <a class="btn btn-glass btn-lg" href="https://github.com/14phucs-netizen/HiPuSwitcher" target="_blank" rel="noopener">
-          <span data-i18n="hero_github">Xem trên GitHub</span>
-        </a>
-      </div>
+      <div class="hero-media-wrap">
+        <img class="hero-media" src="screenshots/hero-banner.png" alt="HiPu Switcher Liquid Glass" />
 
-      <div class="hero-meta">
-        <span id="version-badge">v1.0.0</span> · <span>macOS 14+ (Apple Silicon &amp; Intel)</span> · <span data-i18n="hero_free">Miễn phí · Không quảng cáo</span>
-      </div>
-
-      <!-- Interactive Product Stage -->
-      <div class="stage-shell reveal">
-        <div class="stage-frame">
-          <img src="screenshots/hero-banner.png" alt="HiPu Switcher Liquid Glass Hero" class="active" data-slide="0" />
-          <img src="screenshots/styles-showcase.png" alt="4 phong cách hiển thị" data-slide="1" />
-          <img src="screenshots/triggers-and-spaces.png" alt="Phím tắt & Chuyển Space thông minh" data-slide="2" />
+        <!-- Floating Callout Capsule (#ffffff, 28px, shadowless) -->
+        <div class="floating-callout">
+          <div class="callout-copy">
+            <div class="callout-primary" data-i18n="callout_main">Miễn phí cho macOS 14+</div>
+            <div class="callout-secondary"><span id="version-text">v1.0.0</span> · Apple Silicon &amp; Intel · 3.0 MB</div>
+          </div>
+          <a class="pill-blue pill-blue-md download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg" data-i18n="callout_btn">Tải về (.dmg)</a>
         </div>
-      </div>
-
-      <div class="stage-tabs" role="tablist">
-        <button class="stage-tab active" data-target="0" data-i18n="tab_overview">Tổng quan</button>
-        <button class="stage-tab" data-target="1" data-i18n="tab_styles">4 Phong cách</button>
-        <button class="stage-tab" data-target="2" data-i18n="tab_triggers">Phím tắt &amp; Space</button>
       </div>
     </div>
   </header>
 
-  <!-- Bento Features Section -->
-  <section id="features">
+  <!-- 4. In-Page Section Anchor Navigation -->
+  <div class="anchor-nav">
     <div class="container">
-      <div class="sec-head reveal">
-        <div class="sec-kicker" data-i18n="feat_kicker">Thiết kế cho tốc độ</div>
-        <h2 class="sec-title" data-i18n="feat_title">Mọi thứ bạn cần.<br />Không gì dư thừa.</h2>
-        <p class="sec-sub" data-i18n="feat_sub">Viết 100% bằng Swift &amp; SwiftUI gốc, tích hợp sâu vào Liquid Glass và hệ thống Space của macOS.</p>
-      </div>
-
-      <div class="bento">
-        <!-- Card 1: 4 Signature Styles -->
-        <div class="card span-12 reveal">
-          <span class="card-badge" data-i18n="c1_badge">Liquid Glass &amp; Blur</span>
-          <h3 data-i18n="c1_title">4 phong cách có sẵn — tuỳ biến tới từng chi tiết</h3>
-          <p data-i18n="c1_desc">Chuyển đổi tức thì giữa <strong>Liquid Glass</strong>, <strong>Blur-Fan</strong>, <strong>Blur-Rectangle</strong> và <strong>Non-Background</strong>. Tuỳ chỉnh độ đục, viền thẻ, bán kính, góc xoè và lưu cấu hình yêu thích của riêng bạn.</p>
-          <div class="card-media">
-            <img src="screenshots/styles-showcase.png" alt="Four Signature Styles" loading="lazy" />
-          </div>
-        </div>
-
-        <!-- Card 2: Flexible Triggers -->
-        <div class="card span-6 reveal">
-          <span class="card-badge" data-i18n="c2_badge">Kích hoạt mọi nơi</span>
-          <h3 data-i18n="c2_title">Mở ngay tại vị trí con trỏ</h3>
-          <p data-i18n="c2_desc">Không cần với tay lên góc màn hình hay bấm ⌘Tab nhiều lần. Chọn tổ hợp phím quen thuộc nhất với bạn.</p>
-          <div class="keycap-grid">
-            <div class="keycap-item">
-              <div class="kbd-row"><kbd>fn</kbd><kbd>⇧</kbd></div>
-              <span data-i18n="k1">Mở nhanh một tay</span>
-            </div>
-            <div class="keycap-item">
-              <div class="kbd-row"><kbd>⇧</kbd><kbd>⇧</kbd></div>
-              <span data-i18n="k2">Nhấn đúp ⇧ / ⌥ / ⌘</span>
-            </div>
-            <div class="keycap-item">
-              <div class="kbd-row"><kbd>⌥</kbd><kbd>Space</kbd></div>
-              <span data-i18n="k3">Phím tắt tuỳ chỉnh</span>
-            </div>
-            <div class="keycap-item">
-              <div class="kbd-row"><kbd>Mouse 3</kbd></div>
-              <span data-i18n="k4">Bấm con lăn chuột</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Smart Spaces + Finder -->
-        <div class="card span-6 reveal">
-          <span class="card-badge" data-i18n="c3_badge">Đa màn hình nền</span>
-          <h3 data-i18n="c3_title">Chuyển Space mượt mà · Finder mở tại chỗ</h3>
-          <p data-i18n="c3_desc">Nhấn vào ứng dụng đang chạy ở Màn hình nền khác sẽ lướt thẳng sang đúng Space đó. Riêng <strong>Finder</strong> luôn mở thư mục <em>Tải về</em> ngay tại Space hiện tại — không bao giờ kéo bạn về màn hình cũ.</p>
-          <div class="card-media">
-            <img src="screenshots/triggers-and-spaces.png" alt="Smart Space Switching" loading="lazy" />
-          </div>
-        </div>
-
-        <!-- Card 4: Native & Privacy -->
-        <div class="card span-12 reveal">
-          <span class="card-badge" data-i18n="c4_badge">Native · Riêng tư</span>
-          <h3 data-i18n="c4_title">Siêu nhẹ, an toàn và tự kiểm tra cập nhật</h3>
-          <p data-i18n="c4_desc">Không Electron, không theo dõi người dùng, bật sẵn Hardened Runtime, hỗ trợ song ngữ Tiếng Việt / English tức thì và tự động thông báo khi có phiên bản mới trên GitHub Releases.</p>
-          <div class="stats">
-            <div class="stat">
-              <strong>3.0 MB</strong>
-              <span data-i18n="s1">Dung lượng cài đặt</span>
-            </div>
-            <div class="stat">
-              <strong>100%</strong>
-              <span data-i18n="s2">Swift &amp; SwiftUI gốc</span>
-            </div>
-            <div class="stat">
-              <strong>0%</strong>
-              <span data-i18n="s3">Tracking / Quảng cáo</span>
-            </div>
-            <div class="stat">
-              <strong>VN / EN</strong>
-              <span data-i18n="s4">Đổi ngôn ngữ tức thì</span>
-            </div>
-          </div>
-        </div>
+      <div class="anchor-list">
+        <a href="#highlights" data-i18n="nav_highlights">Điểm nổi bật</a>
+        <a href="#styles" data-i18n="nav_styles">Phong cách</a>
+        <a href="#triggers" data-i18n="nav_triggers">Kích hoạt &amp; Space</a>
+        <a href="#install" data-i18n="nav_install">Cài đặt</a>
+        <a href="#support" data-i18n="nav_support">Ủng hộ</a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- 3-Step Installation -->
-  <section id="install">
+  <!-- 5. Highlights Carousel Stage (#f5f5f7) -->
+  <section id="highlights" class="band-mist">
     <div class="container">
-      <div class="sec-head reveal">
-        <div class="sec-kicker" data-i18n="inst_kicker">Bắt đầu ngay</div>
-        <h2 class="sec-title" data-i18n="inst_title">Cài đặt trong 15 giây</h2>
-      </div>
-
-      <div class="steps">
-        <div class="card reveal">
-          <div class="step-num">1</div>
-          <h3 data-i18n="st1_t">Tải &amp; kéo vào Applications</h3>
-          <p data-i18n="st1_d">Mở file <code>HiPuSwitcher.dmg</code> và kéo biểu tượng <strong>HiPu Switcher</strong> thả vào thư mục <strong>Applications</strong>.</p>
-        </div>
-
-        <div class="card reveal">
-          <div class="step-num">2</div>
-          <h3 data-i18n="st2_t">Mở ứng dụng lần đầu</h3>
-          <p data-i18n="st2_d">Nếu macOS hiển thị cảnh báo Gatekeeper, vào <em>Cài đặt hệ thống → Quyền riêng tư &amp; Bảo mật → bấm Vẫn mở (Open Anyway)</em> đúng 1 lần.</p>
-        </div>
-
-        <div class="card reveal">
-          <div class="step-num">3</div>
-          <h3 data-i18n="st3_t">Cấp quyền Trợ năng</h3>
-          <p data-i18n="st3_d">Bấm <strong>Cấp quyền</strong> trên màn hình chào mừng và bật công tắc <strong>HiPuSwitcher</strong> trong Trợ năng để sử dụng đầy đủ phím tắt.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Support / Buy Coffee -->
-  <section id="support">
-    <div class="container">
-      <div class="coffee-card reveal">
-        <div>
-          <span class="card-badge" data-i18n="sup_badge">Ủng hộ tác giả</span>
-          <h3 style="font-size: 28px; margin-bottom: 10px;" data-i18n="sup_title">Mời PhucVang một tách cà phê ☕️</h3>
-          <p style="color: var(--muted); max-width: 560px; font-size: 15.5px;" data-i18n="sup_desc">
-            HiPu Switcher được phát triển và chia sẻ hoàn toàn miễn phí. Nếu ứng dụng giúp công việc hằng ngày trên Mac của bạn nhanh và vui hơn, hãy quét mã QR bên cạnh để tiếp thêm động lực cho các bản cập nhật tiếp theo nhé!
-          </p>
-        </div>
-        <div class="coffee-qr" id="open-qr" title="Bấm để phóng to mã QR">
-          <img src="assets/donate-qr.png" alt="Donate QR Code - PhucVang" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <div class="sec-head reveal">
-        <div class="sec-kicker">FAQ</div>
-        <h2 class="sec-title" data-i18n="faq_title">Câu hỏi thường gặp</h2>
-      </div>
-
-      <div class="faq-list">
-        <details class="reveal">
-          <summary data-i18n="q1">HiPu Switcher có miễn phí không?</summary>
-          <p data-i18n="a1">Có, hoàn toàn miễn phí và không có quảng cáo hay giới hạn tính năng. Bạn có thể tải về và dùng ngay, hoặc mời tác giả một tách cà phê nếu thấy hữu ích.</p>
-        </details>
-
-        <details class="reveal">
-          <summary data-i18n="q2">Tại sao ứng dụng cần quyền Trợ năng (Accessibility)?</summary>
-          <p data-i18n="a2">macOS yêu cầu quyền Trợ năng để ứng dụng có thể lắng nghe phím tắt bổ trợ toàn cục như <code>fn + Shift</code>, nhấn đúp <code>⇧ / ⌥ / ⌘</code> hoặc chuột giữa khi bạn đang làm việc trên các ứng dụng khác. Ứng dụng không ghi lại nội dung gõ phím và không gửi bất kỳ dữ liệu nào ra ngoài.</p>
-        </details>
-
-        <details class="reveal">
-          <summary data-i18n="q3">Mở lần đầu macOS báo "không thể kiểm tra phần mềm độc hại" thì làm sao?</summary>
-          <p data-i18n="a3">Vì ứng dụng được phát hành độc lập miễn phí chưa qua App Store, lần đầu mở macOS Gatekeeper sẽ hỏi xác nhận. Bạn chỉ cần vào <strong>Cài đặt hệ thống → Quyền riêng tư &amp; Bảo mật</strong>, kéo xuống dưới và bấm <strong>Vẫn mở (Open Anyway)</strong> đúng 1 lần duy nhất.</p>
-        </details>
-
-        <details class="reveal">
-          <summary data-i18n="q4">Khi có phiên bản mới tôi cập nhật như thế nào?</summary>
-          <p data-i18n="a4">HiPu Switcher tự động kiểm tra cập nhật mỗi 24 giờ, hoặc bạn có thể bấm <strong>Kiểm tra cập nhật…</strong> từ thanh Menu Bar hay trong <strong>Cài đặt → Giới thiệu</strong> để tải bản <code>.dmg</code> mới nhất từ GitHub Releases.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Final Sign-off CTA -->
-  <section>
-    <div class="container">
-      <div class="final-cta reveal">
-        <img src="assets/app-icon.png" alt="HiPu Switcher" />
-        <h2 data-i18n="cta_title">Sẵn sàng nâng cấp trải nghiệm Mac?</h2>
-        <p data-i18n="cta_sub">Tải HiPu Switcher miễn phí và cảm nhận tốc độ chuyển ứng dụng chuẩn Liquid Glass.</p>
-        <a class="btn btn-primary btn-lg download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
-          <span data-i18n="cta_btn">Tải về cho macOS</span>
+      <div class="section-bar">
+        <h2 class="section-heading" data-i18n="hl_title">Điểm nổi bật.</h2>
+        <a class="apple-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases" target="_blank" rel="noopener">
+          <span data-i18n="hl_link">Xem bản phát hành</span> ›
         </a>
       </div>
+
+      <div class="highlight-stage">
+        <div class="highlight-slide active" data-slide="0">
+          <p class="highlight-caption" data-i18n="hl_c1">Liquid Glass gốc trên macOS. Mở ngay tại vị trí con trỏ, gọn gàng và mượt mà.</p>
+          <img src="screenshots/hero-banner.png" alt="Liquid Glass Launcher" />
+        </div>
+
+        <div class="highlight-slide" data-slide="1">
+          <p class="highlight-caption" data-i18n="hl_c2">Bốn phong cách tích hợp sẵn. Chuyển đổi tức thì từ kính lỏng đến tối giản không nền.</p>
+          <img src="screenshots/styles-showcase.png" alt="Four Signature Styles" loading="lazy" />
+        </div>
+
+        <div class="highlight-slide" data-slide="2">
+          <p class="highlight-caption" data-i18n="hl_c3">Kích hoạt bằng phím tắt quen thuộc. Lướt thẳng sang Space chứa ứng dụng.</p>
+          <img src="screenshots/triggers-and-spaces.png" alt="Triggers and Smart Spaces" loading="lazy" />
+        </div>
+      </div>
+
+      <!-- Carousel Playback Control (Apple translucent 36px track) -->
+      <div class="carousel-controls">
+        <div class="carousel-track">
+          <div class="dot-group" role="tablist" aria-label="Highlights">
+            <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="dot" data-index="2" aria-label="Slide 3"></button>
+          </div>
+          <button class="play-btn" id="carousel-toggle" aria-label="Pause carousel">❚❚</button>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- 6. Editorial Feature Block 1: Styles (#ffffff) -->
+  <section id="styles" class="band-white">
+    <div class="container">
+      <div class="editorial-grid">
+        <div>
+          <p class="editorial-kicker" data-i18n="ed1_kicker">Giao diện</p>
+          <h2 class="editorial-title" data-i18n="ed1_title">Bốn phong cách.<br />Tuỳ biến theo ý bạn.</h2>
+          <p class="editorial-copy" data-i18n="ed1_copy">
+            Chuyển nhanh giữa Liquid Glass, Blur-Fan, Blur-Rectangle và Non-Background. Tự điều chỉnh độ đục, viền thẻ, bán kính và lưu cấu hình riêng.
+          </p>
+          <ul class="editorial-points">
+            <li><strong>Liquid Glass</strong> <span class="dim" data-i18n="ed1_p1">— Kính lỏng chuẩn macOS 26/27</span></li>
+            <li><strong>Blur-Fan &amp; Rectangle</strong> <span class="dim" data-i18n="ed1_p2">— Làm mờ nền thời gian thực</span></li>
+            <li><strong>Non-Background</strong> <span class="dim" data-i18n="ed1_p3">— Tối giản không khung, chỉ còn icon</span></li>
+          </ul>
+        </div>
+        <div>
+          <img class="editorial-media" src="screenshots/styles-showcase.png" alt="4 phong cách HiPu Switcher" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Editorial Feature Block 2: Triggers & Spaces (#f5f5f7) -->
+  <section id="triggers" class="band-mist">
+    <div class="container">
+      <div class="editorial-grid">
+        <div>
+          <p class="editorial-kicker" data-i18n="ed2_kicker">Kích hoạt &amp; Đa màn hình</p>
+          <h2 class="editorial-title" data-i18n="ed2_title">Gọi mọi nơi.<br />Đúng Space, đúng chỗ.</h2>
+          <p class="editorial-copy" data-i18n="ed2_copy">
+            Mở bằng một tay mà không xung đột phím tắt. Chuyển thẳng sang Space đang mở ứng dụng — riêng Finder luôn mở Tải về ngay tại màn hình hiện tại.
+          </p>
+          <div class="kbd-strip">
+            <span class="kbd-pill">fn + ⇧</span>
+            <span class="kbd-pill">⇧ ⇧ / ⌥ ⌥ / ⌘ ⌘</span>
+            <span class="kbd-pill">⌥ Space</span>
+            <span class="kbd-pill" data-i18n="kbd_mouse">Chuột giữa</span>
+          </div>
+        </div>
+        <div>
+          <img class="editorial-media" src="screenshots/triggers-and-spaces.png" alt="Triggers and Smart Spaces" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Specs & 3-Step Install (#ffffff) -->
+  <section id="install" class="band-white">
+    <div class="container">
+      <div class="spec-strip">
+        <div class="spec-cell">
+          <div class="spec-val">3.0 MB</div>
+          <div class="spec-lbl" data-i18n="sp1">Bộ cài .dmg siêu nhẹ</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-val">100%</div>
+          <div class="spec-lbl" data-i18n="sp2">Swift &amp; SwiftUI gốc</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-val">0%</div>
+          <div class="spec-lbl" data-i18n="sp3">Tracking hay quảng cáo</div>
+        </div>
+        <div class="spec-cell">
+          <div class="spec-val">VN / EN</div>
+          <div class="spec-lbl" data-i18n="sp4">Đổi ngôn ngữ tức thì</div>
+        </div>
+      </div>
+
+      <div class="section-bar">
+        <h2 class="section-heading" data-i18n="inst_title">Cài đặt trong 3 bước.</h2>
+        <a class="apple-link download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
+          <span data-i18n="inst_dl">Tải HiPuSwitcher.dmg</span> ›
+        </a>
+      </div>
+
+      <div class="install-grid">
+        <div class="install-card">
+          <div class="step-index" data-i18n="st1_k">Bước 1</div>
+          <h3 data-i18n="st1_t">Kéo vào Applications</h3>
+          <p data-i18n="st1_d">Mở file <code>.dmg</code> và kéo <strong>HiPu Switcher</strong> thả vào thư mục Applications.</p>
+        </div>
+
+        <div class="install-card">
+          <div class="step-index" data-i18n="st2_k">Bước 2</div>
+          <h3 data-i18n="st2_t">Xác nhận lần đầu</h3>
+          <p data-i18n="st2_d">Nếu Gatekeeper hỏi, vào <em>Cài đặt hệ thống → Quyền riêng tư &amp; Bảo mật → Vẫn mở</em> đúng 1 lần.</p>
+        </div>
+
+        <div class="install-card">
+          <div class="step-index" data-i18n="st3_k">Bước 3</div>
+          <h3 data-i18n="st3_t">Bật Trợ năng</h3>
+          <p data-i18n="st3_d">Bấm <strong>Cấp quyền</strong> ở màn hình chào mừng và bật HiPuSwitcher để dùng mọi phím tắt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Support & FAQ (#f5f5f7) -->
+  <section id="support" class="band-mist">
+    <div class="container">
+      <div class="support-card">
+        <div>
+          <span class="launch-status" data-i18n="sup_kicker">Ủng hộ tác giả</span>
+          <h2 class="editorial-title" style="margin-bottom: 10px;" data-i18n="sup_title">Mời PhucVang tách cà phê.</h2>
+          <p class="editorial-copy" style="margin-bottom: 0; max-width: 540px;" data-i18n="sup_copy">
+            HiPu Switcher hoàn toàn miễn phí. Nếu ứng dụng giúp ích cho công việc hằng ngày của bạn, hãy quét mã QR để ủng hộ phát triển các bản cập nhật mới.
+          </p>
+        </div>
+        <div class="support-qr" id="open-qr" title="Phóng to mã QR">
+          <img src="assets/donate-qr.png" alt="Donate QR Code" />
+        </div>
+      </div>
+
+      <div id="faq" class="faq-wrap">
+        <h2 class="section-heading" style="margin-bottom: 24px;" data-i18n="faq_title">Câu hỏi thường gặp.</h2>
+
+        <details>
+          <summary data-i18n="q1">Ứng dụng có miễn phí hoàn toàn không?</summary>
+          <p data-i18n="a1">Có. Không quảng cáo, không đăng ký trả phí và không giới hạn tính năng.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="q2">Vì sao cần cấp quyền Trợ năng (Accessibility)?</summary>
+          <p data-i18n="a2">macOS yêu cầu quyền này để lắng nghe phím tắt bổ trợ toàn cục (fn + Shift, nhấn đúp phím, chuột giữa). Ứng dụng không ghi lại nội dung gõ phím và không gửi dữ liệu ra ngoài.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="q3">Mở lần đầu macOS cảnh báo chưa xác minh thì làm sao?</summary>
+          <p data-i18n="a3">Vào Cài đặt hệ thống → Quyền riêng tư &amp; Bảo mật → kéo xuống bấm <strong>Vẫn mở (Open Anyway)</strong> đúng 1 lần duy nhất.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="q4">Làm sao nhận bản cập nhật mới?</summary>
+          <p data-i18n="a4">App tự kiểm tra mỗi 24 giờ, hoặc bạn bấm <strong>Kiểm tra cập nhật…</strong> từ Menu Bar / Cài đặt → Giới thiệu.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Footer (#f5f5f7) -->
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 <strong>PhucVang</strong> · HiPu Switcher for macOS.</div>
+      <div>© 2026 PhucVang. HiPu Switcher for macOS.</div>
       <div class="footer-links">
         <a href="https://github.com/14phucs-netizen/HiPuSwitcher" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/14phucs-netizen/HiPuSwitcher/releases" target="_blank" rel="noopener">Releases</a>
-        <a href="#faq">FAQ</a>
+        <a class="download-link" href="https://github.com/14phucs-netizen/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg" data-i18n="ft_dl">Tải về (.dmg)</a>
       </div>
     </div>
   </footer>
 
-  <!-- QR Zoom Modal -->
+  <!-- QR Enlarge Modal -->
   <div class="modal" id="qr-modal" aria-hidden="true">
     <div class="modal-box">
-      <div class="qr-wrap">
-        <img src="assets/donate-qr.png" alt="Donate QR Code" />
-      </div>
-      <p data-i18n="qr_thanks">Cảm ơn bạn đã ủng hộ tách cà phê cho PhucVang! ☕️</p>
+      <img src="assets/donate-qr.png" alt="Donate QR Code" />
+      <p data-i18n="qr_thanks">Cảm ơn bạn đã mời PhucVang tách cà phê ☕️</p>
     </div>
   </div>
 
   <script>
-    // 1. Interactive Stage Tabs
-    const tabs = document.querySelectorAll('.stage-tab');
-    const slides = document.querySelectorAll('.stage-frame img');
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const idx = tab.dataset.target;
-        tabs.forEach(t => t.classList.toggle('active', t === tab));
-        slides.forEach(img => img.classList.toggle('active', img.dataset.slide === idx));
+    // 1. Highlights Carousel + Auto-play / Pause
+    const slides = document.querySelectorAll('.highlight-slide');
+    const dots = document.querySelectorAll('.dot');
+    const toggleBtn = document.getElementById('carousel-toggle');
+    let current = 0;
+    let playing = true;
+
+    function goTo(idx) {
+      current = (idx + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    let timer = setInterval(() => { if (playing) goTo(current + 1); }, 4800);
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        goTo(Number(dot.dataset.index));
       });
     });
 
-    // 2. Scroll Reveal
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    toggleBtn.addEventListener('click', () => {
+      playing = !playing;
+      toggleBtn.textContent = playing ? '❚❚' : '▶';
+    });
 
-    // 3. QR Zoom Modal
+    // 2. QR Modal
     const qrModal = document.getElementById('qr-modal');
     document.getElementById('open-qr').addEventListener('click', () => qrModal.classList.add('open'));
-    qrModal.addEventListener('click', e => {
-      if (e.target === qrModal) qrModal.classList.remove('open');
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') qrModal.classList.remove('open');
-    });
+    qrModal.addEventListener('click', e => { if (e.target === qrModal) qrModal.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') qrModal.classList.remove('open'); });
 
-    // 4. Auto-sync latest version & DMG download link from GitHub latest.json
+    // 3. Auto-sync version & download URL from GitHub latest.json
+    let latestVersion = '1.0.0';
     fetch('https://raw.githubusercontent.com/14phucs-netizen/HiPuSwitcher/main/latest.json')
       .then(r => r.ok ? r.json() : null)
       .then(data => {
         if (!data) return;
         if (data.version) {
-          const badge = document.getElementById('version-badge');
-          if (badge) badge.textContent = 'v' + String(data.version).replace(/^v/i, '');
+          latestVersion = String(data.version).replace(/^v/i, '');
+          document.getElementById('version-text').textContent = 'v' + latestVersion;
+          updateLaunchStatus(document.documentElement.lang);
         }
         if (data.downloadURL && data.downloadURL.startsWith('https://')) {
           document.querySelectorAll('.download-link').forEach(a => a.href = data.downloadURL);
@@ -1082,69 +1196,64 @@
       })
       .catch(() => {});
 
-    // 5. Instant Vietnamese / English localization
+    // 4. Instant VN / EN Switching
     const dict = {
       en: {
-        nav_features: 'Features',
+        nav_highlights: 'Highlights',
+        nav_styles: 'Styles',
+        nav_triggers: 'Triggers',
         nav_install: 'Install',
         nav_support: 'Support',
-        nav_download: 'Download',
-        hero_eyebrow: 'macOS 14+ · Native Liquid Glass · 100% Free',
-        hero_title: 'Switch apps.<br />At the speed of thought.',
-        hero_sub: 'A native Liquid Glass radial & card app switcher built for macOS. Appears right at your cursor, switches Spaces effortlessly, and stays feather-light.',
-        hero_download: 'Download for macOS (.dmg)',
-        hero_github: 'View on GitHub',
-        hero_free: 'Free · Zero Ads',
-        tab_overview: 'Overview',
-        tab_styles: '4 Signature Styles',
-        tab_triggers: 'Triggers & Spaces',
-        feat_kicker: 'Built for Speed',
-        feat_title: 'Everything you need.<br />Nothing in the way.',
-        feat_sub: 'Crafted 100% in native Swift & SwiftUI, deeply integrated with macOS Liquid Glass and multi-Space workflows.',
-        c1_badge: 'Liquid Glass & Blur',
-        c1_title: '4 built-in styles — customizable down to the pixel',
-        c1_desc: 'Switch instantly between <strong>Liquid Glass</strong>, <strong>Blur-Fan</strong>, <strong>Blur-Rectangle</strong>, and <strong>Non-Background</strong>. Fine-tune opacity, borders, radius, spread angle, and save your own presets.',
-        c2_badge: 'Trigger Anywhere',
-        c2_title: 'Summon right at your cursor',
-        c2_desc: 'Skip repetitive ⌘Tab cycling. Open HiPu Switcher with the gesture or shortcut that feels most natural.',
-        k1: 'One-hand quick launch',
-        k2: 'Double-tap ⇧ / ⌥ / ⌘',
-        k3: 'Any custom hotkey',
-        k4: 'Middle mouse button',
-        c3_badge: 'Multi-Space Ready',
-        c3_title: 'Smart Space switching · Finder opens right here',
-        c3_desc: 'Clicking an app on another Desktop glides smoothly to its Space. <strong>Finder</strong> always opens <em>Downloads</em> right in your current Space — never yanking you back.',
-        c4_badge: 'Native · Private',
-        c4_title: 'Feather-light, private, and auto-updating',
-        c4_desc: 'Zero Electron, zero analytics, signed with Hardened Runtime, live Vietnamese / English switching, and built-in GitHub Releases update checker.',
-        s1: 'Installer size',
-        s2: 'Native Swift & SwiftUI',
-        s3: 'Tracking or Ads',
-        s4: 'Instant localization',
-        inst_kicker: 'Get Started',
-        inst_title: 'Install in 15 seconds',
-        st1_t: 'Download & drag to Applications',
-        st1_d: 'Open <code>HiPuSwitcher.dmg</code> and drag <strong>HiPu Switcher</strong> into your <strong>Applications</strong> folder.',
-        st2_t: 'Open for the first time',
-        st2_d: 'If macOS Gatekeeper asks, go to <em>System Settings → Privacy &amp; Security → Open Anyway</em> just once.',
-        st3_t: 'Grant Accessibility',
-        st3_d: 'Click <strong>Grant</strong> in the welcome screen and toggle <strong>HiPuSwitcher</strong> ON in Accessibility to unlock all global triggers.',
-        sup_badge: 'Support the Developer',
-        sup_title: 'Buy PhucVang a Coffee ☕️',
-        sup_desc: 'HiPu Switcher is built and shared completely free. If it makes your daily Mac workflow faster and more enjoyable, scan the QR code to fuel future updates!',
-        faq_title: 'Frequently Asked Questions',
+        nav_download: 'Download Free',
+        hero_new: 'New · v1.0.0',
+        hero_title: 'Switch apps.<br />Instantly.',
+        hero_sub: 'A native Liquid Glass radial launcher for macOS. Summon at your cursor, glide to the right Space, just 3 MB.',
+        callout_main: 'Free for macOS 14+',
+        callout_btn: 'Download (.dmg)',
+        hl_title: 'Get the highlights.',
+        hl_link: 'View releases',
+        hl_c1: 'Native Liquid Glass on macOS. Opens right at your cursor — crisp and effortless.',
+        hl_c2: 'Four signature styles built in. Switch from refractive glass to minimal floating icons.',
+        hl_c3: 'Trigger with any shortcut you love. Jumps straight to the Space with your app.',
+        ed1_kicker: 'Design',
+        ed1_title: 'Four styles.<br />Made to fit your Mac.',
+        ed1_copy: 'Switch instantly between Liquid Glass, Blur-Fan, Blur-Rectangle, and Non-Background. Fine-tune opacity, borders, radius, and save custom presets.',
+        ed1_p1: '— Native macOS 26/27 refractive glass',
+        ed1_p2: '— Real-time behind-window blur',
+        ed1_p3: '— Minimal icons with zero background',
+        ed2_kicker: 'Triggers & Spaces',
+        ed2_title: 'Trigger anywhere.<br />Land in the right Space.',
+        ed2_copy: 'Open one-handed without hotkey conflicts. Automatically glides to the Space holding your app — while Finder always opens Downloads right where you are.',
+        kbd_mouse: 'Middle Click',
+        sp1: 'Lightweight .dmg installer',
+        sp2: 'Native Swift & SwiftUI',
+        sp3: 'Tracking or ads',
+        sp4: 'Instant localization',
+        inst_title: 'Ready in 3 steps.',
+        inst_dl: 'Download HiPuSwitcher.dmg',
+        st1_k: 'Step 1',
+        st1_t: 'Drag to Applications',
+        st1_d: 'Open the <code>.dmg</code> and drag <strong>HiPu Switcher</strong> into your Applications folder.',
+        st2_k: 'Step 2',
+        st2_t: 'First launch',
+        st2_d: 'If Gatekeeper prompts, open <em>System Settings → Privacy &amp; Security → Open Anyway</em> once.',
+        st3_k: 'Step 3',
+        st3_t: 'Enable Accessibility',
+        st3_d: 'Click <strong>Grant</strong> in onboarding and toggle HiPuSwitcher ON for all global triggers.',
+        sup_kicker: 'Support',
+        sup_title: 'Buy PhucVang a coffee.',
+        sup_copy: 'HiPu Switcher is completely free. If it speeds up your daily Mac workflow, scan the QR code to support future updates.',
+        faq_title: 'Questions, answered.',
         q1: 'Is HiPu Switcher completely free?',
-        a1: 'Yes — 100% free with no ads, subscriptions, or locked features. If you enjoy it, you can optionally buy the developer a coffee.',
+        a1: 'Yes. Zero ads, zero subscriptions, and no locked features.',
         q2: 'Why does it need Accessibility permission?',
-        a2: 'macOS requires Accessibility permission to listen for global modifier triggers like <code>fn + Shift</code>, double-tap <code>⇧ / ⌥ / ⌘</code>, and middle-click across apps. HiPu Switcher never logs keystrokes or sends any data.',
-        q3: 'What if macOS says it cannot verify the developer on first launch?',
-        a3: 'Because the app is distributed independently outside the Mac App Store, macOS Gatekeeper shows a one-time notice. Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong> once.',
-        q4: 'How do I get future updates?',
-        a4: 'HiPu Switcher automatically checks for updates every 24 hours, or click <strong>Check for Updates…</strong> from the Menu Bar or <strong>Settings → About</strong> to download the latest <code>.dmg</code>.',
-        cta_title: 'Ready to upgrade your Mac workflow?',
-        cta_sub: 'Download HiPu Switcher for free and experience native Liquid Glass app switching.',
-        cta_btn: 'Download for macOS',
-        qr_thanks: 'Thank you for buying PhucVang a coffee! ☕️'
+        a2: 'macOS requires Accessibility for global modifier triggers (fn + Shift, double-tap keys, middle click). HiPu Switcher never logs keystrokes or sends any data.',
+        q3: 'What if macOS says the developer cannot be verified?',
+        a3: 'Go to System Settings → Privacy &amp; Security and click <strong>Open Anyway</strong> once.',
+        q4: 'How do updates work?',
+        a4: 'The app checks silently every 24 hours, or click <strong>Check for Updates…</strong> from the Menu Bar or Settings → About.',
+        ft_dl: 'Download (.dmg)',
+        qr_thanks: 'Thank you for buying PhucVang a coffee ☕️'
       }
     };
 
@@ -1153,6 +1262,12 @@
       viOriginals[el.dataset.i18n] = el.innerHTML;
     });
 
+    function updateLaunchStatus(lang) {
+      const el = document.getElementById('launch-status');
+      if (!el) return;
+      el.textContent = (lang === 'en' ? 'New · v' : 'Mới · v') + latestVersion;
+    }
+
     function setLang(lang) {
       document.documentElement.lang = lang;
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
@@ -1160,6 +1275,7 @@
         const key = el.dataset.i18n;
         el.innerHTML = lang === 'en' ? (dict.en[key] || viOriginals[key]) : viOriginals[key];
       });
+      updateLaunchStatus(lang);
     }
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
