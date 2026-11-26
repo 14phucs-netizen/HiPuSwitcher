@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="assets/app-icon.png" />
   <meta property="og:title" content="HiPu Switcher — Switch apps. Instantly." />
   <meta property="og:description" content="Launcher cánh quạt Liquid Glass cho macOS 14+. Phát triển bởi PhucVang." />
-  <meta property="og:image" content="screenshots/hero-banner.png" />
+  <meta property="og:image" content="screenshots/hero.jpg" />
   <style>
     :root {
       /* Colors */
@@ -486,6 +486,87 @@
       border-radius: var(--radius-images);
     }
 
+    .highlight-slide img.square-render {
+      max-height: 460px;
+      width: auto;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+
+    /* Interactive Style Picker Pills (Apple White Gallery) */
+    .style-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .style-pill {
+      height: 32px;
+      padding: 0 14px;
+      border-radius: 9999px;
+      border: 0;
+      background: var(--color-studio-mist);
+      color: var(--color-ink);
+      font-family: var(--font-sf-pro-text);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.16px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .style-pill:hover {
+      background: var(--color-control-gray);
+    }
+
+    .style-pill.active {
+      background: var(--color-ink);
+      color: var(--color-gallery-white);
+    }
+
+    .style-stage {
+      background: var(--color-gallery-white);
+      border-radius: var(--radius-cards);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+      padding: 16px;
+    }
+
+    .style-stage img {
+      display: none;
+      max-height: 420px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .style-stage img.active {
+      display: block;
+    }
+
+    .mist-media-card {
+      background: var(--color-gallery-white);
+      border-radius: var(--radius-cards);
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mist-media-card img {
+      display: block;
+      max-height: 380px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
     /* Carousel Playback Control (Apple translucent 36px pill) */
     .carousel-controls {
       display: flex;
@@ -918,7 +999,7 @@
       </p>
 
       <div class="hero-media-wrap">
-        <img class="hero-media" src="screenshots/hero-banner.png" alt="HiPu Switcher Liquid Glass" />
+        <img class="hero-media" src="screenshots/hero.jpg" alt="HiPu Switcher Liquid Glass" />
 
         <!-- Floating Callout Capsule (#ffffff, 28px, shadowless) -->
         <div class="floating-callout">
@@ -958,17 +1039,17 @@
       <div class="highlight-stage">
         <div class="highlight-slide active" data-slide="0">
           <p class="highlight-caption" data-i18n="hl_c1">Liquid Glass gốc trên macOS. Mở ngay tại vị trí con trỏ, gọn gàng và mượt mà.</p>
-          <img src="screenshots/hero-banner.png" alt="Liquid Glass Launcher" />
+          <img src="screenshots/hero.jpg" alt="HiPu Switcher trên macOS" />
         </div>
 
         <div class="highlight-slide" data-slide="1">
-          <p class="highlight-caption" data-i18n="hl_c2">Bốn phong cách tích hợp sẵn. Chuyển đổi tức thì từ kính lỏng đến tối giản không nền.</p>
-          <img src="screenshots/styles-showcase.png" alt="Four Signature Styles" loading="lazy" />
+          <p class="highlight-caption" data-i18n="hl_c2">Cánh quạt kính lỏng phản chiếu ánh sáng thực tế theo nền màn hình của bạn.</p>
+          <img class="square-render" src="screenshots/style-liquid-fan.png" alt="Liquid Glass Fan" loading="lazy" />
         </div>
 
         <div class="highlight-slide" data-slide="2">
-          <p class="highlight-caption" data-i18n="hl_c3">Kích hoạt bằng phím tắt quen thuộc. Lướt thẳng sang Space chứa ứng dụng.</p>
-          <img src="screenshots/triggers-and-spaces.png" alt="Triggers and Smart Spaces" loading="lazy" />
+          <p class="highlight-caption" data-i18n="hl_c3">Thẻ nổi sắc nét, tối ưu cho thao tác nhanh bằng chuột lẫn phím tắt.</p>
+          <img class="square-render" src="screenshots/style-liquid-cards.png" alt="Liquid Glass Cards" loading="lazy" />
         </div>
       </div>
 
@@ -986,24 +1067,32 @@
     </div>
   </section>
 
-  <!-- 6. Editorial Feature Block 1: Styles (#ffffff) -->
+  <!-- 6. Editorial Feature Block 1: Interactive Styles Gallery (#ffffff) -->
   <section id="styles" class="band-white">
     <div class="container">
       <div class="editorial-grid">
         <div>
           <p class="editorial-kicker" data-i18n="ed1_kicker">Giao diện</p>
-          <h2 class="editorial-title" data-i18n="ed1_title">Bốn phong cách.<br />Tuỳ biến theo ý bạn.</h2>
+          <h2 class="editorial-title" data-i18n="ed1_title">Đa phong cách.<br />Tuỳ biến theo ý bạn.</h2>
           <p class="editorial-copy" data-i18n="ed1_copy">
-            Chuyển nhanh giữa Liquid Glass, Blur-Fan, Blur-Rectangle và Non-Background. Tự điều chỉnh độ đục, viền thẻ, bán kính và lưu cấu hình riêng.
+            Chuyển tức thì giữa Liquid Glass, Blur-Fan, Blur-Rectangle (Sáng / Tối) và Non-Background. Bấm chọn từng kiểu bên dưới để xem giao diện thực tế.
           </p>
-          <ul class="editorial-points">
-            <li><strong>Liquid Glass</strong> <span class="dim" data-i18n="ed1_p1">— Kính lỏng chuẩn macOS 26/27</span></li>
-            <li><strong>Blur-Fan &amp; Rectangle</strong> <span class="dim" data-i18n="ed1_p2">— Làm mờ nền thời gian thực</span></li>
-            <li><strong>Non-Background</strong> <span class="dim" data-i18n="ed1_p3">— Tối giản không khung, chỉ còn icon</span></li>
-          </ul>
+          <div class="style-pills" role="tablist" aria-label="Launcher styles">
+            <button class="style-pill active" data-style="0">Liquid Glass Fan</button>
+            <button class="style-pill" data-style="1">Liquid Glass Card</button>
+            <button class="style-pill" data-style="2">Blur-Fan</button>
+            <button class="style-pill" data-style="3" data-i18n="st_dark">Blur Tối</button>
+            <button class="style-pill" data-style="4" data-i18n="st_light">Blur Sáng</button>
+            <button class="style-pill" data-style="5" data-i18n="st_min">Không nền</button>
+          </div>
         </div>
-        <div>
-          <img class="editorial-media" src="screenshots/styles-showcase.png" alt="4 phong cách HiPu Switcher" loading="lazy" />
+        <div class="style-stage">
+          <img class="active" data-style-img="0" src="screenshots/style-liquid-fan.png" alt="Liquid Glass Fan" />
+          <img data-style-img="1" src="screenshots/style-liquid-cards.png" alt="Liquid Glass Cards" loading="lazy" />
+          <img data-style-img="2" src="screenshots/style-blur-fan.png" alt="Blur Fan" loading="lazy" />
+          <img data-style-img="3" src="screenshots/style-rect-dark.png" alt="Blur Rectangle Dark" loading="lazy" />
+          <img data-style-img="4" src="screenshots/style-rect-light.png" alt="Blur Rectangle Light" loading="lazy" />
+          <img data-style-img="5" src="screenshots/style-minimal.png" alt="Non-Background Minimal" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1026,8 +1115,8 @@
             <span class="kbd-pill" data-i18n="kbd_mouse">Chuột giữa</span>
           </div>
         </div>
-        <div>
-          <img class="editorial-media" src="screenshots/triggers-and-spaces.png" alt="Triggers and Smart Spaces" loading="lazy" />
+        <div class="mist-media-card">
+          <img src="screenshots/style-liquid-cards.png" alt="HiPu Switcher Liquid Glass Cards" loading="lazy" />
         </div>
       </div>
     </div>
@@ -1173,6 +1262,17 @@
       toggleBtn.textContent = playing ? '❚❚' : '▶';
     });
 
+    // 1b. Interactive 6-Style Switcher
+    const stylePills = document.querySelectorAll('.style-pill');
+    const styleImgs = document.querySelectorAll('[data-style-img]');
+    stylePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const idx = pill.dataset.style;
+        stylePills.forEach(p => p.classList.toggle('active', p === pill));
+        styleImgs.forEach(img => img.classList.toggle('active', img.dataset.styleImg === idx));
+      });
+    });
+
     // 2. QR Modal
     const qrModal = document.getElementById('qr-modal');
     document.getElementById('open-qr').addEventListener('click', () => qrModal.classList.add('open'));
@@ -1216,11 +1316,11 @@
         hl_c2: 'Four signature styles built in. Switch from refractive glass to minimal floating icons.',
         hl_c3: 'Trigger with any shortcut you love. Jumps straight to the Space with your app.',
         ed1_kicker: 'Design',
-        ed1_title: 'Four styles.<br />Made to fit your Mac.',
-        ed1_copy: 'Switch instantly between Liquid Glass, Blur-Fan, Blur-Rectangle, and Non-Background. Fine-tune opacity, borders, radius, and save custom presets.',
-        ed1_p1: '— Native macOS 26/27 refractive glass',
-        ed1_p2: '— Real-time behind-window blur',
-        ed1_p3: '— Minimal icons with zero background',
+        ed1_title: 'Every style.<br />Tailored to your Mac.',
+        ed1_copy: 'Switch instantly between Liquid Glass, Blur-Fan, Blur-Rectangle (Light / Dark), and Non-Background. Click each style below to preview.',
+        st_dark: 'Blur Dark',
+        st_light: 'Blur Light',
+        st_min: 'Minimal',
         ed2_kicker: 'Triggers & Spaces',
         ed2_title: 'Trigger anywhere.<br />Land in the right Space.',
         ed2_copy: 'Open one-handed without hotkey conflicts. Automatically glides to the Space holding your app — while Finder always opens Downloads right where you are.',
