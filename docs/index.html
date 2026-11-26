@@ -290,107 +290,19 @@
       z-index: 20;
     }
 
-    /* Crystal-clear macOS 26/27 Liquid Glass Card */
-    .lg-card {
-      position: relative;
+    /* Real Refracted Liquid Glass Card Image */
+    .lg-card-img {
+      display: block;
       width: 100%;
       height: 100%;
-      border-radius: 27% / 22.5%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 7%;
-      overflow: hidden;
-      background:
-        radial-gradient(120% 90% at 15% 10%, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.01) 100%),
-        linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 52%, rgba(20, 20, 26, 0.14) 100%);
-      backdrop-filter: blur(14px) saturate(190%) contrast(1.06) brightness(1.05);
-      -webkit-backdrop-filter: blur(14px) saturate(190%) contrast(1.06) brightness(1.05);
-      border: 1px solid rgba(255, 255, 255, 0.52);
-      box-shadow:
-        0 20px 44px rgba(0, 0, 0, 0.22),
-        0 4px 12px rgba(0, 0, 0, 0.10),
-        inset 0 2px 2px rgba(255, 255, 255, 0.82),
-        inset 0 -1.5px 2px rgba(255, 255, 255, 0.32),
-        inset 1.5px 0 2px rgba(255, 255, 255, 0.42),
-        inset -1px 0 2px rgba(255, 255, 255, 0.22);
-      transition: background 0.28s ease, border-color 0.28s ease, box-shadow 0.32s ease, backdrop-filter 0.28s ease;
-    }
-
-    /* Specular glass sheen reflection */
-    .lg-card::before {
-      content: "";
-      position: absolute;
-      inset: -25%;
-      background: linear-gradient(
-        118deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.28) 46%,
-        rgba(255, 255, 255, 0.06) 54%,
-        transparent 68%
-      );
-      transform: translateX(-18%) rotate(4deg);
-      pointer-events: none;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
-      opacity: 0.72;
-    }
-
-    /* Crisp bottom-right glass refraction edge */
-    .lg-card::after {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: inherit;
-      background: linear-gradient(
-        320deg,
-        rgba(255, 255, 255, 0.22) 0%,
-        transparent 28%
-      );
+      object-fit: contain;
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.24));
+      transition: filter 0.32s ease;
       pointer-events: none;
     }
 
-    .lg-card-slot:hover .lg-card {
-      border-color: rgba(255, 255, 255, 0.86);
-      backdrop-filter: blur(18px) saturate(210%) contrast(1.08) brightness(1.10);
-      -webkit-backdrop-filter: blur(18px) saturate(210%) contrast(1.08) brightness(1.10);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.30),
-        0 6px 18px rgba(0, 0, 0, 0.14),
-        inset 0 2px 3px rgba(255, 255, 255, 0.95),
-        inset 0 -2px 3px rgba(255, 255, 255, 0.45),
-        inset 2px 0 3px rgba(255, 255, 255, 0.55),
-        inset -1.5px 0 3px rgba(255, 255, 255, 0.30);
-    }
-
-    .lg-card-slot:hover .lg-card::before {
-      transform: translateX(14%) rotate(4deg);
-      opacity: 1;
-    }
-
-    .lg-icon {
-      position: relative;
-      z-index: 2;
-      width: 44%;
-      aspect-ratio: 1;
-      border-radius: 23%;
-      object-fit: cover;
-      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.24));
-      transition: transform 0.38s cubic-bezier(0.22, 1.45, 0.36, 1);
-    }
-
-    .lg-card-slot:hover .lg-icon {
-      transform: scale(1.07);
-    }
-
-    .lg-dot {
-      position: relative;
-      z-index: 2;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.75);
+    .lg-card-slot:hover .lg-card-img {
+      filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.34)) brightness(1.05);
     }
 
     /* Floating Liquid Glass Tooltip above hovered card */
@@ -1243,31 +1155,22 @@
 
       <!-- Live Interactive 3-Card Liquid Glass Launcher -->
       <div class="hero-launcher" id="hero-launcher">
-        <!-- Left Card: Module E -->
+        <!-- Left Card: Module E (Real Snell-refracted Liquid Glass) -->
         <div class="lg-card-slot" style="--lx: 35%; --ly: 46%; --ang: -30deg; --z: 3;">
           <div class="lg-tooltip">Module E</div>
-          <div class="lg-card">
-            <img class="lg-icon" src="assets/app-icon.png" alt="Module E" />
-            <span class="lg-dot"></span>
-          </div>
+          <img class="lg-card-img" src="figma/lg-card-left.png" alt="Module E" />
         </div>
 
-        <!-- Center Card: Framer -->
+        <!-- Center Card: Framer (Real Snell-refracted Liquid Glass) -->
         <div class="lg-card-slot" style="--lx: 50.2%; --ly: 39.5%; --ang: 0deg; --z: 2;">
           <div class="lg-tooltip">Framer</div>
-          <div class="lg-card">
-            <img class="lg-icon" src="figma/icon-framer.svg" alt="Framer" />
-            <span class="lg-dot"></span>
-          </div>
+          <img class="lg-card-img" src="figma/lg-card-center.png" alt="Framer" />
         </div>
 
-        <!-- Right Card: Siri -->
+        <!-- Right Card: Siri (Real Snell-refracted Liquid Glass) -->
         <div class="lg-card-slot" style="--lx: 65.4%; --ly: 46%; --ang: 30deg; --z: 1;">
           <div class="lg-tooltip">Siri</div>
-          <div class="lg-card">
-            <img class="lg-icon" src="figma/icon-siri.png" alt="Siri" />
-            <span class="lg-dot"></span>
-          </div>
+          <img class="lg-card-img" src="figma/lg-card-right.png" alt="Siri" />
         </div>
 
         <!-- Center Close X Button -->
