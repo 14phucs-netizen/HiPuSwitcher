@@ -214,17 +214,23 @@
     }
 
     /* =========================================
-       LIVE INTERACTIVE HERO STAGE (Liquid Glass)
+       LIVE REAL-APP DEMO VIDEO HERO STAGE
        ========================================= */
     .hero-visual {
       position: relative;
       width: 100%;
-      aspect-ratio: 903 / 593;
-      border-radius: 16px;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
       overflow: hidden;
-      background: url('figma/hero-wallpaper.jpg') center / cover no-repeat;
-      user-select: none;
-      -webkit-user-select: none;
+      background: #141418;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
+    }
+
+    .hero-video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .mac-menubar {
@@ -243,6 +249,7 @@
       color: rgba(255, 255, 255, 0.92);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
       pointer-events: none;
+      z-index: 3;
     }
 
     .mac-menubar-left,
@@ -256,140 +263,30 @@
       font-weight: 700;
     }
 
-    .hero-launcher {
+    .video-toggle {
       position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1.3, 0.36, 1);
-    }
-
-    .hero-launcher.dismissed {
-      opacity: 0;
-      transform: scale(0.86);
-      pointer-events: none;
-    }
-
-    /* Radial Card Slot — exact Figma geometry & overlap */
-    .lg-card-slot {
-      position: absolute;
-      left: var(--lx, 50%);
-      top: var(--ly, 46%);
-      width: 22.1%;
-      aspect-ratio: 200 / 243;
-      transform-origin: center center;
-      transform: translate(-50%, -50%) rotate(var(--ang)) translateY(0px);
-      z-index: var(--z);
-      cursor: pointer;
-      transition: transform 0.46s cubic-bezier(0.22, 1.45, 0.36, 1), z-index 0s;
-    }
-
-    .lg-card-slot:hover {
-      transform: translate(-50%, -50%) rotate(var(--ang)) translateY(-26px) scale(1.09);
-      z-index: 20;
-    }
-
-    /* Real Refracted Liquid Glass Card Image */
-    .lg-card-img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.24));
-      transition: filter 0.32s ease;
-      pointer-events: none;
-    }
-
-    .lg-card-slot:hover .lg-card-img {
-      filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.34)) brightness(1.05);
-    }
-
-    /* Floating Liquid Glass Tooltip above hovered card */
-    .lg-tooltip {
-      position: absolute;
-      bottom: calc(100% + 14px);
-      left: 50%;
-      transform: translateX(-50%) translateY(6px) scale(0.92);
-      opacity: 0;
-      pointer-events: none;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-family: var(--font-text);
-      font-size: 13px;
-      font-weight: 600;
-      color: #ffffff;
-      white-space: nowrap;
-      background: rgba(28, 28, 32, 0.42);
-      backdrop-filter: blur(18px) saturate(160%);
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
-      border: 1px solid rgba(255, 255, 255, 0.38);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.45);
-      transition: opacity 0.22s ease, transform 0.32s cubic-bezier(0.22, 1.4, 0.36, 1);
-    }
-
-    .lg-card-slot:hover .lg-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0) scale(1);
-    }
-
-    /* Center Liquid Glass X button */
-    .lg-close {
-      position: absolute;
-      left: 50%;
-      top: 78%;
-      transform: translate(-50%, -50%);
-      width: 42px;
-      height: 42px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 4;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      background: rgba(255, 255, 255, 0.16);
-      backdrop-filter: blur(18px) saturate(150%);
-      -webkit-backdrop-filter: blur(18px) saturate(150%);
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 18px;
-      line-height: 1;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(20, 20, 24, 0.42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #ffffff;
+      font-size: 11px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.55);
-      transition: transform 0.32s cubic-bezier(0.22, 1.45, 0.36, 1), background 0.2s ease;
-      z-index: 15;
+      transition: background 0.18s ease, transform 0.18s ease;
     }
 
-    .lg-close:hover {
-      transform: translate(-50%, -50%) scale(1.14);
-      background: rgba(255, 255, 255, 0.28);
-    }
-
-    .reopen-hint {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.42);
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .reopen-hint.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .reopen-hint:hover {
-      transform: translate(-50%, -50%) scale(1.05);
+    .video-toggle:hover {
+      background: rgba(20, 20, 24, 0.68);
+      transform: scale(1.06);
     }
 
     /* Figma Download Pill Bar (node 2:2202) */
@@ -1135,8 +1032,8 @@
       <h1 class="hero-title" data-i18n="hero_title">Switch apps.<br />Instantly.</h1>
     </div>
 
-    <div class="hero-visual" id="hero-stage">
-      <!-- Authentic macOS Menu Bar -->
+    <div class="hero-visual">
+      <!-- Authentic macOS Menu Bar overlay -->
       <div class="mac-menubar" aria-hidden="true">
         <div class="mac-menubar-left">
           <span></span>
@@ -1148,36 +1045,26 @@
           <span>Help</span>
         </div>
         <div class="mac-menubar-right">
-          <span>26 thg 11</span>
+          <span>27 thg 11</span>
           <span>9:41</span>
         </div>
       </div>
 
-      <!-- Live Interactive 3-Card Liquid Glass Launcher -->
-      <div class="hero-launcher" id="hero-launcher">
-        <!-- Left Card: Module E (Real Snell-refracted Liquid Glass) -->
-        <div class="lg-card-slot" style="--lx: 35%; --ly: 46%; --ang: -30deg; --z: 3;">
-          <div class="lg-tooltip">Module E</div>
-          <img class="lg-card-img" src="figma/lg-card-left.png" alt="Module E" />
-        </div>
+      <!-- Real Screen Recording of Module E on macOS -->
+      <video
+        id="hero-video"
+        class="hero-video"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        poster="figma/hero-wallpaper.jpg"
+      >
+        <source src="figma/hero-demo.mp4" type="video/mp4" />
+      </video>
 
-        <!-- Center Card: Framer (Real Snell-refracted Liquid Glass) -->
-        <div class="lg-card-slot" style="--lx: 50.2%; --ly: 39.5%; --ang: 0deg; --z: 2;">
-          <div class="lg-tooltip">Framer</div>
-          <img class="lg-card-img" src="figma/lg-card-center.png" alt="Framer" />
-        </div>
-
-        <!-- Right Card: Siri (Real Snell-refracted Liquid Glass) -->
-        <div class="lg-card-slot" style="--lx: 65.4%; --ly: 46%; --ang: 30deg; --z: 1;">
-          <div class="lg-tooltip">Siri</div>
-          <img class="lg-card-img" src="figma/lg-card-right.png" alt="Siri" />
-        </div>
-
-        <!-- Center Close X Button -->
-        <button class="lg-close" id="hero-close" type="button" aria-label="Close preview">✕</button>
-      </div>
-
-      <button class="reopen-hint" id="hero-reopen" type="button" data-i18n="hero_reopen">Bấm để mở lại Module E</button>
+      <button class="video-toggle" id="video-toggle" type="button" aria-label="Pause or play demo video" title="Tạm dừng / Phát">❚❚</button>
     </div>
 
     <div class="download-pill">
@@ -1410,17 +1297,17 @@
   </div>
 
   <script>
-    // 0. Live Interactive Hero Stage (close / reopen demo)
-    const heroLauncher = document.getElementById('hero-launcher');
-    const heroClose = document.getElementById('hero-close');
-    const heroReopen = document.getElementById('hero-reopen');
-    heroClose.addEventListener('click', () => {
-      heroLauncher.classList.add('dismissed');
-      heroReopen.classList.add('visible');
-    });
-    heroReopen.addEventListener('click', () => {
-      heroLauncher.classList.remove('dismissed');
-      heroReopen.classList.remove('visible');
+    // 0. Hero Demo Video Play/Pause toggle
+    const heroVideo = document.getElementById('hero-video');
+    const videoToggle = document.getElementById('video-toggle');
+    videoToggle.addEventListener('click', () => {
+      if (heroVideo.paused) {
+        heroVideo.play();
+        videoToggle.textContent = '❚❚';
+      } else {
+        heroVideo.pause();
+        videoToggle.textContent = '▶';
+      }
     });
 
     // 1. Seamless Continuous Marquee for Highlights (clone cards once for infinite loop)
