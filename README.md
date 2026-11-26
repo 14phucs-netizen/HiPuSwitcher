@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/screenshots/hero.jpg" alt="HiPu Switcher Hero Banner" width="100%" />
+  <img src="docs/screenshots/hero-white.png" alt="HiPu Switcher Hero Banner" width="100%" />
 </p>
 
 <h1 align="center">HiPu Switcher</h1>
