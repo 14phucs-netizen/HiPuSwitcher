@@ -1339,7 +1339,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#highlights" data-i18n="nav_hl">Điểm nổi bật</a>
         <a href="#steps" data-i18n="nav_steps">Cài đặt</a>
-        <a href="#updates" data-i18n="nav_updates">Có gì mới</a>
+        <a href="updates.html" data-i18n="nav_updates">Có gì mới</a>
         <a href="#faq">FAQ</a>
         <a href="#support" data-i18n="nav_sup">Ủng hộ</a>
       </nav>
@@ -1597,36 +1597,6 @@
     </div>
   </section>
 
-  <!-- SECTION 3.5: WHAT'S NEW -->
-  <section id="updates" class="updates-section">
-    <div class="wrap">
-      <div class="updates-head">
-        <div class="updates-head-left">
-          <h2 class="sec-title" data-i18n="upd_title">Có gì mới.</h2>
-          <p data-i18n="upd_sub">Theo dõi mọi bản cập nhật, tính năng mới và lỗi đã được khắc phục.</p>
-        </div>
-        <a class="updates-all-btn" href="updates.html" data-i18n="upd_all">Xem toàn bộ lịch sử cập nhật →</a>
-      </div>
-
-      <div class="updates-shell">
-        <div class="updates-shell-top">
-          <div class="updates-ver-info">
-            <span class="u-ver-pill" id="u-latest-ver">v1.0.0</span>
-            <span class="u-latest-pill" data-i18n="upd_latest">Mới nhất</span>
-            <span class="u-date" id="u-latest-date">26/11/2026</span>
-          </div>
-          <div class="u-tabs" id="u-tabs">
-            <button class="u-tab active" data-ucat="all" data-i18n="u_all">Tất cả</button>
-            <button class="u-tab" data-ucat="new" data-i18n="u_new">Tính năng mới</button>
-            <button class="u-tab" data-ucat="improved" data-i18n="u_imp">Cải thiện</button>
-            <button class="u-tab" data-ucat="fixed" data-i18n="u_fix">Sửa lỗi</button>
-          </div>
-        </div>
-        <div class="u-bento" id="u-bento"></div>
-      </div>
-    </div>
-  </section>
-
   <!-- SECTION 4: FAQ -->
   <section id="faq" class="faq-section">
     <div class="wrap">
@@ -1671,6 +1641,7 @@
     <div class="wrap footer-inner">
       <div>© 2026 PhucVang · Module E for macOS.</div>
       <div class="footer-links">
+        <a href="updates.html" data-i18n="nav_updates">Có gì mới</a>
         <a href="https://github.com/Phucvang/HiPuSwitcher" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/Phucvang/HiPuSwitcher/releases" target="_blank" rel="noopener">Releases</a>
         <a class="download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg" data-i18n="dl_btn">Tải về</a>
@@ -1800,50 +1771,6 @@
       viOriginals[el.dataset.i18n] = el.innerHTML;
     });
 
-    function renderHomeUpdates() {
-      if (!latestRelease) return;
-      const loc = latestRelease[currentLang] || latestRelease.vi;
-      document.getElementById('u-latest-ver').textContent = 'v' + latestRelease.version;
-      const [y, m, d] = latestRelease.date.split('-');
-      document.getElementById('u-latest-date').textContent = currentLang === 'vi' ? `${d}/${m}/${y}` : `${y}-${m}-${d}`;
-
-      const labels = currentLang === 'en'
-        ? { new: 'New Features', improved: 'Improvements', fixed: 'Bug Fixes' }
-        : { new: 'Tính năng mới', improved: 'Cải thiện', fixed: 'Sửa lỗi' };
-
-      const cols = [
-        { key: 'new', cls: 'c-new', tag: labels.new, items: loc.new || [] },
-        { key: 'improved', cls: 'c-imp', tag: labels.improved, items: loc.improved || [] },
-        { key: 'fixed', cls: 'c-fix', tag: labels.fixed, items: loc.fixed || [] }
-      ].filter(c => (currentUCat === 'all' || currentUCat === c.key) && c.items.length > 0);
-
-      const bento = document.getElementById('u-bento');
-      bento.classList.toggle('single-col', cols.length === 1);
-      bento.innerHTML = cols.map(c => `
-        <div class="u-col ${c.cls}">
-          <span class="u-col-tag">${c.tag}</span>
-          <ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        </div>
-      `).join('');
-    }
-
-    document.querySelectorAll('.u-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        currentUCat = tab.dataset.ucat;
-        document.querySelectorAll('.u-tab').forEach(t => t.classList.toggle('active', t === tab));
-        renderHomeUpdates();
-      });
-    });
-
-    fetch('updates.json?v=' + Date.now())
-      .then(r => r.ok ? r.json() : null)
-      .then(data => {
-        if (!data || !data.releases || !data.releases.length) return;
-        latestRelease = data.releases[0];
-        renderHomeUpdates();
-      })
-      .catch(() => {});
-
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         currentLang = btn.dataset.lang;
@@ -1853,7 +1780,6 @@
           const k = el.dataset.i18n;
           el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
-        renderHomeUpdates();
       });
     });
   </script>
