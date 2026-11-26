@@ -170,11 +170,10 @@
     }
 
     .kicker-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(255, 116, 11, 0.16);
+      background: #1d1d1f;
     }
 
     .page-title {
@@ -339,7 +338,7 @@
     }
 
     .rail-item:hover { background: #f5f5f7; }
-    .rail-item.is-latest { background: rgba(255, 116, 11, 0.09); color: var(--ink); }
+    .rail-item.is-latest { background: #f0f0f3; color: var(--ink); }
 
     .rail-date {
       font-size: 12px;
@@ -365,8 +364,8 @@
 
     .release-header {
       padding: 30px 34px 24px;
-      background: linear-gradient(135deg, rgba(255, 116, 11, 0.06) 0%, rgba(255, 255, 255, 0) 60%);
-      border-bottom: 1px solid #f0f0f3;
+      background: #fafafa;
+      border-bottom: 1px solid #ececef;
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
@@ -397,13 +396,12 @@
     .latest-tag {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(255, 116, 11, 0.14);
-      color: #c85200;
+      background: #ececef;
+      color: #1d1d1f;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .release-date {
@@ -457,25 +455,28 @@
       padding: 18px 20px;
     }
 
-    .change-group.cat-new { background: #f4f7ff; border: 1px solid rgba(37, 99, 235, 0.1); }
-    .change-group.cat-improved { background: #fff8f1; border: 1px solid rgba(255, 116, 11, 0.14); }
-    .change-group.cat-fixed { background: #f2fbf5; border: 1px solid rgba(22, 163, 74, 0.13); }
+    .change-group.cat-new,
+    .change-group.cat-improved,
+    .change-group.cat-fixed {
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
 
     .group-head {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12.5px;
+      font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 12px;
       padding: 4px 11px;
       border-radius: 999px;
     }
 
-    .cat-new .group-head { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
-    .cat-improved .group-head { background: rgba(255, 116, 11, 0.15); color: #c85200; }
-    .cat-fixed .group-head { background: rgba(22, 163, 74, 0.14); color: #15803d; }
+    .cat-new .group-head { background: #1d1d1f; color: #ffffff; }
+    .cat-improved .group-head { background: #e5e5ea; color: #1d1d1f; }
+    .cat-fixed .group-head { background: #ffffff; color: #3a3a3c; border: 1px solid rgba(0, 0, 0, 0.08); }
 
     .change-list {
       list-style: none;
@@ -497,14 +498,14 @@
       position: absolute;
       left: 3px;
       top: 9px;
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
     }
 
-    .cat-new .change-list li::before { background: #3b82f6; }
-    .cat-improved .change-list li::before { background: #ff740b; }
-    .cat-fixed .change-list li::before { background: #22c55e; }
+    .cat-new .change-list li::before { background: #1d1d1f; }
+    .cat-improved .change-list li::before { background: #6e6e73; }
+    .cat-fixed .change-list li::before { background: #aeaeb2; }
 
     .empty-state {
       background: var(--white);
@@ -586,9 +587,9 @@
       <div class="controls-bar">
         <div class="filter-pills" id="filter-pills">
           <button class="f-pill active" data-cat="all" data-i18n="f_all">Tất cả</button>
-          <button class="f-pill" data-cat="new" data-i18n="f_new">✨ Tính năng mới</button>
-          <button class="f-pill" data-cat="improved" data-i18n="f_imp">⚡ Cải thiện</button>
-          <button class="f-pill" data-cat="fixed" data-i18n="f_fix">🛠 Sửa lỗi</button>
+          <button class="f-pill" data-cat="new" data-i18n="f_new">Tính năng mới</button>
+          <button class="f-pill" data-cat="improved" data-i18n="f_imp">Cải thiện</button>
+          <button class="f-pill" data-cat="fixed" data-i18n="f_fix">Sửa lỗi</button>
         </div>
         <label class="search-box">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -634,9 +635,9 @@
         title: 'Có gì mới.',
         sub: 'Toàn bộ lịch sử phiên bản, tính năng mới, cải thiện hiệu năng và các lỗi đã được khắc phục trên Module E.',
         f_all: 'Tất cả',
-        f_new: '✨ Tính năng mới',
-        f_imp: '⚡ Cải thiện',
-        f_fix: '🛠 Sửa lỗi',
+        f_new: 'Tính năng mới',
+        f_imp: 'Cải thiện',
+        f_fix: 'Sửa lỗi',
         rail_h: 'Các phiên bản',
         back_home: 'Trang chủ',
         search_ph: 'Tìm tính năng hoặc lỗi đã sửa...',
@@ -657,9 +658,9 @@
         title: "What's New.",
         sub: 'Every release, new feature, performance refinement, and bug fix shipped for Module E on macOS.',
         f_all: 'All',
-        f_new: '✨ New Features',
-        f_imp: '⚡ Improvements',
-        f_fix: '🛠 Bug Fixes',
+        f_new: 'New Features',
+        f_imp: 'Improvements',
+        f_fix: 'Bug Fixes',
         rail_h: 'Versions',
         back_home: 'Home',
         search_ph: 'Search features or bug fixes...',
@@ -742,7 +743,7 @@
               <div>
                 <div class="release-meta">
                   <span class="ver-badge">v${r.version}</span>
-                  ${r.latest ? `<span class="latest-tag">● ${t.latest}</span>` : ''}
+                  ${r.latest ? `<span class="latest-tag">${t.latest}</span>` : ''}
                   <span class="release-date">${formatDate(r.date)}</span>
                 </div>
                 <h2 class="release-title">${loc.title}</h2>

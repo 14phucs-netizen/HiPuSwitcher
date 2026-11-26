@@ -1027,10 +1027,10 @@
     .u-latest-pill {
       padding: 5px 11px;
       border-radius: 999px;
-      background: rgba(255, 116, 11, 0.13);
-      color: #c85200;
+      background: #f0f0f3;
+      color: #1d1d1f;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     .u-date {
@@ -1085,21 +1085,25 @@
       gap: 12px;
     }
 
-    .u-col.c-new { background: #f4f7ff; border: 1px solid rgba(37, 99, 235, 0.1); }
-    .u-col.c-imp { background: #fff8f1; border: 1px solid rgba(255, 116, 11, 0.14); }
-    .u-col.c-fix { background: #f2fbf5; border: 1px solid rgba(22, 163, 74, 0.13); }
+    .u-col.c-new,
+    .u-col.c-imp,
+    .u-col.c-fix {
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
 
     .u-col-tag {
       align-self: flex-start;
       padding: 4px 11px;
       border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
-    .c-new .u-col-tag { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
-    .c-imp .u-col-tag { background: rgba(255, 116, 11, 0.15); color: #c85200; }
-    .c-fix .u-col-tag { background: rgba(22, 163, 74, 0.14); color: #15803d; }
+    .c-new .u-col-tag { background: #1d1d1f; color: #ffffff; }
+    .c-imp .u-col-tag { background: #e5e5ea; color: #1d1d1f; }
+    .c-fix .u-col-tag { background: #ffffff; color: #3a3a3c; border: 1px solid rgba(0, 0, 0, 0.08); }
 
     .u-col ul {
       list-style: none;
@@ -1126,9 +1130,9 @@
       border-radius: 50%;
     }
 
-    .c-new li::before { background: #3b82f6; }
-    .c-imp li::before { background: #ff740b; }
-    .c-fix li::before { background: #22c55e; }
+    .c-new li::before { background: #1d1d1f; }
+    .c-imp li::before { background: #6e6e73; }
+    .c-fix li::before { background: #aeaeb2; }
 
     /* =========================================
        SECTION 4: FAQ & SUPPORT QR
@@ -1608,14 +1612,14 @@
         <div class="updates-shell-top">
           <div class="updates-ver-info">
             <span class="u-ver-pill" id="u-latest-ver">v1.0.0</span>
-            <span class="u-latest-pill" data-i18n="upd_latest">● Mới nhất</span>
+            <span class="u-latest-pill" data-i18n="upd_latest">Mới nhất</span>
             <span class="u-date" id="u-latest-date">26/11/2026</span>
           </div>
           <div class="u-tabs" id="u-tabs">
             <button class="u-tab active" data-ucat="all" data-i18n="u_all">Tất cả</button>
-            <button class="u-tab" data-ucat="new" data-i18n="u_new">✨ Tính năng mới</button>
-            <button class="u-tab" data-ucat="improved" data-i18n="u_imp">⚡ Cải thiện</button>
-            <button class="u-tab" data-ucat="fixed" data-i18n="u_fix">🛠 Sửa lỗi</button>
+            <button class="u-tab" data-ucat="new" data-i18n="u_new">Tính năng mới</button>
+            <button class="u-tab" data-ucat="improved" data-i18n="u_imp">Cải thiện</button>
+            <button class="u-tab" data-ucat="fixed" data-i18n="u_fix">Sửa lỗi</button>
           </div>
         </div>
         <div class="u-bento" id="u-bento"></div>
@@ -1771,11 +1775,11 @@
         upd_title: "What's New.",
         upd_sub: 'Track every release, new feature, and bug fix shipped for Module E.',
         upd_all: 'View full changelog →',
-        upd_latest: '● Latest',
+        upd_latest: 'Latest',
         u_all: 'All',
-        u_new: '✨ New Features',
-        u_imp: '⚡ Improvements',
-        u_fix: '🛠 Bug Fixes',
+        u_new: 'New Features',
+        u_imp: 'Improvements',
+        u_fix: 'Bug Fixes',
         faq_title: 'Questions, answered.',
         q1: 'Is Module E completely free?',
         a1: 'Yes. 100% free with zero ads, subscriptions, or locked features.',
@@ -1804,8 +1808,8 @@
       document.getElementById('u-latest-date').textContent = currentLang === 'vi' ? `${d}/${m}/${y}` : `${y}-${m}-${d}`;
 
       const labels = currentLang === 'en'
-        ? { new: '✨ New Features', improved: '⚡ Improvements', fixed: '🛠 Bug Fixes' }
-        : { new: '✨ Tính năng mới', improved: '⚡ Cải thiện', fixed: '🛠 Sửa lỗi' };
+        ? { new: 'New Features', improved: 'Improvements', fixed: 'Bug Fixes' }
+        : { new: 'Tính năng mới', improved: 'Cải thiện', fixed: 'Sửa lỗi' };
 
       const cols = [
         { key: 'new', cls: 'c-new', tag: labels.new, items: loc.new || [] },
