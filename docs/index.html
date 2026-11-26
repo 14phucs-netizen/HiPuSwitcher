@@ -948,6 +948,189 @@
     }
 
     /* =========================================
+       SECTION 3.5: WHAT'S NEW (CHANGELOG BENTO)
+       ========================================= */
+    .updates-section {
+      padding: 0 0 96px;
+    }
+
+    .updates-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .updates-head-left p {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .updates-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease;
+    }
+
+    .updates-all-btn:hover {
+      background: var(--ink);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .updates-shell {
+      background: var(--white);
+      border-radius: 49px;
+      padding: 36px 40px 40px;
+      filter: drop-shadow(0px 0px 12.5px rgba(0, 0, 0, 0.03));
+    }
+
+    .updates-shell-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+      border-bottom: 1px solid #ececef;
+    }
+
+    .updates-ver-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .u-ver-pill {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .u-latest-pill {
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 116, 11, 0.13);
+      color: #c85200;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .u-date {
+      font-size: 13.5px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .u-tabs {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      background: #f5f5f7;
+      padding: 4px;
+      border-radius: 999px;
+    }
+
+    .u-tab {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .u-tab.active {
+      background: var(--white);
+      color: var(--ink);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .u-bento {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .u-bento.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    .u-col {
+      border-radius: 26px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .u-col.c-new { background: #f4f7ff; border: 1px solid rgba(37, 99, 235, 0.1); }
+    .u-col.c-imp { background: #fff8f1; border: 1px solid rgba(255, 116, 11, 0.14); }
+    .u-col.c-fix { background: #f2fbf5; border: 1px solid rgba(22, 163, 74, 0.13); }
+
+    .u-col-tag {
+      align-self: flex-start;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .c-new .u-col-tag { background: rgba(37, 99, 235, 0.12); color: #1d4ed8; }
+    .c-imp .u-col-tag { background: rgba(255, 116, 11, 0.15); color: #c85200; }
+    .c-fix .u-col-tag { background: rgba(22, 163, 74, 0.14); color: #15803d; }
+
+    .u-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .u-col li {
+      position: relative;
+      padding-left: 15px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .u-col li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .c-new li::before { background: #3b82f6; }
+    .c-imp li::before { background: #ff740b; }
+    .c-fix li::before { background: #22c55e; }
+
+    /* =========================================
        SECTION 4: FAQ & SUPPORT QR
        ========================================= */
     .faq-section {
@@ -1133,6 +1316,8 @@
       .sc-pill { font-size: 18px; padding: 11px 18px; }
       .steps-card { grid-template-columns: 1fr; padding: 24px; border-radius: 36px; }
       .step-stage { min-height: 220px; padding: 24px 18px; border-radius: 24px; }
+      .updates-shell { padding: 24px; border-radius: 36px; }
+      .u-bento { grid-template-columns: 1fr; }
       .faq-card { padding: 8px 24px; border-radius: 36px; }
       .support-card { flex-direction: column; text-align: center; padding: 28px; border-radius: 36px; }
     }
@@ -1150,6 +1335,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="#highlights" data-i18n="nav_hl">Điểm nổi bật</a>
         <a href="#steps" data-i18n="nav_steps">Cài đặt</a>
+        <a href="#updates" data-i18n="nav_updates">Có gì mới</a>
         <a href="#faq">FAQ</a>
         <a href="#support" data-i18n="nav_sup">Ủng hộ</a>
       </nav>
@@ -1407,6 +1593,36 @@
     </div>
   </section>
 
+  <!-- SECTION 3.5: WHAT'S NEW -->
+  <section id="updates" class="updates-section">
+    <div class="wrap">
+      <div class="updates-head">
+        <div class="updates-head-left">
+          <h2 class="sec-title" data-i18n="upd_title">Có gì mới.</h2>
+          <p data-i18n="upd_sub">Theo dõi mọi bản cập nhật, tính năng mới và lỗi đã được khắc phục.</p>
+        </div>
+        <a class="updates-all-btn" href="updates.html" data-i18n="upd_all">Xem toàn bộ lịch sử cập nhật →</a>
+      </div>
+
+      <div class="updates-shell">
+        <div class="updates-shell-top">
+          <div class="updates-ver-info">
+            <span class="u-ver-pill" id="u-latest-ver">v1.0.0</span>
+            <span class="u-latest-pill" data-i18n="upd_latest">● Mới nhất</span>
+            <span class="u-date" id="u-latest-date">26/11/2026</span>
+          </div>
+          <div class="u-tabs" id="u-tabs">
+            <button class="u-tab active" data-ucat="all" data-i18n="u_all">Tất cả</button>
+            <button class="u-tab" data-ucat="new" data-i18n="u_new">✨ Tính năng mới</button>
+            <button class="u-tab" data-ucat="improved" data-i18n="u_imp">⚡ Cải thiện</button>
+            <button class="u-tab" data-ucat="fixed" data-i18n="u_fix">🛠 Sửa lỗi</button>
+          </div>
+        </div>
+        <div class="u-bento" id="u-bento"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 4: FAQ -->
   <section id="faq" class="faq-section">
     <div class="wrap">
@@ -1518,11 +1734,16 @@
       })
       .catch(() => {});
 
-    // 5. VN / EN Language Switcher
+    // 5. VN / EN Language Switcher & What's New Bento Loader
+    let currentLang = 'vi';
+    let currentUCat = 'all';
+    let latestRelease = null;
+
     const dict = {
       en: {
         nav_hl: 'Highlights',
         nav_steps: 'Install',
+        nav_updates: "What's New",
         nav_sup: 'Support',
         dl_btn: 'Download',
         hero_kicker: 'Crafted for macOS · 100% Free',
@@ -1547,6 +1768,14 @@
         m2_b: 'Open Anyway',
         m3_k: 'System Settings → Accessibility',
         m3_ok: '✓ Ready to use',
+        upd_title: "What's New.",
+        upd_sub: 'Track every release, new feature, and bug fix shipped for Module E.',
+        upd_all: 'View full changelog →',
+        upd_latest: '● Latest',
+        u_all: 'All',
+        u_new: '✨ New Features',
+        u_imp: '⚡ Improvements',
+        u_fix: '🛠 Bug Fixes',
         faq_title: 'Questions, answered.',
         q1: 'Is Module E completely free?',
         a1: 'Yes. 100% free with zero ads, subscriptions, or locked features.',
@@ -1567,15 +1796,60 @@
       viOriginals[el.dataset.i18n] = el.innerHTML;
     });
 
+    function renderHomeUpdates() {
+      if (!latestRelease) return;
+      const loc = latestRelease[currentLang] || latestRelease.vi;
+      document.getElementById('u-latest-ver').textContent = 'v' + latestRelease.version;
+      const [y, m, d] = latestRelease.date.split('-');
+      document.getElementById('u-latest-date').textContent = currentLang === 'vi' ? `${d}/${m}/${y}` : `${y}-${m}-${d}`;
+
+      const labels = currentLang === 'en'
+        ? { new: '✨ New Features', improved: '⚡ Improvements', fixed: '🛠 Bug Fixes' }
+        : { new: '✨ Tính năng mới', improved: '⚡ Cải thiện', fixed: '🛠 Sửa lỗi' };
+
+      const cols = [
+        { key: 'new', cls: 'c-new', tag: labels.new, items: loc.new || [] },
+        { key: 'improved', cls: 'c-imp', tag: labels.improved, items: loc.improved || [] },
+        { key: 'fixed', cls: 'c-fix', tag: labels.fixed, items: loc.fixed || [] }
+      ].filter(c => (currentUCat === 'all' || currentUCat === c.key) && c.items.length > 0);
+
+      const bento = document.getElementById('u-bento');
+      bento.classList.toggle('single-col', cols.length === 1);
+      bento.innerHTML = cols.map(c => `
+        <div class="u-col ${c.cls}">
+          <span class="u-col-tag">${c.tag}</span>
+          <ul>${c.items.map(i => `<li>${i}</li>`).join('')}</ul>
+        </div>
+      `).join('');
+    }
+
+    document.querySelectorAll('.u-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        currentUCat = tab.dataset.ucat;
+        document.querySelectorAll('.u-tab').forEach(t => t.classList.toggle('active', t === tab));
+        renderHomeUpdates();
+      });
+    });
+
+    fetch('updates.json?v=' + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data || !data.releases || !data.releases.length) return;
+        latestRelease = data.releases[0];
+        renderHomeUpdates();
+      })
+      .catch(() => {});
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang;
-        document.documentElement.lang = lang;
+        currentLang = btn.dataset.lang;
+        document.documentElement.lang = currentLang;
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn));
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const k = el.dataset.i18n;
-          el.innerHTML = lang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
+          el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
+        renderHomeUpdates();
       });
     });
   </script>

@@ -1,0 +1,54 @@
+{
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-11-26",
+      "latest": true,
+      "downloadURL": "https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg",
+      "vi": {
+        "title": "Ra mắt Module E cho macOS",
+        "summary": "Bản phát hành chính thức đầu tiên với giao diện Liquid Glass, kiểu quạt Wedge & thẻ bo tròn, phím tắt tức thì và tự động kiểm tra cập nhật.",
+        "new": [
+          "Mở menu chuyển ứng dụng ngay tại vị trí con trỏ chuột với hiệu ứng Liquid Glass, Blur và Off.",
+          "Hỗ trợ 2 bố cục chính (Cánh quạt Wedge & Thẻ bo tròn) cùng 4 preset cài sẵn dễ tuỳ chỉnh.",
+          "Kích hoạt nhanh bằng Fn + ⇧, nhấn đúp ⇧ / ⌥ / ⌘, chuột giữa hoặc tổ hợp phím tuỳ chỉnh.",
+          "Màn hình hướng dẫn cấp quyền Trợ năng (Accessibility) ngay lần mở đầu tiên.",
+          "Tự động kiểm tra phiên bản mới từ GitHub Releases ngay trong Menu Bar và Cài đặt → Giới thiệu."
+        ],
+        "improved": [
+          "Tối ưu chuyển đổi giữa nhiều Desktop / Spaces mượt mà, giữ nguyên bố cục cửa sổ đang làm việc.",
+          "Nhấn vào Finder sẽ mở trực tiếp thư mục Tải về ngay trên Space hiện tại.",
+          "Đồng bộ màu kính của nút đóng (×) ở tâm theo đúng chế độ Liquid Glass / Blur / Off.",
+          "Nâng cấp icon Menu Bar độ phân giải Retina sắc nét, tự thích ứng Light / Dark Mode."
+        ],
+        "fixed": [
+          "Sửa lỗi macOS bật hộp thoại cảnh báo quyền Trợ năng ngoài ý muốn khi ứng dụng vừa khởi động.",
+          "Sửa lỗi không chuyển đúng sang ứng dụng đang mở ở một Space khác.",
+          "Sửa lỗi đường dẫn Finder đôi khi mở nhầm thư mục hệ thống MyLibraries."
+        ]
+      },
+      "en": {
+        "title": "Introducing Module E for macOS",
+        "summary": "First official release featuring Liquid Glass visuals, Wedge & Rounded Card layouts, instant global triggers, and built-in update checking.",
+        "new": [
+          "Summon the app switcher right at your cursor with Liquid Glass, Blur, and Off visual modes.",
+          "Two flexible layouts (Wedge fan & Rounded Cards) with 4 ready-to-use presets.",
+          "Instant triggers: Fn + ⇧, double-tap ⇧ / ⌥ / ⌘, middle click, or custom global hotkeys.",
+          "Guided first-launch onboarding for macOS Accessibility permission.",
+          "Automatic update checker backed by GitHub Releases from Menu Bar and Settings → About."
+        ],
+        "improved": [
+          "Smoother multi-Space app activation without disrupting your existing window arrangement.",
+          "Clicking Finder opens your Downloads folder right on your current Space.",
+          "Synced the center close button (×) glass style to match Liquid Glass / Blur / Off modes.",
+          "Upgraded Retina Menu Bar template icon for crisp Light & Dark Mode rendering."
+        ],
+        "fixed": [
+          "Fixed an unexpected macOS Accessibility warning popup appearing on launch before trust was granted.",
+          "Fixed switching to running apps located on a different macOS Space.",
+          "Fixed Finder occasionally opening the internal MyLibraries system folder."
+        ]
+      }
+    }
+  ]
+}
