@@ -194,23 +194,49 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 18px;
       width: 100%;
     }
 
     .hero-kicker {
-      font-size: 21px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      font-size: 13.5px;
       font-weight: 600;
-      line-height: 1.2;
+      letter-spacing: -0.01em;
       color: var(--ink-soft);
     }
 
+    .hero-kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ff740b;
+      box-shadow: 0 0 0 3px rgba(255, 116, 11, 0.16);
+      flex-shrink: 0;
+    }
+
     .hero-title {
-      font-size: clamp(46px, 7.5vw, 80px);
+      font-size: clamp(44px, 7.2vw, 78px);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
       color: var(--ink);
+    }
+
+    .hero-desc {
+      max-width: 630px;
+      font-size: clamp(16px, 2vw, 19.5px);
+      font-weight: 400;
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+      color: var(--muted);
     }
 
     /* =========================================
@@ -1145,8 +1171,12 @@
   <!-- SECTION 1: HERO -->
   <section class="wrap hero">
     <div class="hero-head">
-      <p class="hero-kicker" data-i18n="hero_kicker">Hello, hello.</p>
-      <h1 class="hero-title" data-i18n="hero_title">Switch apps.<br />Instantly.</h1>
+      <p class="hero-kicker">
+        <span class="hero-kicker-dot" aria-hidden="true"></span>
+        <span data-i18n="hero_kicker">Thiết kế riêng cho macOS · Miễn phí 100%</span>
+      </p>
+      <h1 class="hero-title" data-i18n="hero_title">Chuyển ứng dụng.<br />Nhanh như ý nghĩ.</h1>
+      <p class="hero-desc" data-i18n="hero_desc">Quên đi cảm giác rê chuột xuống Dock hay bấm ⌘Tab lặp đi lặp lại. Vòng tròn Liquid Glass mở ra ngay tại đầu con trỏ — lướt nhẹ, chọn đúng ứng dụng trong tích tắc.</p>
     </div>
 
     <div class="hardware-stage">
@@ -1495,9 +1525,9 @@
         nav_steps: 'Install',
         nav_sup: 'Support',
         dl_btn: 'Download',
-        hero_kicker: 'Hello, hello.',
-        hero_title: 'Switch apps.<br />Instantly.',
-        hero_reopen: 'Click to summon Module E',
+        hero_kicker: 'Crafted for macOS · 100% Free',
+        hero_title: 'Switch apps.<br />At the speed of thought.',
+        hero_desc: 'Ditch endless ⌘Tab loops and trips to the Dock. A sleek Liquid Glass radial switcher opens right under your cursor — glide, click, and jump into any app in a split second.',
         dl_meta: 'Free for macOS 14+',
         c1_t: 'Opens anywhere<br />right at your cursor',
         c2_t: 'Press to open — click to switch',
