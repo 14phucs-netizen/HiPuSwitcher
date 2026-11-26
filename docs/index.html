@@ -182,11 +182,11 @@
        SECTION 1: HERO (Figma node 2:2205)
        ========================================= */
     .hero {
-      padding: 112px 0 120px;
+      padding: 76px 0 108px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
       text-align: center;
     }
 
@@ -194,7 +194,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       width: 100%;
     }
 
@@ -223,16 +223,16 @@
     }
 
     .hero-title {
-      font-size: clamp(44px, 7.2vw, 78px);
+      font-size: clamp(36px, 5.4vw, 60px);
       font-weight: 700;
-      line-height: 1.06;
+      line-height: 1.08;
       letter-spacing: -0.03em;
       color: var(--ink);
     }
 
     .hero-desc {
-      max-width: 630px;
-      font-size: clamp(16px, 2vw, 19.5px);
+      max-width: 600px;
+      font-size: clamp(15.5px, 1.8vw, 18.5px);
       font-weight: 400;
       line-height: 1.55;
       letter-spacing: -0.01em;
@@ -1369,6 +1369,17 @@
       <p class="hero-desc" data-i18n="hero_desc">Quên đi cảm giác rê chuột xuống Dock hay bấm ⌘Tab lặp đi lặp lại. Module E mở ra ngay tại đầu con trỏ — lướt nhẹ, chọn đúng ứng dụng trong tích tắc.</p>
     </div>
 
+    <div class="download-pill">
+      <div class="download-pill-meta">
+        <span class="download-pill-title" data-i18n="dl_meta">Miễn phí cho macOS 14+</span>
+        <span class="download-pill-sub"><span id="version-text">v1.0.0</span> · Apple Silicon &amp; Intel</span>
+      </div>
+      <a class="download-pill-btn download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
+        <svg width="14" height="16" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.13-1.9-14.34-6.08-3.69-3.03-7.61-7.82-11.77-14.37-5.93-9.27-10.72-20.03-14.38-32.28-3.66-12.24-5.49-23.97-5.49-35.19 0-13.18 3.31-24.16 9.93-32.92 6.62-8.76 15.05-13.31 25.29-13.66 4.92 0 10.67 1.48 17.26 4.44 6.59 2.96 10.83 4.47 12.73 4.53 1.45 0 6.13-1.76 14.03-5.28 7.9-3.52 14.56-4.97 19.99-4.36 14.77 1.19 25.88 7.01 33.33 17.46-13.21 8.01-19.72 19.22-19.53 33.62.19 11.22 4.21 20.56 12.06 28.01 3.63 3.45 7.83 6.12 12.61 8.02-1.01 2.95-2.07 5.79-3.18 8.53zM119.22 31.01c0 8.8-3.21 17.01-9.62 24.61-7.73 9.03-17.09 14.24-27.25 13.42-.13-1.05-.21-2.16-.21-3.32 0-8.44 3.67-17.48 11.01-25.8 3.5-3.99 7.95-7.31 13.35-9.96 5.4-2.64 10.5-4.1 15.3-4.36.28 1.84.42 3.64.42 5.41z"/></svg>
+        <span data-i18n="dl_btn">Tải về</span>
+      </a>
+    </div>
+
     <div class="hardware-stage">
       <div class="hardware-composition">
         <!-- iMac 24" Mockup -->
@@ -1425,17 +1436,6 @@
           <div class="mbp-base"></div>
         </div>
       </div>
-    </div>
-
-    <div class="download-pill">
-      <div class="download-pill-meta">
-        <span class="download-pill-title" data-i18n="dl_meta">Miễn phí cho macOS 14+</span>
-        <span class="download-pill-sub"><span id="version-text">v1.0.0</span> · Apple Silicon &amp; Intel</span>
-      </div>
-      <a class="download-pill-btn download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
-        <svg width="14" height="16" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.13-1.9-14.34-6.08-3.69-3.03-7.61-7.82-11.77-14.37-5.93-9.27-10.72-20.03-14.38-32.28-3.66-12.24-5.49-23.97-5.49-35.19 0-13.18 3.31-24.16 9.93-32.92 6.62-8.76 15.05-13.31 25.29-13.66 4.92 0 10.67 1.48 17.26 4.44 6.59 2.96 10.83 4.47 12.73 4.53 1.45 0 6.13-1.76 14.03-5.28 7.9-3.52 14.56-4.97 19.99-4.36 14.77 1.19 25.88 7.01 33.33 17.46-13.21 8.01-19.72 19.22-19.53 33.62.19 11.22 4.21 20.56 12.06 28.01 3.63 3.45 7.83 6.12 12.61 8.02-1.01 2.95-2.07 5.79-3.18 8.53zM119.22 31.01c0 8.8-3.21 17.01-9.62 24.61-7.73 9.03-17.09 14.24-27.25 13.42-.13-1.05-.21-2.16-.21-3.32 0-8.44 3.67-17.48 11.01-25.8 3.5-3.99 7.95-7.31 13.35-9.96 5.4-2.64 10.5-4.1 15.3-4.36.28 1.84.42 3.64.42 5.41z"/></svg>
-        <span data-i18n="dl_btn">Tải về</span>
-      </a>
     </div>
   </section>
 
