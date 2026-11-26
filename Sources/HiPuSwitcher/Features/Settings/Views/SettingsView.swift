@@ -550,8 +550,8 @@ enum SettingsTab: String, CaseIterable, Identifiable, Hashable {
             return l.t("Chọn danh sách ứng dụng hiển thị và sắp xếp thứ tự trên Launcher.",
                        "Choose which applications appear and reorder them in the Launcher.")
         case .about:
-            return l.t("Thông tin phiên bản, quyền riêng tư và mã nguồn mở của HiPu Switcher.",
-                       "Version info, privacy details, and open-source notices for HiPu Switcher.")
+            return l.t("Thông tin phiên bản, quyền riêng tư và mã nguồn mở của Module E.",
+                       "Version info, privacy details, and open-source notices for Module E.")
         }
     }
 
@@ -845,7 +845,7 @@ struct GeneralSettingsPane: View {
                     }
                 }
 
-                Toggle(l10n.t("Mở HiPu Switcher cùng khi đăng nhập", "Open HiPu Switcher at login"), isOn: $viewModel.launchAtLogin)
+                Toggle(l10n.t("Mở Module E cùng khi đăng nhập", "Open Module E at login"), isOn: $viewModel.launchAtLogin)
                     .disabled(!LaunchAtLoginHelper.isSupported)
                 if !LaunchAtLoginHelper.isSupported {
                     Text(l10n.t("Yêu cầu ứng dụng được ký bằng Developer ID.", "Requires an app signed with a Developer ID."))
@@ -2118,8 +2118,8 @@ struct AboutSettingsPane: View {
                                     .font(.headline)
                             }
                             Text(l10n.t(
-                                "Nếu HiPu Switcher giúp ích cho công việc hằng ngày của bạn, hãy quét mã QR bên cạnh để ủng hộ nhé!",
-                                "If HiPu Switcher helps your daily workflow, scan the QR code to support future updates!"
+                                "Nếu Module E giúp ích cho công việc hằng ngày của bạn, hãy quét mã QR bên cạnh để ủng hộ nhé!",
+                                "If Module E helps your daily workflow, scan the QR code to support future updates!"
                             ))
                             .font(.caption)
                             .foregroundStyle(.secondary)

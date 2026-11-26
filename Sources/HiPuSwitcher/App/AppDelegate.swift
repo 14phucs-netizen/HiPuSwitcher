@@ -390,7 +390,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 image.isTemplate = true
                 button.image = image
             } else {
-                button.image = NSImage(systemSymbolName: "square.grid.2x2", accessibilityDescription: "HiPu Switcher")
+                button.image = NSImage(systemSymbolName: "square.grid.2x2", accessibilityDescription: "Module E")
             }
         }
         
@@ -400,7 +400,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func rebuildMenuBarMenu() {
         let l = L10n.shared
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: l.t("Mở HiPu Switcher", "Show HiPu Switcher"), action: #selector(toggleLauncher), keyEquivalent: "s"))
+        menu.addItem(NSMenuItem(title: l.t("Mở Module E", "Show Module E"), action: #selector(toggleLauncher), keyEquivalent: "s"))
         menu.addItem(NSMenuItem.separator())
         menu.addItem(NSMenuItem(title: l.t("Cài đặt…", "Settings…"), action: #selector(openSettingsMenu), keyEquivalent: ","))
         menu.addItem(NSMenuItem(title: l.t("Kiểm tra cập nhật…", "Check for Updates…"), action: #selector(checkForUpdatesMenu), keyEquivalent: ""))

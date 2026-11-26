@@ -3,7 +3,7 @@ import Foundation
 /// Thông tin thương mại của app, hiển thị trong Cài đặt → Giới thiệu.
 /// Điền các giá trị `nil` trước khi phát hành; mục nào còn `nil` sẽ tự ẩn khỏi giao diện.
 enum AppInfo {
-    static let name = "HiPu Switcher"
+    static let name = "Module E"
     static let developer = "PhucVang"
     static let copyright = "© 2026 PhucVang. Bảo lưu mọi quyền."
 

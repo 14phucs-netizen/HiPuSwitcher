@@ -39,7 +39,7 @@ struct OnboardingView: View {
                     .frame(width: 72, height: 72)
                     .shadow(color: .black.opacity(0.18), radius: 6, x: 0, y: 3)
 
-                Text(l10n.t("Chào mừng đến với HiPu Switcher", "Welcome to HiPu Switcher"))
+                Text(l10n.t("Chào mừng đến với Module E", "Welcome to Module E"))
                     .font(.title2.bold())
                     .multilineTextAlignment(.center)
 
@@ -182,8 +182,8 @@ struct OnboardingView: View {
 
                 if !isAccessibilityGranted {
                     Text(l10n.t(
-                        "Hãy bật HiPuSwitcher trong Cài đặt hệ thống → Trợ năng để tiếp tục.",
-                        "Enable HiPuSwitcher in System Settings → Accessibility to continue."
+                        "Hãy bật Module E trong Cài đặt hệ thống → Trợ năng để tiếp tục.",
+                        "Enable Module E in System Settings → Accessibility to continue."
                     ))
                     .font(.caption)
                     .foregroundStyle(.secondary)

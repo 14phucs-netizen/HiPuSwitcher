@@ -25,7 +25,7 @@ package_app() {
     local icns_file="$5"
     local menu_icon_name="$6"
     
-    local app_dir="${target_name}.app"
+    local app_dir="${display_name}.app"
     local contents_dir="${app_dir}/Contents"
     local macos_dir="${contents_dir}/MacOS"
     local resources_dir="${contents_dir}/Resources"
@@ -150,7 +150,7 @@ PLIST
     echo "Successfully packaged and signed ${app_dir}"
 }
 
-# Package HiPuSwitcher (the App Switcher)
-package_app "HiPuSwitcher" "HiPu Switcher" "true" "true" "icon_switcher.icns" "MenuBarIconTemplate"
+# Package Module E (the App Switcher)
+package_app "HiPuSwitcher" "Module E" "true" "true" "icon_switcher.icns" "MenuBarIconTemplate"
 
 echo "Build and packaging complete!"
