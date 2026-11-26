@@ -214,16 +214,156 @@
     }
 
     /* =========================================
-       LIVE REAL-APP DEMO VIDEO HERO STAGE
+       APPLE HARDWARE MOCKUP STAGE (iMac + MacBook Pro)
        ========================================= */
-    .hero-visual {
+    .hardware-stage {
+      position: relative;
+      width: 100%;
+      max-width: 903px;
+      padding: 8px 0 18px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hardware-composition {
+      position: relative;
+      width: 100%;
+      padding-bottom: 24px;
+    }
+
+    /* --- iMac 24" (Silver Aluminum) --- */
+    .imac {
+      position: relative;
+      width: 72%;
+      margin-left: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .imac-body {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1.5px solid #d8d8dc;
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.12), 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .imac-bezel {
+      position: relative;
+      padding: 12px 12px 10px;
+      background: #ffffff;
+    }
+
+    .imac-cam {
+      position: absolute;
+      top: 4.5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background: #c8c8cc;
+    }
+
+    .imac-screen {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
-      border-radius: 18px;
+      border-radius: 4px;
       overflow: hidden;
       background: #141418;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.10);
+    }
+
+    .imac-chin {
+      height: 44px;
+      background: linear-gradient(180deg, #ececef 0%, #e1e1e6 100%);
+      border-top: 1px solid rgba(0, 0, 0, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .imac-stand-neck {
+      width: 19%;
+      height: 58px;
+      background: linear-gradient(180deg, #b8b9bf 0%, #dcdde2 38%, #cfd0d6 85%, #b4b5bb 100%);
+      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.14);
+    }
+
+    .imac-stand-foot {
+      width: 28%;
+      height: 7px;
+      border-radius: 2px 2px 6px 6px;
+      background: linear-gradient(180deg, #e8e9ed 0%, #c6c7cd 100%);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+    }
+
+    /* --- MacBook Pro (Space Silver / Black Bezel + Notch) --- */
+    .macbook {
+      position: absolute;
+      right: 0;
+      bottom: 18px;
+      width: 54%;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mbp-lid {
+      width: 88%;
+      padding: 9px 9px 11px;
+      border-radius: 16px 16px 4px 4px;
+      background: #0d0d0f;
+      border: 1.5px solid #3a3a3e;
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      position: relative;
+    }
+
+    .mbp-screen {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9.5;
+      border-radius: 5px;
+      overflow: hidden;
+      background: #141418;
+    }
+
+    .mbp-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 15%;
+      height: 11px;
+      background: #0d0d0f;
+      border-radius: 0 0 6px 6px;
+      z-index: 4;
+    }
+
+    .mbp-base {
+      width: 100%;
+      height: 13px;
+      border-radius: 2px 2px 12px 12px;
+      background: linear-gradient(180deg, #e5e6ea 0%, #c8c9cf 55%, #aeb0b7 100%);
+      position: relative;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .mbp-base::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16%;
+      height: 4px;
+      border-radius: 0 0 4px 4px;
+      background: #9fa1a8;
     }
 
     .hero-video {
@@ -238,13 +378,13 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 28px;
-      padding: 0 14px;
+      height: 20px;
+      padding: 0 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-family: var(--font-text);
-      font-size: 11.5px;
+      font-size: 9px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.92);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -256,37 +396,11 @@
     .mac-menubar-right {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 9px;
     }
 
     .mac-menubar-left strong {
       font-weight: 700;
-    }
-
-    .video-toggle {
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 4;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: rgba(20, 20, 24, 0.42);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      color: #ffffff;
-      font-size: 11px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.18s ease, transform 0.18s ease;
-    }
-
-    .video-toggle:hover {
-      background: rgba(20, 20, 24, 0.68);
-      transform: scale(1.06);
     }
 
     /* Figma Download Pill Bar (node 2:2202) */
@@ -981,6 +1095,9 @@
     @media (max-width: 820px) {
       .nav-links { display: none; }
       .hero { padding: 72px 0 80px; }
+      .imac { display: none; }
+      .macbook { position: relative; right: auto; bottom: auto; width: 100%; }
+      .hardware-composition { padding-bottom: 8px; }
       .download-pill { flex-direction: column; gap: 14px; padding: 18px 20px; border-radius: 28px; width: 100%; }
       .download-pill-meta { align-items: center; text-align: center; }
       .download-pill-btn { width: 100%; }
@@ -1032,39 +1149,62 @@
       <h1 class="hero-title" data-i18n="hero_title">Switch apps.<br />Instantly.</h1>
     </div>
 
-    <div class="hero-visual">
-      <!-- Authentic macOS Menu Bar overlay -->
-      <div class="mac-menubar" aria-hidden="true">
-        <div class="mac-menubar-left">
-          <span></span>
-          <strong>Finder</strong>
-          <span>File</span>
-          <span>Edit</span>
-          <span>View</span>
-          <span>Window</span>
-          <span>Help</span>
+    <div class="hardware-stage">
+      <div class="hardware-composition">
+        <!-- iMac 24" Mockup -->
+        <div class="imac" aria-label="Module E on iMac">
+          <div class="imac-body">
+            <div class="imac-bezel">
+              <span class="imac-cam" aria-hidden="true"></span>
+              <div class="imac-screen">
+                <div class="mac-menubar" aria-hidden="true">
+                  <div class="mac-menubar-left">
+                    <span></span>
+                    <strong>Finder</strong>
+                    <span>File</span>
+                    <span>Edit</span>
+                    <span>View</span>
+                    <span>Window</span>
+                  </div>
+                  <div class="mac-menubar-right">
+                    <span>9:41</span>
+                  </div>
+                </div>
+                <video class="hero-video" autoplay loop muted playsinline preload="auto" poster="figma/hero-wallpaper.jpg">
+                  <source src="figma/hero-demo.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+            <div class="imac-chin"></div>
+          </div>
+          <div class="imac-stand-neck"></div>
+          <div class="imac-stand-foot"></div>
         </div>
-        <div class="mac-menubar-right">
-          <span>27 thg 11</span>
-          <span>9:41</span>
+
+        <!-- MacBook Pro Mockup -->
+        <div class="macbook" aria-label="Module E on MacBook Pro">
+          <div class="mbp-lid">
+            <div class="mbp-screen">
+              <div class="mbp-notch" aria-hidden="true"></div>
+              <div class="mac-menubar" aria-hidden="true">
+                <div class="mac-menubar-left">
+                  <span></span>
+                  <strong>Finder</strong>
+                  <span>File</span>
+                  <span>Edit</span>
+                </div>
+                <div class="mac-menubar-right">
+                  <span>9:41</span>
+                </div>
+              </div>
+              <video class="hero-video" autoplay loop muted playsinline preload="auto" poster="figma/hero-wallpaper.jpg">
+                <source src="figma/hero-demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          <div class="mbp-base"></div>
         </div>
       </div>
-
-      <!-- Real Screen Recording of Module E on macOS -->
-      <video
-        id="hero-video"
-        class="hero-video"
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="auto"
-        poster="figma/hero-wallpaper.jpg"
-      >
-        <source src="figma/hero-demo.mp4" type="video/mp4" />
-      </video>
-
-      <button class="video-toggle" id="video-toggle" type="button" aria-label="Pause or play demo video" title="Tạm dừng / Phát">❚❚</button>
     </div>
 
     <div class="download-pill">
@@ -1297,17 +1437,9 @@
   </div>
 
   <script>
-    // 0. Hero Demo Video Play/Pause toggle
-    const heroVideo = document.getElementById('hero-video');
-    const videoToggle = document.getElementById('video-toggle');
-    videoToggle.addEventListener('click', () => {
-      if (heroVideo.paused) {
-        heroVideo.play();
-        videoToggle.textContent = '❚❚';
-      } else {
-        heroVideo.pause();
-        videoToggle.textContent = '▶';
-      }
+    // 0. Ensure both iMac & MacBook Pro demo videos play continuously in sync
+    document.querySelectorAll('.hero-video').forEach(v => {
+      v.play().catch(() => {});
     });
 
     // 1. Seamless Continuous Marquee for Highlights (clone cards once for infinite loop)
