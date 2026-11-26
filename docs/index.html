@@ -329,19 +329,31 @@
       border-color: #000000;
     }
 
-    /* Horizontal Scroll Rail aligned with 903px container on left, bleeding right */
-    .highlights-rail {
-      display: flex;
-      gap: 32px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      padding: 12px max(20px, calc((100vw - var(--content-w)) / 2)) 24px;
-      scrollbar-width: none;
+    /* Continuous Infinite Marquee Rail for Highlights */
+    .highlights-viewport {
+      width: 100%;
+      overflow: hidden;
+      padding: 12px 0 24px;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
     }
 
-    .highlights-rail::-webkit-scrollbar {
-      display: none;
+    @keyframes highlightsMarquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(calc(-50% - 16px)); }
+    }
+
+    .highlights-track {
+      display: flex;
+      gap: 32px;
+      width: max-content;
+      animation: highlightsMarquee 36s linear infinite;
+      will-change: transform;
+    }
+
+    .highlights-viewport:hover .highlights-track,
+    .highlights-track.paused {
+      animation-play-state: paused;
     }
 
     /* Highlight Card (Figma 400x513, rounded-[49px], p-[40px]) */
@@ -395,7 +407,7 @@
       transform: translate(8px, 12px);
     }
 
-    /* Card 2 & 3 Visuals */
+    /* Card 2 & 3 Visuals — crisp full-res Retina renders */
     .h-card-visual {
       width: 100%;
       height: 320px;
@@ -410,6 +422,11 @@
       width: auto;
       height: auto;
       object-fit: contain;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .h-card-visual img.rounded-render {
+      border-radius: 26px;
     }
 
     /* Card 4: Window Stays Intact Preview (Figma 2:2739) */
@@ -974,61 +991,62 @@
       <div class="sec-header">
         <h2 class="sec-title">Get the highlights.</h2>
         <div class="carousel-nav">
-          <button class="carousel-btn" id="scroll-prev" aria-label="Previous">‹</button>
-          <button class="carousel-btn" id="scroll-next" aria-label="Next">›</button>
+          <button class="carousel-btn" id="marquee-toggle" aria-label="Pause highlights" title="Tạm dừng / Tiếp tục">❚❚</button>
         </div>
       </div>
     </div>
 
-    <div class="highlights-rail" id="highlights-rail">
-      <!-- Card 1: Mở mọi nơi ngay vị trí chuột -->
-      <article class="h-card">
-        <h3 class="h-card-title" data-i18n="c1_t">Mở mọi nơi<br />ngay vị trí chuột</h3>
-        <div class="cursor-radar">
-          <span class="radar-ring r1"></span>
-          <span class="radar-ring r2"></span>
-          <span class="radar-ring r3"></span>
-          <img class="radar-cursor" src="figma/cursor.svg" alt="macOS Cursor" />
-        </div>
-      </article>
-
-      <!-- Card 2: Nhấn là mở - click là chuyển -->
-      <article class="h-card">
-        <h3 class="h-card-title" data-i18n="c2_t">Nhấn là mở - click là chuyển</h3>
-        <div class="h-card-visual">
-          <img src="figma/card-click-switch.png" alt="Nhấn là mở - click là chuyển" loading="lazy" />
-        </div>
-      </article>
-
-      <!-- Card 3: Điều chỉnh giao diện theo sở thích cá nhân -->
-      <article class="h-card">
-        <h3 class="h-card-title" data-i18n="c3_t">Điều chỉnh giao diện theo sở thích cá nhân</h3>
-        <div class="h-card-visual">
-          <img src="figma/card-customize.png" alt="Điều chỉnh giao diện" loading="lazy" />
-        </div>
-      </article>
-
-      <!-- Card 4: Giữ nguyên cửa sổ không thay đổi. -->
-      <article class="h-card">
-        <h3 class="h-card-title" data-i18n="c4_t">Giữ nguyên cửa sổ không thay đổi.</h3>
-        <div class="h-card-visual">
-          <div class="window-preview">
-            <img src="figma/card-window-inner.png" alt="Giữ nguyên cửa sổ" loading="lazy" />
+    <div class="highlights-viewport">
+      <div class="highlights-track" id="highlights-track">
+        <!-- Card 1: Mở mọi nơi ngay vị trí chuột -->
+        <article class="h-card">
+          <h3 class="h-card-title" data-i18n="c1_t">Mở mọi nơi<br />ngay vị trí chuột</h3>
+          <div class="cursor-radar">
+            <span class="radar-ring r1"></span>
+            <span class="radar-ring r2"></span>
+            <span class="radar-ring r3"></span>
+            <img class="radar-cursor" src="figma/cursor.svg" alt="macOS Cursor" />
           </div>
-        </div>
-      </article>
+        </article>
 
-      <!-- Card 5: Phím tắt theo thói quen của bạn -->
-      <article class="h-card">
-        <h3 class="h-card-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn</h3>
-        <div class="shortcut-cloud">
-          <span class="sc-pill">Fn + ⇧</span>
-          <span class="sc-pill">⇧ ⇧</span>
-          <span class="sc-pill">⌥ ⌥</span>
-          <span class="sc-pill">⌥ Space</span>
-          <span class="sc-pill solid" data-i18n="c5_custom">Gán phím tắt</span>
-        </div>
-      </article>
+        <!-- Card 2: Nhấn là mở - click là chuyển (Retina 1024px) -->
+        <article class="h-card">
+          <h3 class="h-card-title" data-i18n="c2_t">Nhấn là mở - click là chuyển</h3>
+          <div class="h-card-visual">
+            <img class="rounded-render" src="screenshots/style-rect-light.png" alt="Nhấn là mở - click là chuyển" />
+          </div>
+        </article>
+
+        <!-- Card 3: Điều chỉnh giao diện theo sở thích cá nhân (Retina 1024px, unclipped) -->
+        <article class="h-card">
+          <h3 class="h-card-title" data-i18n="c3_t">Điều chỉnh giao diện theo sở thích cá nhân</h3>
+          <div class="h-card-visual">
+            <img class="rounded-render" src="screenshots/style-liquid-fan.png" alt="Điều chỉnh giao diện" />
+          </div>
+        </article>
+
+        <!-- Card 4: Giữ nguyên cửa sổ không thay đổi. -->
+        <article class="h-card">
+          <h3 class="h-card-title" data-i18n="c4_t">Giữ nguyên cửa sổ không thay đổi.</h3>
+          <div class="h-card-visual">
+            <div class="window-preview">
+              <img src="figma/card-window-inner.png" alt="Giữ nguyên cửa sổ" />
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 5: Phím tắt theo thói quen của bạn -->
+        <article class="h-card">
+          <h3 class="h-card-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn</h3>
+          <div class="shortcut-cloud">
+            <span class="sc-pill">Fn + ⇧</span>
+            <span class="sc-pill">⇧ ⇧</span>
+            <span class="sc-pill">⌥ ⌥</span>
+            <span class="sc-pill">⌥ Space</span>
+            <span class="sc-pill solid" data-i18n="c5_custom">Gán phím tắt</span>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -1073,7 +1091,7 @@
             </div>
             <img class="drag-chevrons" src="figma/chevrons.svg" alt="Drag to" />
             <div class="drag-tile">
-              <img class="folder-ic" src="figma/applications-folder.png" alt="Applications" />
+              <img class="folder-ic" src="figma/applications-folder.png?v=2" alt="Applications" />
               <span>Applications</span>
             </div>
           </div>
@@ -1185,13 +1203,19 @@
   </div>
 
   <script>
-    // 1. Horizontal Highlights Rail arrows
-    const rail = document.getElementById('highlights-rail');
-    document.getElementById('scroll-prev').addEventListener('click', () => {
-      rail.scrollBy({ left: -432, behavior: 'smooth' });
+    // 1. Seamless Continuous Marquee for Highlights (clone cards once for infinite loop)
+    const track = document.getElementById('highlights-track');
+    const marqueeToggle = document.getElementById('marquee-toggle');
+    const origCards = Array.from(track.children);
+    origCards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
     });
-    document.getElementById('scroll-next').addEventListener('click', () => {
-      rail.scrollBy({ left: 432, behavior: 'smooth' });
+
+    marqueeToggle.addEventListener('click', () => {
+      const isPaused = track.classList.toggle('paused');
+      marqueeToggle.textContent = isPaused ? '▶' : '❚❚';
     });
 
     // 2. Interactive 3-Steps Accordion
