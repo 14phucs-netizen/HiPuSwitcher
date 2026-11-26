@@ -1135,6 +1135,158 @@
     .c-fix li::before { background: #aeaeb2; }
 
     /* =========================================
+       SECTION 4.5: FEEDBACK (GRAYSCALE)
+       ========================================= */
+    .feedback-section {
+      padding: 0 0 96px;
+    }
+
+    .feedback-card {
+      background: var(--white);
+      border-radius: 49px;
+      padding: 44px;
+      filter: drop-shadow(0px 0px 12.5px rgba(0, 0, 0, 0.03));
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 40px;
+      align-items: start;
+    }
+
+    .feedback-info h2 {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .feedback-info p {
+      margin-top: 14px;
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .fb-types {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .fb-type-btn {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: #f5f5f7;
+      color: var(--ink-soft);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .fb-type-btn:hover {
+      background: #ececef;
+    }
+
+    .fb-type-btn.active {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .fb-field {
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      background: #f5f5f7;
+      border-radius: 18px;
+      padding: 13px 16px;
+      font: inherit;
+      font-size: 14.5px;
+      color: var(--ink);
+      outline: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .fb-field::placeholder {
+      color: #8e8e93;
+    }
+
+    .fb-field:focus {
+      background: var(--white);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    textarea.fb-field {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .fb-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .fb-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .fb-btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+
+    .fb-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .fb-btn-secondary:hover {
+      background: #f5f5f7;
+    }
+
+    .fb-status {
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 18px;
+    }
+
+    /* =========================================
        SECTION 4: FAQ & SUPPORT QR
        ========================================= */
     .faq-section {
@@ -1323,6 +1475,7 @@
       .updates-shell { padding: 24px; border-radius: 36px; }
       .u-bento { grid-template-columns: 1fr; }
       .faq-card { padding: 8px 24px; border-radius: 36px; }
+      .feedback-card { grid-template-columns: 1fr; padding: 28px; border-radius: 36px; gap: 24px; }
       .support-card { flex-direction: column; text-align: center; padding: 28px; border-radius: 36px; }
     }
   </style>
@@ -1341,6 +1494,7 @@
         <a href="#steps" data-i18n="nav_steps">Cài đặt</a>
         <a href="updates.html" data-i18n="nav_updates">Có gì mới</a>
         <a href="#faq">FAQ</a>
+        <a href="#feedback" data-i18n="nav_fb">Góp ý</a>
         <a href="#support" data-i18n="nav_sup">Ủng hộ</a>
       </nav>
       <div class="topbar-right">
@@ -1622,6 +1776,33 @@
     </div>
   </section>
 
+  <!-- SECTION 4.5: FEEDBACK -->
+  <section id="feedback" class="feedback-section">
+    <div class="wrap">
+      <div class="feedback-card">
+        <div class="feedback-info">
+          <h2 data-i18n="fb_title">Góp ý &amp; Báo lỗi.</h2>
+          <p data-i18n="fb_sub">Gặp lỗi khi sử dụng hoặc có ý tưởng tính năng mới cho Module E? Gửi góp ý trực tiếp để mình cải thiện nhanh nhất ở các bản cập nhật tiếp theo.</p>
+          <div class="fb-types" id="fb-types" role="group" aria-label="Loại góp ý">
+            <button type="button" class="fb-type-btn active" data-fbtype="bug" data-i18n="fb_t_bug">Báo lỗi</button>
+            <button type="button" class="fb-type-btn" data-fbtype="enhancement" data-i18n="fb_t_feat">Đề xuất tính năng</button>
+            <button type="button" class="fb-type-btn" data-fbtype="feedback" data-i18n="fb_t_gen">Góp ý chung</button>
+          </div>
+        </div>
+
+        <form class="feedback-form" id="feedback-form">
+          <input type="text" class="fb-field" id="fb-subject" placeholder="Tiêu đề ngắn gọn..." required />
+          <textarea class="fb-field" id="fb-body" placeholder="Mô tả chi tiết lỗi, phiên bản macOS hoặc tính năng bạn mong muốn..." required></textarea>
+          <div class="fb-actions">
+            <button type="submit" class="fb-btn-primary" id="fb-github-btn" data-i18n="fb_send_gh">Gửi qua GitHub Issue</button>
+            <button type="button" class="fb-btn-secondary" id="fb-email-btn" data-i18n="fb_send_mail">Gửi qua Email</button>
+          </div>
+          <div class="fb-status" id="fb-status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 5: SUPPORT QR -->
   <section id="support" class="support-section">
     <div class="wrap">
@@ -1719,6 +1900,7 @@
         nav_hl: 'Highlights',
         nav_steps: 'Install',
         nav_updates: "What's New",
+        nav_fb: 'Feedback',
         nav_sup: 'Support',
         dl_btn: 'Download',
         hero_kicker: 'Crafted for macOS · 100% Free',
@@ -1760,6 +1942,13 @@
         a3: 'Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong> just once.',
         q4: 'How do updates work?',
         a4: 'Module E automatically checks for updates every 24 hours, or click <strong>Check for Updates…</strong> from the Menu Bar or <strong>Settings → About</strong>.',
+        fb_title: 'Feedback &amp; Bug Reports.',
+        fb_sub: 'Spotted a bug or have an idea for Module E? Send feedback directly so it makes it into the next release.',
+        fb_t_bug: 'Bug Report',
+        fb_t_feat: 'Feature Request',
+        fb_t_gen: 'General Feedback',
+        fb_send_gh: 'Submit via GitHub Issue',
+        fb_send_mail: 'Send via Email',
         sup_t: 'Buy PhucVang a coffee ☕️',
         sup_d: 'Module E is completely free. If it speeds up your daily Mac workflow, scan the QR code to support future updates.',
         qr_thanks: 'Thank you for buying PhucVang a coffee ☕️'
@@ -1771,6 +1960,65 @@
       viOriginals[el.dataset.i18n] = el.innerHTML;
     });
 
+    // 6. Feedback form (GitHub Issue + Email)
+    let fbType = 'bug';
+    const fbSubject = document.getElementById('fb-subject');
+    const fbBody = document.getElementById('fb-body');
+    const fbStatus = document.getElementById('fb-status');
+
+    function syncFeedbackPlaceholders() {
+      if (currentLang === 'en') {
+        fbSubject.placeholder = 'Short summary...';
+        fbBody.placeholder = 'Describe the bug, your macOS version, or the feature you would like to see...';
+      } else {
+        fbSubject.placeholder = 'Tiêu đề ngắn gọn...';
+        fbBody.placeholder = 'Mô tả chi tiết lỗi, phiên bản macOS hoặc tính năng bạn mong muốn...';
+      }
+    }
+
+    document.querySelectorAll('.fb-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        fbType = btn.dataset.fbtype;
+        document.querySelectorAll('.fb-type-btn').forEach(b => b.classList.toggle('active', b === btn));
+      });
+    });
+
+    function getFeedbackPayload() {
+      const title = fbSubject.value.trim();
+      const body = fbBody.value.trim();
+      if (!title || !body) {
+        fbStatus.textContent = currentLang === 'en'
+          ? 'Please enter both a short summary and details.'
+          : 'Vui lòng nhập đầy đủ tiêu đề và nội dung góp ý.';
+        return null;
+      }
+      const tagMap = { bug: '[Bug]', enhancement: '[Feature]', feedback: '[Feedback]' };
+      const fullTitle = `${tagMap[fbType] || '[Feedback]'} ${title}`;
+      const ver = document.getElementById('version-text')?.textContent || 'v1.0.0';
+      const fullBody = `${body}\n\n---\nVersion: ${ver}\nType: ${fbType}`;
+      return { fullTitle, fullBody };
+    }
+
+    document.getElementById('feedback-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const payload = getFeedbackPayload();
+      if (!payload) return;
+      const url = `https://github.com/Phucvang/HiPuSwitcher/issues/new?title=${encodeURIComponent(payload.fullTitle)}&body=${encodeURIComponent(payload.fullBody)}&labels=${encodeURIComponent(fbType)}`;
+      window.open(url, '_blank', 'noopener');
+      fbStatus.textContent = currentLang === 'en'
+        ? 'Opened GitHub Issue with your feedback pre-filled.'
+        : 'Đã mở trang GitHub Issue với nội dung góp ý điền sẵn.';
+    });
+
+    document.getElementById('fb-email-btn').addEventListener('click', () => {
+      const payload = getFeedbackPayload();
+      if (!payload) return;
+      window.location.href = `mailto:phucnv0103@gmail.com?subject=${encodeURIComponent('Module E — ' + payload.fullTitle)}&body=${encodeURIComponent(payload.fullBody)}`;
+      fbStatus.textContent = currentLang === 'en'
+        ? 'Opening your Mail app...'
+        : 'Đang mở ứng dụng Mail...';
+    });
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         currentLang = btn.dataset.lang;
@@ -1780,6 +2028,7 @@
           const k = el.dataset.i18n;
           el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
+        syncFeedbackPlaceholders();
       });
     });
   </script>
