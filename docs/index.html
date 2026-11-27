@@ -440,78 +440,54 @@
       background: transparent;
     }
 
-    .download-pill-meta {
+    .hero-cta {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-      gap: 2px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .download-pill-title {
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.2;
-      color: #000000;
-    }
-
-    .download-pill-sub {
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 1.2;
-      color: var(--muted);
-    }
-
-    .download-pill-btn {
+    .hero-dl-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 10px 34px;
+      gap: 9px;
+      padding: 14px 32px;
       border-radius: 999px;
       background: #000000;
       color: #ffffff;
       font-size: 16px;
-      font-weight: 400;
-      line-height: 1.2;
-      white-space: nowrap;
+      font-weight: 500;
       transition: transform 0.16s ease, opacity 0.16s ease;
     }
 
-    .download-pill-btn:hover {
+    .hero-dl-btn:hover {
       opacity: 0.88;
       transform: translateY(-1px);
     }
 
+    .hero-dl-meta {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
     /* =========================================
-       SECTION 2: GET THE HIGHLIGHTS (INTERACTIVE BENTO)
+       SECTION 2: HIGHLIGHTS (MINIMALIST BENTO)
        ========================================= */
     .highlights-section {
-      padding: 0 0 120px;
+      padding: 0 0 112px;
     }
 
     .sec-header {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
 
     .sec-title {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(32px, 4.6vw, 46px);
       font-weight: 700;
       line-height: 1.12;
       letter-spacing: -0.025em;
       color: var(--ink);
-    }
-
-    .sec-sub {
-      max-width: 420px;
-      font-size: 16px;
-      line-height: 1.5;
-      color: var(--muted);
     }
 
     .bento-grid {
@@ -523,111 +499,39 @@
     .b-card {
       position: relative;
       background: var(--white);
-      border-radius: 38px;
-      padding: 34px;
-      border: 1px solid rgba(0, 0, 0, 0.045);
-      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.03);
+      border-radius: 42px;
+      padding: 38px;
+      filter: drop-shadow(0px 0px 12.5px rgba(0, 0, 0, 0.03));
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 22px;
+      gap: 24px;
       overflow: hidden;
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
-    }
-
-    .b-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
     }
 
     .b-span-7 { grid-column: span 7; }
     .b-span-5 { grid-column: span 5; }
     .b-span-12 { grid-column: span 12; }
 
-    .b-card.dark {
-      background: linear-gradient(155deg, #16161a 0%, #09090b 100%);
-      border-color: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-    }
-
-    .b-tag {
-      align-self: flex-start;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 12px;
+    .b-title {
+      font-size: clamp(24px, 2.4vw, 30px);
       font-weight: 600;
-      letter-spacing: -0.01em;
-      background: #f2f2f5;
-      color: #3a3a3c;
-    }
-
-    .b-card.dark .b-tag {
-      background: rgba(255, 255, 255, 0.11);
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    .b-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      color: var(--ink);
       position: relative;
       z-index: 2;
     }
 
-    .b-title {
-      font-size: clamp(24px, 2.5vw, 31px);
-      font-weight: 700;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-
-    .b-card.dark .b-title { color: #ffffff; }
-
-    .b-desc {
-      font-size: 14.5px;
-      line-height: 1.55;
-      color: var(--muted);
-      max-width: 440px;
-    }
-
-    .b-card.dark .b-desc { color: rgba(255, 255, 255, 0.65); }
-
-    /* Interactive Light Precision Cursor Canvas (Card 1) */
+    /* Card 1: Minimal Concentric Cursor Stage */
     .cursor-stage {
       position: relative;
-      height: 285px;
-      border-radius: 26px;
-      background-color: #f5f5f7;
-      background-image: radial-gradient(rgba(0, 0, 0, 0.085) 1px, transparent 1px);
-      background-size: 20px 20px;
-      border: 1px solid rgba(0, 0, 0, 0.045);
-      box-shadow: inset 0 0 32px #f5f5f7;
+      height: 290px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
-      cursor: none;
       user-select: none;
-    }
-
-    .cursor-guide-x,
-    .cursor-guide-y {
-      position: absolute;
-      background: rgba(0, 0, 0, 0.05);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .cursor-guide-x {
-      left: 0;
-      right: 0;
-      height: 1px;
-      top: 50%;
-    }
-
-    .cursor-guide-y {
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      left: 50%;
     }
 
     .cursor-anchor {
@@ -636,7 +540,6 @@
       top: 52%;
       width: 0;
       height: 0;
-      z-index: 3;
       pointer-events: none;
     }
 
@@ -648,114 +551,26 @@
       transform: translate(-50%, -50%);
     }
 
-    .c-ring.r1 {
-      width: 244px;
-      height: 244px;
-      background: #efeff2;
-      border: 1px solid rgba(0, 0, 0, 0.035);
-    }
-
-    .c-ring.r2 {
-      width: 172px;
-      height: 172px;
-      background: #e7e7ec;
-      border: 1px solid rgba(255, 255, 255, 0.85);
-    }
-
-    .c-ring.r3 {
-      width: 100px;
-      height: 100px;
-      background: #dedee5;
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.055);
-    }
-
-    .c-sonar {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(0, 0, 0, 0.16);
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .c-sonar.pop {
-      animation: lightSonar 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes lightSonar {
-      0%   { transform: translate(-50%, -50%) scale(0.75); opacity: 0.55; }
-      100% { transform: translate(-50%, -50%) scale(2.65); opacity: 0; }
-    }
+    .c-ring.r1 { width: 268px; height: 268px; background: #f4f4f6; }
+    .c-ring.r2 { width: 196px; height: 196px; background: #ececf0; }
+    .c-ring.r3 { width: 122px; height: 122px; background: #e3e3e9; }
 
     .c-pointer {
       position: relative;
       z-index: 4;
-      width: 38px;
+      width: 48px;
       height: auto;
-      transform: translate(-4px, -2px);
-      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
+      transform: translate(4px, 8px);
       display: block;
     }
 
-    .c-coord-pill {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 5;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(8px);
-      font-size: 11.5px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      color: var(--ink-soft);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-      pointer-events: none;
-    }
-
-    .c-coord-pill span {
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    .c-hint-pill {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      z-index: 5;
-      padding: 5px 11px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      backdrop-filter: blur(8px);
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--muted);
-      pointer-events: none;
-    }
-
-    /* Visual Frames inside Bento Cards */
+    /* Card 2 & 3: Clean Direct Artwork */
     .b-visual {
       width: 100%;
-      height: 285px;
-      border-radius: 26px;
-      background: #f5f5f7;
-      border: 1px solid rgba(0, 0, 0, 0.04);
+      height: 290px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      overflow: hidden;
     }
 
     .b-visual img {
@@ -764,100 +579,64 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      image-rendering: -webkit-optimize-contrast;
+      transition: transform 0.3s ease;
     }
 
     .b-card:hover .b-visual img {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
-    /* Card 4: Retina Window Preview inside Clean Stage */
-    .b-window-frame {
+    /* Card 4: Clean Window Screenshot */
+    .b-window-clean {
       width: 100%;
-      height: 285px;
-      border-radius: 26px;
-      padding: 18px 22px 0;
+      height: 290px;
+      border-radius: 20px;
       overflow: hidden;
-      background: #f5f5f7;
-      border: 1px solid rgba(0, 0, 0, 0.045);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.06);
     }
 
-    .b-window-frame img {
+    .b-window-clean img {
       display: block;
       width: 100%;
-      height: 267px;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
-      border-radius: 12px 12px 0 0;
-      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.09);
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .b-card:hover .b-window-frame img {
-      transform: scale(1.025);
-    }
-
-    /* Card 5: Full-Width Interactive Shortcut Bar */
+    /* Card 5: Clean Minimal Shortcut Pills */
     .b-shortcuts-card {
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .shortcut-deck {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
     }
 
-    .shortcut-keys {
+    .shortcut-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .sc-key {
+    .sc-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 13px 20px;
-      border-radius: 16px;
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      background: #f5f5f7;
-      box-shadow: 0 3px 0 #d8d8de;
-      font: inherit;
-      font-size: 16px;
-      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1.5px solid #c6c6cc;
+      font-size: 17px;
+      font-weight: 500;
       color: var(--ink);
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease, color 0.15s ease;
+      background: transparent;
+      white-space: nowrap;
     }
 
-    .sc-key:hover {
-      background: #ececef;
-    }
-
-    .sc-key.active,
-    .sc-key:active {
+    .sc-pill.solid {
       background: var(--ink);
-      color: var(--white);
       border-color: var(--ink);
-      box-shadow: 0 1px 0 #000000;
-      transform: translateY(2px);
-    }
-
-    .sc-readout {
-      font-size: 13.5px;
-      color: var(--muted);
-      padding: 10px 14px;
-      border-radius: 14px;
-      background: #f5f5f7;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--white);
     }
 
     /* =========================================
@@ -1698,23 +1477,16 @@
   <!-- SECTION 1: HERO -->
   <section class="wrap hero">
     <div class="hero-head">
-      <p class="hero-kicker">
-        <span class="hero-kicker-dot" aria-hidden="true"></span>
-        <span data-i18n="hero_kicker">Thiết kế riêng cho macOS · Miễn phí 100%</span>
-      </p>
       <h1 class="hero-title" data-i18n="hero_title">Chuyển ứng dụng.<br />Nhanh như ý nghĩ.</h1>
-      <p class="hero-desc" data-i18n="hero_desc">Quên đi cảm giác rê chuột xuống Dock hay bấm ⌘Tab lặp đi lặp lại. Module E mở ra ngay tại đầu con trỏ — lướt nhẹ, chọn đúng ứng dụng trong tích tắc.</p>
+      <p class="hero-desc" data-i18n="hero_desc">Mở ngay tại đầu con trỏ — lướt nhẹ và chọn đúng ứng dụng trong tích tắc.</p>
     </div>
 
-    <div class="download-pill">
-      <div class="download-pill-meta">
-        <span class="download-pill-title" data-i18n="dl_meta">Miễn phí cho macOS 14+</span>
-        <span class="download-pill-sub"><span id="version-text">v1.0.0</span> · Apple Silicon &amp; Intel</span>
-      </div>
-      <a class="download-pill-btn download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
+    <div class="hero-cta">
+      <a class="hero-dl-btn download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg">
         <svg width="14" height="16" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-        <span data-i18n="dl_btn">Tải về</span>
+        <span data-i18n="dl_free">Tải miễn phí</span>
       </a>
+      <p class="hero-dl-meta"><span data-i18n="dl_meta">macOS 14+</span> · <span id="version-text">v1.0.0</span> · Apple Silicon &amp; Intel</p>
     </div>
 
     <div class="hardware-stage">
@@ -1776,90 +1548,61 @@
     </div>
   </section>
 
-  <!-- SECTION 2: GET THE HIGHLIGHTS (INTERACTIVE BENTO) -->
+  <!-- SECTION 2: HIGHLIGHTS (MINIMALIST BENTO) -->
   <section id="highlights" class="highlights-section">
     <div class="wrap">
       <div class="sec-header">
         <h2 class="sec-title" data-i18n="hl_title">Điểm nổi bật.</h2>
-        <p class="sec-sub" data-i18n="hl_sub">Mọi thao tác chuyển đổi ứng dụng trên macOS được rút gọn xuống chỉ còn một nhịp lướt.</p>
       </div>
 
       <div class="bento-grid">
-        <!-- Bento 1 (Light, 7 cols): Interactive Precision Cursor Canvas -->
+        <!-- Bento 1 (7 cols) -->
         <article class="b-card b-span-7">
-          <div class="b-copy">
-            <span class="b-tag" data-i18n="b1_tag">Tức thì</span>
-            <h3 class="b-title" data-i18n="c1_t">Mở mọi nơi. Ngay tại đầu con trỏ.</h3>
-            <p class="b-desc" data-i18n="b1_d">Không cần rê chuột xuống Dock. Gọi Module E ở bất kỳ góc màn hình nào — menu mở ra đúng vị trí bạn đang nhìn.</p>
-          </div>
+          <h3 class="b-title" data-i18n="c1_t">Mở mọi nơi ngay vị trí chuột.</h3>
           <div class="cursor-stage" id="cursor-stage">
-            <div class="c-coord-pill" aria-hidden="true">Fn + ⇧ <span>·</span> <span id="c-coord-xy">X 312 &nbsp;Y 118</span></div>
-            <div class="cursor-guide-x" id="c-guide-x" aria-hidden="true"></div>
-            <div class="cursor-guide-y" id="c-guide-y" aria-hidden="true"></div>
             <div class="cursor-anchor" id="c-anchor" aria-hidden="true">
               <span class="c-ring r1"></span>
               <span class="c-ring r2"></span>
               <span class="c-ring r3"></span>
-              <span class="c-sonar" id="c-sonar"></span>
               <img class="c-pointer" src="figma/cursor.svg" alt="macOS Cursor" />
             </div>
-            <span class="c-hint-pill" data-i18n="b1_hint">Di chuột hoặc bấm để thử</span>
           </div>
         </article>
 
-        <!-- Bento 2 (Light, 5 cols): Press & Click -->
+        <!-- Bento 2 (5 cols) -->
         <article class="b-card b-span-5">
-          <div class="b-copy">
-            <span class="b-tag" data-i18n="b2_tag">Một chạm</span>
-            <h3 class="b-title" data-i18n="c2_t">Nhấn là mở — click là chuyển.</h3>
-            <p class="b-desc" data-i18n="b2_d">Lướt nhẹ qua ứng dụng đang chạy, bấm một lần là chuyển ngay tức thì.</p>
-          </div>
+          <h3 class="b-title" data-i18n="c2_t">Nhấn là mở — click là chuyển.</h3>
           <div class="b-visual">
             <img src="figma/card-click-switch.png?v=3" alt="Nhấn là mở - click là chuyển" />
           </div>
         </article>
 
-        <!-- Bento 3 (Light, 5 cols): Customize -->
+        <!-- Bento 3 (5 cols) -->
         <article class="b-card b-span-5">
-          <div class="b-copy">
-            <span class="b-tag" data-i18n="b3_tag">Cá nhân hoá</span>
-            <h3 class="b-title" data-i18n="c3_t">Tuỳ biến theo gu của bạn.</h3>
-            <p class="b-desc" data-i18n="b3_d">Chọn bố cục cánh quạt hoặc thẻ bo tròn, tinh chỉnh độ mờ kính, góc mở và kích thước icon.</p>
-          </div>
+          <h3 class="b-title" data-i18n="c3_t">Tuỳ biến theo sở thích cá nhân.</h3>
           <div class="b-visual">
-            <img src="figma/card-customize.png?v=3" alt="Điều chỉnh giao diện" />
+            <img src="figma/card-customize.png?v=3" alt="Tuỳ biến giao diện" />
           </div>
         </article>
 
-        <!-- Bento 4 (Light, 7 cols): Windows stay intact -->
+        <!-- Bento 4 (7 cols) -->
         <article class="b-card b-span-7">
-          <div class="b-copy">
-            <span class="b-tag" data-i18n="b4_tag">Đa không gian</span>
-            <h3 class="b-title" data-i18n="c4_t">Giữ nguyên bố cục cửa sổ.</h3>
-            <p class="b-desc" data-i18n="b4_d">Chuyển mượt giữa các ứng dụng và macOS Spaces mà không làm xáo trộn hay thay đổi vị trí cửa sổ đang làm việc.</p>
-          </div>
-          <div class="b-window-frame">
+          <h3 class="b-title" data-i18n="c4_t">Giữ nguyên cửa sổ không thay đổi.</h3>
+          <div class="b-window-clean">
             <img src="figma/card-window-hd.jpg" alt="Giữ nguyên cửa sổ" />
           </div>
         </article>
 
-        <!-- Bento 5 (Full-width 12 cols): Interactive Shortcut Deck -->
+        <!-- Bento 5 (12 cols) -->
         <article class="b-card b-span-12 b-shortcuts-card">
-          <div class="b-copy">
-            <span class="b-tag" data-i18n="b5_tag">Phím tắt</span>
-            <h3 class="b-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn.</h3>
-            <p class="b-desc" data-i18n="b5_d">Hỗ trợ phím bổ trợ một tay, nhấn đúp, chuột giữa hoặc gán tổ hợp phím riêng. Bấm thử từng phím bên cạnh.</p>
-          </div>
-          <div class="shortcut-deck">
-            <div class="shortcut-keys" id="shortcut-keys" role="group" aria-label="Shortcut presets">
-              <button type="button" class="sc-key active" data-sc="fnshift">Fn + ⇧</button>
-              <button type="button" class="sc-key" data-sc="dshift">⇧ ⇧</button>
-              <button type="button" class="sc-key" data-sc="dopt">⌥ ⌥</button>
-              <button type="button" class="sc-key" data-sc="optspace">⌥ Space</button>
-              <button type="button" class="sc-key" data-sc="middle" data-i18n="sc_mid">Chuột giữa</button>
-              <button type="button" class="sc-key" data-sc="custom" data-i18n="c5_custom">Gán phím tắt</button>
-            </div>
-            <div class="sc-readout" id="sc-readout">Fn + ⇧ — Kích hoạt cực nhanh bằng ngón út tay trái, không trùng phím tắt ứng dụng nào.</div>
+          <h3 class="b-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn.</h3>
+          <div class="shortcut-pills">
+            <span class="sc-pill">Fn + ⇧</span>
+            <span class="sc-pill">⇧ ⇧</span>
+            <span class="sc-pill">⌥ ⌥</span>
+            <span class="sc-pill">⌥ Space</span>
+            <span class="sc-pill" data-i18n="sc_mid">Chuột giữa</span>
+            <span class="sc-pill solid" data-i18n="c5_custom">Gán phím tắt</span>
           </div>
         </article>
       </div>
@@ -1989,8 +1732,8 @@
     <div class="wrap">
       <div class="support-card">
         <div>
-          <h3 data-i18n="sup_t">Mời PhucVang tách cà phê ☕️</h3>
-          <p data-i18n="sup_d">Module E hoàn toàn miễn phí. Nếu ứng dụng giúp công việc hằng ngày của bạn nhanh hơn, hãy quét mã QR để ủng hộ phát triển các bản cập nhật mới.</p>
+          <h3 data-i18n="sup_t">Ủng hộ phát triển Module E</h3>
+          <p data-i18n="sup_d">Module E hoàn toàn miễn phí. Nếu ứng dụng giúp công việc hằng ngày của bạn nhanh hơn, bạn có thể quét mã QR để ủng hộ các bản cập nhật tiếp theo.</p>
         </div>
         <div class="qr-box" id="open-qr" title="Phóng to mã QR">
           <img src="assets/donate-qr.png" alt="Donate QR Code" />
@@ -2016,59 +1759,33 @@
   <div class="modal" id="qr-modal" aria-hidden="true">
     <div class="modal-box">
       <img src="assets/donate-qr.png" alt="Donate QR Code" />
-      <p data-i18n="qr_thanks">Cảm ơn bạn đã mời PhucVang tách cà phê ☕️</p>
+      <p data-i18n="qr_thanks">Cảm ơn bạn đã ủng hộ Module E.</p>
     </div>
   </div>
 
   <script>
-    // 0. Ensure both iMac & MacBook Pro demo videos play continuously in sync
+    // 0. Ensure both iMac & MacBook Pro demo videos play continuously
     document.querySelectorAll('.hero-video').forEach(v => {
       v.play().catch(() => {});
     });
 
-    // 1. Interactive Highlights Bento: Light Precision Cursor Canvas & Tactile Shortcut Deck
+    // 1. Subtle smooth follow on Card 1 cursor radar
     const cStage = document.getElementById('cursor-stage');
     const cAnchor = document.getElementById('c-anchor');
-    const cGuideX = document.getElementById('c-guide-x');
-    const cGuideY = document.getElementById('c-guide-y');
-    const cCoordXY = document.getElementById('c-coord-xy');
-    const cSonar = document.getElementById('c-sonar');
-
     if (cStage && cAnchor) {
       let hovering = false;
       let targetX = 0.5, targetY = 0.52;
       let curX = 0.5, curY = 0.52;
-      let lastPulse = 0;
 
-      function fireSonar() {
-        if (!cSonar) return;
-        cSonar.classList.remove('pop');
-        void cSonar.offsetWidth;
-        cSonar.classList.add('pop');
-      }
-
-      function tickCursor(ts) {
-        const w = cStage.clientWidth || 560;
-        const h = cStage.clientHeight || 230;
+      function tickCursor() {
         if (!hovering) {
-          const t = ts * 0.00085;
-          targetX = 0.5 + 0.24 * Math.sin(t);
-          targetY = 0.52 + 0.17 * Math.sin(t * 2);
-          if (ts - lastPulse > 2400) {
-            lastPulse = ts;
-            fireSonar();
-          }
+          targetX = 0.5;
+          targetY = 0.52;
         }
-        curX += (targetX - curX) * (hovering ? 0.22 : 0.08);
-        curY += (targetY - curY) * (hovering ? 0.22 : 0.08);
-
-        const px = curX * w;
-        const py = curY * h;
-        cAnchor.style.left = px + 'px';
-        cAnchor.style.top = py + 'px';
-        if (cGuideX) cGuideX.style.top = py + 'px';
-        if (cGuideY) cGuideY.style.left = px + 'px';
-        if (cCoordXY) cCoordXY.innerHTML = `X ${Math.round(px)} &nbsp;Y ${Math.round(py)}`;
+        curX += (targetX - curX) * 0.14;
+        curY += (targetY - curY) * 0.14;
+        cAnchor.style.left = (curX * 100) + '%';
+        cAnchor.style.top = (curY * 100) + '%';
         requestAnimationFrame(tickCursor);
       }
       requestAnimationFrame(tickCursor);
@@ -2076,51 +1793,14 @@
       cStage.addEventListener('mousemove', e => {
         hovering = true;
         const rect = cStage.getBoundingClientRect();
-        targetX = Math.max(0.12, Math.min(0.88, (e.clientX - rect.left) / rect.width));
-        targetY = Math.max(0.18, Math.min(0.84, (e.clientY - rect.top) / rect.height));
+        targetX = Math.max(0.28, Math.min(0.72, (e.clientX - rect.left) / rect.width));
+        targetY = Math.max(0.32, Math.min(0.72, (e.clientY - rect.top) / rect.height));
       });
 
       cStage.addEventListener('mouseleave', () => {
         hovering = false;
       });
-
-      cStage.addEventListener('click', () => {
-        fireSonar();
-      });
     }
-
-    let activeSc = 'fnshift';
-    const scCopy = {
-      vi: {
-        fnshift: 'Fn + ⇧ — Kích hoạt cực nhanh bằng ngón út tay trái, không trùng phím tắt ứng dụng nào.',
-        dshift: '⇧ ⇧ — Nhấn đúp Shift siêu gọn cho người quen thao tác bàn phím nhanh.',
-        dopt: '⌥ ⌥ — Nhấn đúp Option nhẹ nhàng, thuận tiện khi gõ văn bản hoặc lập trình.',
-        optspace: '⌥ Space — Quen thuộc như Spotlight nhưng mở ngay tại vị trí con trỏ chuột.',
-        middle: 'Chuột giữa — Một tay dùng chuột rời vẫn chuyển ứng dụng mượt mà không cần chạm bàn phím.',
-        custom: 'Gán phím tắt — Tự chọn bất kỳ tổ hợp phím nào phù hợp nhất với thói quen của bạn.'
-      },
-      en: {
-        fnshift: 'Fn + ⇧ — Instant left-hand trigger with zero conflicts across macOS apps.',
-        dshift: '⇧ ⇧ — Crisp double-tap Shift for fast keyboard-first workflows.',
-        dopt: '⌥ ⌥ — Effortless double-tap Option while writing or coding.',
-        optspace: '⌥ Space — Familiar like Spotlight, summoned right under your cursor.',
-        middle: 'Middle Click — Switch apps one-handed with your mouse without touching the keyboard.',
-        custom: 'Custom Hotkey — Bind any shortcut combination that matches your muscle memory.'
-      }
-    };
-
-    function renderScReadout() {
-      const el = document.getElementById('sc-readout');
-      if (el) el.textContent = (scCopy[currentLang] || scCopy.vi)[activeSc] || '';
-    }
-
-    document.querySelectorAll('.sc-key').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeSc = btn.dataset.sc;
-        document.querySelectorAll('.sc-key').forEach(b => b.classList.toggle('active', b === btn));
-        renderScReadout();
-      });
-    });
 
     // 2. Interactive 3-Steps Accordion
     const stepBtns = document.querySelectorAll('.step-item');
@@ -2153,11 +1833,7 @@
       })
       .catch(() => {});
 
-    // 5. VN / EN Language Switcher & What's New Bento Loader
-    let currentLang = 'vi';
-    let currentUCat = 'all';
-    let latestRelease = null;
-
+    // 5. VN / EN Language Switcher
     const dict = {
       en: {
         nav_hl: 'Highlights',
@@ -2166,28 +1842,16 @@
         nav_fb: 'Feedback',
         nav_sup: 'Support',
         dl_btn: 'Download',
-        hero_kicker: 'Crafted for macOS · 100% Free',
+        dl_free: 'Download Free',
         hero_title: 'Switch apps.<br />At the speed of thought.',
-        hero_desc: 'Ditch endless ⌘Tab loops and trips to the Dock. Module E opens right under your cursor — glide, click, and jump into any app in a split second.',
-        dl_meta: 'Free for macOS 14+',
+        hero_desc: 'Opens right at your cursor — glide and switch apps in a split second.',
+        dl_meta: 'macOS 14+',
         hl_title: 'Get the highlights.',
-        hl_sub: 'Every app switch on macOS distilled down to a single effortless glide.',
-        b1_tag: 'Instant',
-        c1_t: 'Opens anywhere. Right at your cursor.',
-        b1_d: 'No more trips to the Dock. Summon Module E in any corner of the screen — right where your eyes already are.',
-        b1_hint: 'Move or click to try',
-        b2_tag: 'One tap',
+        c1_t: 'Opens anywhere right at your cursor.',
         c2_t: 'Press to open — click to switch.',
-        b2_d: 'Glide over your running apps and jump straight in with a single click.',
-        b3_tag: 'Customizable',
-        c3_t: 'Tailored to your style.',
-        b3_d: 'Switch between Wedge fan or rounded cards, fine-tune glass blur, angle, and icon size.',
-        b4_tag: 'Multi-Space',
+        c3_t: 'Customize to match your style.',
         c4_t: 'Keeps your windows right where they are.',
-        b4_d: 'Jump smoothly across apps and macOS Spaces without disrupting your window layout.',
-        b5_tag: 'Shortcuts',
         c5_t: 'Shortcuts that fit your muscle memory.',
-        b5_d: 'Supports one-hand modifiers, double-tap, middle click, or custom combos. Try pressing a key.',
         sc_mid: 'Middle Click',
         c5_custom: 'Custom hotkey',
         steps_title: 'Ready in 3 steps.',
@@ -2203,14 +1867,6 @@
         m2_b: 'Open Anyway',
         m3_k: 'System Settings → Accessibility',
         m3_ok: '✓ Ready to use',
-        upd_title: "What's New.",
-        upd_sub: 'Track every release, new feature, and bug fix shipped for Module E.',
-        upd_all: 'View full changelog →',
-        upd_latest: 'Latest',
-        u_all: 'All',
-        u_new: 'New Features',
-        u_imp: 'Improvements',
-        u_fix: 'Bug Fixes',
         faq_title: 'Questions, answered.',
         q1: 'Is Module E completely free?',
         a1: 'Yes. 100% free with zero ads, subscriptions, or locked features.',
@@ -2220,16 +1876,9 @@
         a3: 'Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong> just once.',
         q4: 'How do updates work?',
         a4: 'Module E automatically checks for updates every 24 hours, or click <strong>Check for Updates…</strong> from the Menu Bar or <strong>Settings → About</strong>.',
-        fb_title: 'Feedback &amp; Bug Reports.',
-        fb_sub: 'Spotted a bug or have an idea for Module E? Send feedback directly so it makes it into the next release.',
-        fb_t_bug: 'Bug Report',
-        fb_t_feat: 'Feature Request',
-        fb_t_gen: 'General Feedback',
-        fb_send_gh: 'Submit via GitHub Issue',
-        fb_send_mail: 'Send via Email',
-        sup_t: 'Buy PhucVang a coffee ☕️',
+        sup_t: 'Support Module E',
         sup_d: 'Module E is completely free. If it speeds up your daily Mac workflow, scan the QR code to support future updates.',
-        qr_thanks: 'Thank you for buying PhucVang a coffee ☕️'
+        qr_thanks: 'Thank you for supporting Module E.'
       }
     };
 
@@ -2240,14 +1889,13 @@
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        currentLang = btn.dataset.lang;
-        document.documentElement.lang = currentLang;
+        const lang = btn.dataset.lang;
+        document.documentElement.lang = lang;
         document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn));
         document.querySelectorAll('[data-i18n]').forEach(el => {
           const k = el.dataset.i18n;
-          el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
+          el.innerHTML = lang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
-        renderScReadout();
       });
     });
   </script>
