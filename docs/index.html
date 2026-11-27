@@ -484,7 +484,7 @@
     }
 
     /* =========================================
-       SECTION 2: GET THE HIGHLIGHTS (Figma 3:3628)
+       SECTION 2: GET THE HIGHLIGHTS (INTERACTIVE BENTO)
        ========================================= */
     .highlights-section {
       padding: 0 0 120px;
@@ -492,102 +492,136 @@
 
     .sec-header {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 55px;
+      margin-bottom: 40px;
     }
 
     .sec-title {
       font-size: clamp(32px, 5vw, 48px);
       font-weight: 700;
-      line-height: 1.16;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+
+    .sec-sub {
+      max-width: 420px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .b-card {
+      position: relative;
+      background: var(--white);
+      border-radius: 38px;
+      padding: 34px;
+      border: 1px solid rgba(0, 0, 0, 0.045);
+      box-shadow: 0 2px 24px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+      overflow: hidden;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+    }
+
+    .b-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .b-span-7 { grid-column: span 7; }
+    .b-span-5 { grid-column: span 5; }
+    .b-span-12 { grid-column: span 12; }
+
+    .b-card.dark {
+      background: linear-gradient(155deg, #16161a 0%, #09090b 100%);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .b-tag {
+      align-self: flex-start;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      background: #f2f2f5;
+      color: #3a3a3c;
+    }
+
+    .b-card.dark .b-tag {
+      background: rgba(255, 255, 255, 0.11);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .b-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .b-title {
+      font-size: clamp(24px, 2.5vw, 31px);
+      font-weight: 700;
+      line-height: 1.18;
       letter-spacing: -0.02em;
       color: var(--ink);
     }
 
-    .carousel-nav {
-      display: flex;
-      gap: 10px;
+    .b-card.dark .b-title { color: #ffffff; }
+
+    .b-desc {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 440px;
     }
 
-    .carousel-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--white);
-      color: var(--ink);
-      font-size: 18px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.18s ease, border-color 0.18s ease;
-    }
+    .b-card.dark .b-desc { color: rgba(255, 255, 255, 0.65); }
 
-    .carousel-btn:hover {
-      background: #000000;
-      color: #ffffff;
-      border-color: #000000;
-    }
-
-    /* Continuous Infinite Marquee Rail for Highlights */
-    .highlights-viewport {
-      width: 100%;
-      overflow: hidden;
-      padding: 12px 0 24px;
-      mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
-    }
-
-    @keyframes highlightsMarquee {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(calc(-50% - 16px)); }
-    }
-
-    .highlights-track {
-      display: flex;
-      gap: 32px;
-      width: max-content;
-      animation: highlightsMarquee 36s linear infinite;
-      will-change: transform;
-    }
-
-    .highlights-viewport:hover .highlights-track,
-    .highlights-track.paused {
-      animation-play-state: paused;
-    }
-
-    /* Highlight Card (Figma 400x513, rounded-[49px], p-[40px]) */
-    .h-card {
-      flex: 0 0 400px;
-      height: 513px;
-      background: var(--white);
-      border-radius: 49px;
-      padding: 40px;
-      filter: drop-shadow(0px 0px 12.5px rgba(0, 0, 0, 0.03));
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      scroll-snap-align: start;
-      overflow: hidden;
-    }
-
-    .h-card-title {
-      font-size: 32px;
-      font-weight: 600;
-      line-height: 40px;
-      letter-spacing: -0.015em;
-      color: var(--ink);
-    }
-
-    /* Card 1: Concentric Cursor Radar (Figma 2:2674) */
-    .cursor-radar {
+    /* Interactive Cursor Radar Stage (Card 1) */
+    .radar-stage {
       position: relative;
-      width: 308px;
-      height: 308px;
-      margin: 0 auto;
+      height: 230px;
+      border-radius: 26px;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 70%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    .radar-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .radar-follower {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 210px;
+      height: 210px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: left 0.16s cubic-bezier(0.22, 1, 0.36, 1), top 0.16s cubic-bezier(0.22, 1, 0.36, 1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -596,85 +630,172 @@
     .radar-ring {
       position: absolute;
       border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.16);
     }
 
-    .radar-ring.r1 { width: 308px; height: 308px; background: #f3f3f3; }
-    .radar-ring.r2 { width: 244px; height: 244px; background: #ececec; }
-    .radar-ring.r3 { width: 157px; height: 157px; background: #e6e6e6; }
+    .radar-ring.r1 { width: 204px; height: 204px; background: rgba(255, 255, 255, 0.025); }
+    .radar-ring.r2 { width: 144px; height: 144px; background: rgba(255, 255, 255, 0.04); }
+    .radar-ring.r3 { width: 84px; height: 84px; background: rgba(255, 255, 255, 0.07); }
+
+    .radar-node {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .radar-node.n1 { transform: translate(-52px, -44px) rotate(-14deg); }
+    .radar-node.n2 { transform: translate(0px, -64px); background: rgba(255, 255, 255, 0.24); }
+    .radar-node.n3 { transform: translate(52px, -44px) rotate(14deg); }
 
     .radar-cursor {
       position: relative;
-      z-index: 2;
-      width: 64px;
+      z-index: 3;
+      width: 34px;
       height: auto;
-      transform: translate(8px, 12px);
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
+      transform: translate(5px, 8px);
     }
 
-    /* Card 2 & 3 Visuals — crisp full-res Retina renders */
-    .h-card-visual {
+    .radar-hint {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.48);
+      pointer-events: none;
+    }
+
+    /* Visual Frames inside Bento Cards */
+    .b-visual {
       width: 100%;
-      height: 320px;
+      height: 230px;
+      border-radius: 24px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.04);
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 16px;
+      overflow: hidden;
     }
 
-    .h-card-visual img {
+    .b-visual img {
       max-width: 100%;
       max-height: 100%;
       width: auto;
       height: auto;
       object-fit: contain;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       image-rendering: -webkit-optimize-contrast;
     }
 
-    .h-card-visual img.rounded-render {
-      border-radius: 26px;
+    .b-card:hover .b-visual img {
+      transform: scale(1.04);
     }
 
-    /* Card 4: Window Stays Intact Preview (Figma 2:2739) */
-    .window-preview {
+    /* Card 4: Window Preview inside macOS Frame */
+    .b-window-frame {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 18px;
       overflow: hidden;
-      background: #e9e9ec;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
     }
 
-    .window-preview img {
+    .b-window-bar {
+      height: 26px;
+      padding: 0 12px;
+      background: #f5f5f7;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .b-win-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d1d1d6;
+    }
+
+    .b-window-frame img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 204px;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Card 5: Shortcut Pills (Figma 3:3613) */
-    .shortcut-cloud {
+    .b-card:hover .b-window-frame img {
+      transform: scale(1.025);
+    }
+
+    /* Card 5: Full-Width Interactive Shortcut Bar */
+    .b-shortcuts-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .shortcut-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .shortcut-keys {
       display: flex;
       flex-wrap: wrap;
-      align-content: flex-end;
-      gap: 12px;
-      margin-top: auto;
+      gap: 10px;
     }
 
-    .sc-pill {
+    .sc-key {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 14px 24px;
-      border-radius: 999px;
-      border: 1.65px solid #b1b1b1;
-      font-size: 23px;
-      font-weight: 400;
-      line-height: 1;
-      color: #000000;
-      background: transparent;
-      white-space: nowrap;
+      padding: 13px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #f5f5f7;
+      box-shadow: 0 3px 0 #d8d8de;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease, color 0.15s ease;
     }
 
-    .sc-pill.solid {
-      background: #000000;
-      border-color: #000000;
-      color: #ffffff;
+    .sc-key:hover {
+      background: #ececef;
+    }
+
+    .sc-key.active,
+    .sc-key:active {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+      box-shadow: 0 1px 0 #000000;
+      transform: translateY(2px);
+    }
+
+    .sc-readout {
+      font-size: 13.5px;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #f5f5f7;
+      border: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     /* =========================================
@@ -1466,10 +1587,10 @@
       .download-pill { flex-direction: column; gap: 14px; padding: 18px 20px; border-radius: 28px; width: 100%; }
       .download-pill-meta { align-items: center; text-align: center; }
       .download-pill-btn { width: 100%; }
-      .h-card { flex: 0 0 320px; height: 470px; padding: 28px; border-radius: 36px; }
-      .h-card-title { font-size: 26px; line-height: 32px; }
-      .cursor-radar { transform: scale(0.82); }
-      .sc-pill { font-size: 18px; padding: 11px 18px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .b-span-7, .b-span-5, .b-span-12 { grid-column: span 1; }
+      .b-card { padding: 26px; border-radius: 30px; }
+      .b-shortcuts-card { grid-template-columns: 1fr; gap: 22px; }
       .steps-card { grid-template-columns: 1fr; padding: 24px; border-radius: 36px; }
       .step-stage { min-height: 220px; padding: 24px 18px; border-radius: 24px; }
       .updates-shell { padding: 24px; border-radius: 36px; }
@@ -1593,65 +1714,95 @@
     </div>
   </section>
 
-  <!-- SECTION 2: GET THE HIGHLIGHTS -->
+  <!-- SECTION 2: GET THE HIGHLIGHTS (INTERACTIVE BENTO) -->
   <section id="highlights" class="highlights-section">
     <div class="wrap">
       <div class="sec-header">
-        <h2 class="sec-title">Get the highlights.</h2>
-        <div class="carousel-nav">
-          <button class="carousel-btn" id="marquee-toggle" aria-label="Pause highlights" title="Tạm dừng / Tiếp tục">❚❚</button>
-        </div>
+        <h2 class="sec-title" data-i18n="hl_title">Điểm nổi bật.</h2>
+        <p class="sec-sub" data-i18n="hl_sub">Mọi thao tác chuyển đổi ứng dụng trên macOS được rút gọn xuống chỉ còn một nhịp lướt.</p>
       </div>
-    </div>
 
-    <div class="highlights-viewport">
-      <div class="highlights-track" id="highlights-track">
-        <!-- Card 1: Mở mọi nơi ngay vị trí chuột -->
-        <article class="h-card">
-          <h3 class="h-card-title" data-i18n="c1_t">Mở mọi nơi<br />ngay vị trí chuột</h3>
-          <div class="cursor-radar">
-            <span class="radar-ring r1"></span>
-            <span class="radar-ring r2"></span>
-            <span class="radar-ring r3"></span>
-            <img class="radar-cursor" src="figma/cursor.svg" alt="macOS Cursor" />
+      <div class="bento-grid">
+        <!-- Bento 1 (Dark, 7 cols): Interactive Cursor Radar -->
+        <article class="b-card dark b-span-7">
+          <div class="b-copy">
+            <span class="b-tag" data-i18n="b1_tag">Tức thì</span>
+            <h3 class="b-title" data-i18n="c1_t">Mở mọi nơi. Ngay tại đầu con trỏ.</h3>
+            <p class="b-desc" data-i18n="b1_d">Không cần rê chuột xuống Dock. Gọi Module E ở bất kỳ góc màn hình nào — menu mở ra đúng vị trí bạn đang nhìn.</p>
+          </div>
+          <div class="radar-stage" id="radar-stage">
+            <div class="radar-grid-bg" aria-hidden="true"></div>
+            <div class="radar-follower" id="radar-follower" aria-hidden="true">
+              <span class="radar-ring r1"></span>
+              <span class="radar-ring r2"></span>
+              <span class="radar-ring r3"></span>
+              <span class="radar-node n1"></span>
+              <span class="radar-node n2"></span>
+              <span class="radar-node n3"></span>
+              <img class="radar-cursor" src="figma/cursor.svg" alt="" />
+            </div>
+            <span class="radar-hint" data-i18n="b1_hint">Rê chuột vào đây để thử</span>
           </div>
         </article>
 
-        <!-- Card 2: Nhấn là mở - click là chuyển -->
-        <article class="h-card">
-          <h3 class="h-card-title" data-i18n="c2_t">Nhấn là mở - click là chuyển</h3>
-          <div class="h-card-visual">
+        <!-- Bento 2 (Light, 5 cols): Press & Click -->
+        <article class="b-card b-span-5">
+          <div class="b-copy">
+            <span class="b-tag" data-i18n="b2_tag">Một chạm</span>
+            <h3 class="b-title" data-i18n="c2_t">Nhấn là mở — click là chuyển.</h3>
+            <p class="b-desc" data-i18n="b2_d">Lướt nhẹ qua ứng dụng đang chạy, bấm một lần là chuyển ngay tức thì.</p>
+          </div>
+          <div class="b-visual">
             <img src="figma/card-click-switch.png?v=3" alt="Nhấn là mở - click là chuyển" />
           </div>
         </article>
 
-        <!-- Card 3: Điều chỉnh giao diện theo sở thích cá nhân -->
-        <article class="h-card">
-          <h3 class="h-card-title" data-i18n="c3_t">Điều chỉnh giao diện theo sở thích cá nhân</h3>
-          <div class="h-card-visual">
+        <!-- Bento 3 (Light, 5 cols): Customize -->
+        <article class="b-card b-span-5">
+          <div class="b-copy">
+            <span class="b-tag" data-i18n="b3_tag">Cá nhân hoá</span>
+            <h3 class="b-title" data-i18n="c3_t">Tuỳ biến theo gu của bạn.</h3>
+            <p class="b-desc" data-i18n="b3_d">Chọn bố cục cánh quạt hoặc thẻ bo tròn, tinh chỉnh độ mờ kính, góc mở và kích thước icon.</p>
+          </div>
+          <div class="b-visual">
             <img src="figma/card-customize.png?v=3" alt="Điều chỉnh giao diện" />
           </div>
         </article>
 
-        <!-- Card 4: Giữ nguyên cửa sổ không thay đổi. -->
-        <article class="h-card">
-          <h3 class="h-card-title" data-i18n="c4_t">Giữ nguyên cửa sổ không thay đổi.</h3>
-          <div class="h-card-visual">
-            <div class="window-preview">
-              <img src="figma/card-window-desktop.png?v=3" alt="Giữ nguyên cửa sổ" />
+        <!-- Bento 4 (Light, 7 cols): Windows stay intact -->
+        <article class="b-card b-span-7">
+          <div class="b-copy">
+            <span class="b-tag" data-i18n="b4_tag">Đa không gian</span>
+            <h3 class="b-title" data-i18n="c4_t">Giữ nguyên bố cục cửa sổ.</h3>
+            <p class="b-desc" data-i18n="b4_d">Chuyển mượt giữa các ứng dụng và macOS Spaces mà không làm xáo trộn hay thay đổi vị trí cửa sổ đang làm việc.</p>
+          </div>
+          <div class="b-window-frame">
+            <div class="b-window-bar" aria-hidden="true">
+              <span class="b-win-dot"></span>
+              <span class="b-win-dot"></span>
+              <span class="b-win-dot"></span>
             </div>
+            <img src="figma/card-window-desktop.png?v=3" alt="Giữ nguyên cửa sổ" />
           </div>
         </article>
 
-        <!-- Card 5: Phím tắt theo thói quen của bạn -->
-        <article class="h-card">
-          <h3 class="h-card-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn</h3>
-          <div class="shortcut-cloud">
-            <span class="sc-pill">Fn + ⇧</span>
-            <span class="sc-pill">⇧ ⇧</span>
-            <span class="sc-pill">⌥ ⌥</span>
-            <span class="sc-pill">⌥ Space</span>
-            <span class="sc-pill solid" data-i18n="c5_custom">Gán phím tắt</span>
+        <!-- Bento 5 (Full-width 12 cols): Interactive Shortcut Deck -->
+        <article class="b-card b-span-12 b-shortcuts-card">
+          <div class="b-copy">
+            <span class="b-tag" data-i18n="b5_tag">Phím tắt</span>
+            <h3 class="b-title" data-i18n="c5_t">Phím tắt theo thói quen của bạn.</h3>
+            <p class="b-desc" data-i18n="b5_d">Hỗ trợ phím bổ trợ một tay, nhấn đúp, chuột giữa hoặc gán tổ hợp phím riêng. Bấm thử từng phím bên cạnh.</p>
+          </div>
+          <div class="shortcut-deck">
+            <div class="shortcut-keys" id="shortcut-keys" role="group" aria-label="Shortcut presets">
+              <button type="button" class="sc-key active" data-sc="fnshift">Fn + ⇧</button>
+              <button type="button" class="sc-key" data-sc="dshift">⇧ ⇧</button>
+              <button type="button" class="sc-key" data-sc="dopt">⌥ ⌥</button>
+              <button type="button" class="sc-key" data-sc="optspace">⌥ Space</button>
+              <button type="button" class="sc-key" data-sc="middle" data-i18n="sc_mid">Chuột giữa</button>
+              <button type="button" class="sc-key" data-sc="custom" data-i18n="c5_custom">Gán phím tắt</button>
+            </div>
+            <div class="sc-readout" id="sc-readout">Fn + ⇧ — Kích hoạt cực nhanh bằng ngón út tay trái, không trùng phím tắt ứng dụng nào.</div>
           </div>
         </article>
       </div>
@@ -1844,19 +1995,54 @@
       v.play().catch(() => {});
     });
 
-    // 1. Seamless Continuous Marquee for Highlights (clone cards once for infinite loop)
-    const track = document.getElementById('highlights-track');
-    const marqueeToggle = document.getElementById('marquee-toggle');
-    const origCards = Array.from(track.children);
-    origCards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
-    });
+    // 1. Interactive Highlights Bento: Cursor Radar & Tactile Shortcut Deck
+    const radarStage = document.getElementById('radar-stage');
+    const radarFollower = document.getElementById('radar-follower');
+    if (radarStage && radarFollower) {
+      radarStage.addEventListener('mousemove', e => {
+        const rect = radarStage.getBoundingClientRect();
+        const x = Math.max(44, Math.min(rect.width - 44, e.clientX - rect.left));
+        const y = Math.max(44, Math.min(rect.height - 44, e.clientY - rect.top));
+        radarFollower.style.left = x + 'px';
+        radarFollower.style.top = y + 'px';
+      });
+      radarStage.addEventListener('mouseleave', () => {
+        radarFollower.style.left = '50%';
+        radarFollower.style.top = '50%';
+      });
+    }
 
-    marqueeToggle.addEventListener('click', () => {
-      const isPaused = track.classList.toggle('paused');
-      marqueeToggle.textContent = isPaused ? '▶' : '❚❚';
+    let activeSc = 'fnshift';
+    const scCopy = {
+      vi: {
+        fnshift: 'Fn + ⇧ — Kích hoạt cực nhanh bằng ngón út tay trái, không trùng phím tắt ứng dụng nào.',
+        dshift: '⇧ ⇧ — Nhấn đúp Shift siêu gọn cho người quen thao tác bàn phím nhanh.',
+        dopt: '⌥ ⌥ — Nhấn đúp Option nhẹ nhàng, thuận tiện khi gõ văn bản hoặc lập trình.',
+        optspace: '⌥ Space — Quen thuộc như Spotlight nhưng mở ngay tại vị trí con trỏ chuột.',
+        middle: 'Chuột giữa — Một tay dùng chuột rời vẫn chuyển ứng dụng mượt mà không cần chạm bàn phím.',
+        custom: 'Gán phím tắt — Tự chọn bất kỳ tổ hợp phím nào phù hợp nhất với thói quen của bạn.'
+      },
+      en: {
+        fnshift: 'Fn + ⇧ — Instant left-hand trigger with zero conflicts across macOS apps.',
+        dshift: '⇧ ⇧ — Crisp double-tap Shift for fast keyboard-first workflows.',
+        dopt: '⌥ ⌥ — Effortless double-tap Option while writing or coding.',
+        optspace: '⌥ Space — Familiar like Spotlight, summoned right under your cursor.',
+        middle: 'Middle Click — Switch apps one-handed with your mouse without touching the keyboard.',
+        custom: 'Custom Hotkey — Bind any shortcut combination that matches your muscle memory.'
+      }
+    };
+
+    function renderScReadout() {
+      const el = document.getElementById('sc-readout');
+      if (el) el.textContent = (scCopy[currentLang] || scCopy.vi)[activeSc] || '';
+    }
+
+    document.querySelectorAll('.sc-key').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeSc = btn.dataset.sc;
+        document.querySelectorAll('.sc-key').forEach(b => b.classList.toggle('active', b === btn));
+        renderScReadout();
+      });
     });
 
     // 2. Interactive 3-Steps Accordion
@@ -1907,11 +2093,25 @@
         hero_title: 'Switch apps.<br />At the speed of thought.',
         hero_desc: 'Ditch endless ⌘Tab loops and trips to the Dock. Module E opens right under your cursor — glide, click, and jump into any app in a split second.',
         dl_meta: 'Free for macOS 14+',
-        c1_t: 'Opens anywhere<br />right at your cursor',
-        c2_t: 'Press to open — click to switch',
-        c3_t: 'Customize the look to match your style',
+        hl_title: 'Get the highlights.',
+        hl_sub: 'Every app switch on macOS distilled down to a single effortless glide.',
+        b1_tag: 'Instant',
+        c1_t: 'Opens anywhere. Right at your cursor.',
+        b1_d: 'No more trips to the Dock. Summon Module E in any corner of the screen — right where your eyes already are.',
+        b1_hint: 'Move your cursor here to try',
+        b2_tag: 'One tap',
+        c2_t: 'Press to open — click to switch.',
+        b2_d: 'Glide over your running apps and jump straight in with a single click.',
+        b3_tag: 'Customizable',
+        c3_t: 'Tailored to your style.',
+        b3_d: 'Switch between Wedge fan or rounded cards, fine-tune glass blur, angle, and icon size.',
+        b4_tag: 'Multi-Space',
         c4_t: 'Keeps your windows right where they are.',
-        c5_t: 'Shortcuts that fit your muscle memory',
+        b4_d: 'Jump smoothly across apps and macOS Spaces without disrupting your window layout.',
+        b5_tag: 'Shortcuts',
+        c5_t: 'Shortcuts that fit your muscle memory.',
+        b5_d: 'Supports one-hand modifiers, double-tap, middle click, or custom combos. Try pressing a key.',
+        sc_mid: 'Middle Click',
         c5_custom: 'Custom hotkey',
         st1_lbl: 'Drag to Applications',
         st2_lbl: 'Confirm first launch',
@@ -2029,6 +2229,7 @@
           el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
         syncFeedbackPlaceholders();
+        renderScReadout();
       });
     });
   </script>
