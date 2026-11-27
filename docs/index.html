@@ -22,7 +22,7 @@
       --orange: #ff740b;
       --font-display: 'SF Compact Display', 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --font-text: 'SF Pro Text', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --content-w: 903px;
+      --content-w: 1260px;
     }
 
     * {
@@ -63,10 +63,10 @@
     }
 
     .topbar-inner {
-      max-width: var(--content-w);
+      max-width: calc(var(--content-w) + 60px);
       margin: 0 auto;
       height: 56px;
-      padding: 0 20px;
+      padding: 0 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -171,11 +171,11 @@
       opacity: 0.85;
     }
 
-    /* Main Centered Container (903px per Figma) */
+    /* Main Centered Container (1260px Apple Wide Spec) */
     .wrap {
-      max-width: calc(var(--content-w) + 40px);
+      max-width: calc(var(--content-w) + 60px);
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 30px;
     }
 
     /* =========================================
@@ -245,7 +245,7 @@
     .hardware-stage {
       position: relative;
       width: 100%;
-      max-width: 903px;
+      max-width: 1120px;
       padding: 8px 0 18px;
       display: flex;
       align-items: flex-end;
@@ -596,8 +596,8 @@
     /* Interactive Light Precision Cursor Canvas (Card 1) */
     .cursor-stage {
       position: relative;
-      height: 230px;
-      border-radius: 24px;
+      height: 285px;
+      border-radius: 26px;
       background-color: #f5f5f7;
       background-image: radial-gradient(rgba(0, 0, 0, 0.085) 1px, transparent 1px);
       background-size: 20px 20px;
@@ -649,22 +649,22 @@
     }
 
     .c-ring.r1 {
-      width: 212px;
-      height: 212px;
+      width: 244px;
+      height: 244px;
       background: #efeff2;
       border: 1px solid rgba(0, 0, 0, 0.035);
     }
 
     .c-ring.r2 {
-      width: 148px;
-      height: 148px;
+      width: 172px;
+      height: 172px;
       background: #e7e7ec;
       border: 1px solid rgba(255, 255, 255, 0.85);
     }
 
     .c-ring.r3 {
-      width: 86px;
-      height: 86px;
+      width: 100px;
+      height: 100px;
       background: #dedee5;
       border: 1px solid rgba(255, 255, 255, 0.95);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.055);
@@ -747,14 +747,14 @@
     /* Visual Frames inside Bento Cards */
     .b-visual {
       width: 100%;
-      height: 230px;
-      border-radius: 24px;
+      height: 285px;
+      border-radius: 26px;
       background: #f5f5f7;
       border: 1px solid rgba(0, 0, 0, 0.04);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 20px;
       overflow: hidden;
     }
 
@@ -775,9 +775,9 @@
     /* Card 4: Retina Window Preview inside Clean Stage */
     .b-window-frame {
       width: 100%;
-      height: 230px;
-      border-radius: 24px;
-      padding: 16px 18px 0;
+      height: 285px;
+      border-radius: 26px;
+      padding: 18px 22px 0;
       overflow: hidden;
       background: #f5f5f7;
       border: 1px solid rgba(0, 0, 0, 0.045);
@@ -789,7 +789,7 @@
     .b-window-frame img {
       display: block;
       width: 100%;
-      height: 214px;
+      height: 267px;
       object-fit: cover;
       object-position: top center;
       border-radius: 12px 12px 0 0;
