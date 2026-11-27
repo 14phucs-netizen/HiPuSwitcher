@@ -593,173 +593,155 @@
 
     .b-card.dark .b-desc { color: rgba(255, 255, 255, 0.65); }
 
-    /* Interactive Mini-Desktop Stage (Card 1) */
-    .radar-stage {
+    /* Interactive Light Precision Cursor Canvas (Card 1) */
+    .cursor-stage {
       position: relative;
-      height: 256px;
-      border-radius: 26px;
-      background: #141418;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 230px;
+      border-radius: 24px;
+      background-color: #f5f5f7;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.085) 1px, transparent 1px);
+      background-size: 20px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.045);
+      box-shadow: inset 0 0 32px #f5f5f7;
       overflow: hidden;
-      cursor: pointer;
+      cursor: none;
       user-select: none;
     }
 
-    .radar-bg {
+    .cursor-guide-x,
+    .cursor-guide-y {
       position: absolute;
-      inset: 0;
-      background: url('figma/hero-wallpaper.jpg') center / cover no-repeat;
-      filter: brightness(0.46) contrast(1.06) saturate(0.85);
-      transform: scale(1.04);
+      background: rgba(0, 0, 0, 0.05);
       pointer-events: none;
+      z-index: 1;
     }
 
-    .radar-menubar {
-      position: absolute;
-      top: 0;
+    .cursor-guide-x {
       left: 0;
       right: 0;
-      height: 22px;
-      padding: 0 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 9.5px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.72);
-      background: rgba(0, 0, 0, 0.28);
-      backdrop-filter: blur(10px);
-      pointer-events: none;
-      z-index: 2;
+      height: 1px;
+      top: 50%;
     }
 
-    .radar-dock {
-      position: absolute;
+    .cursor-guide-y {
+      top: 0;
+      bottom: 0;
+      width: 1px;
       left: 50%;
-      bottom: 8px;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-      padding: 5px 8px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      opacity: 0.42;
-      pointer-events: none;
-      z-index: 2;
     }
 
-    .radar-dock span {
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.25);
-    }
-
-    .radar-radial {
+    .cursor-anchor {
       position: absolute;
       left: 50%;
       top: 52%;
       width: 0;
       height: 0;
-      z-index: 4;
-      transition: left 0.45s cubic-bezier(0.22, 1, 0.36, 1), top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 3;
       pointer-events: none;
     }
 
-    .radar-radial.instant {
-      transition: left 0.16s cubic-bezier(0.22, 1, 0.36, 1), top 0.16s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .radial-ripple {
+    .c-ring {
       position: absolute;
       left: 0;
       top: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255, 255, 255, 0.55);
-      transform: translate(-50%, -50%) scale(0.4);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .radial-ripple.pop {
-      animation: rippleBurst 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    @keyframes rippleBurst {
-      0%   { transform: translate(-50%, -50%) scale(0.5); opacity: 0.85; }
-      100% { transform: translate(-50%, -50%) scale(4.6); opacity: 0; }
-    }
-
-    .radial-center-x {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 26px;
-      height: 26px;
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.38);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     }
 
-    .radial-item {
+    .c-ring.r1 {
+      width: 212px;
+      height: 212px;
+      background: #efeff2;
+      border: 1px solid rgba(0, 0, 0, 0.035);
+    }
+
+    .c-ring.r2 {
+      width: 148px;
+      height: 148px;
+      background: #e7e7ec;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+
+    .c-ring.r3 {
+      width: 86px;
+      height: 86px;
+      background: #dedee5;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.055);
+    }
+
+    .c-sonar {
       position: absolute;
       left: 0;
       top: 0;
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.36);
-      backdrop-filter: blur(16px) saturate(160%);
-      -webkit-backdrop-filter: blur(16px) saturate(160%);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1);
-      transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
-    }
-
-    .radar-radial.collapsed .radial-item {
-      transform: translate(-50%, -50%) translate(0px, 0px) rotate(0deg) scale(0.35);
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 0, 0, 0.16);
+      transform: translate(-50%, -50%) scale(0.8);
       opacity: 0;
+      pointer-events: none;
     }
 
-    .radial-item img,
-    .radial-item svg {
-      width: 26px;
-      height: 26px;
-      border-radius: 7px;
+    .c-sonar.pop {
+      animation: lightSonar 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes lightSonar {
+      0%   { transform: translate(-50%, -50%) scale(0.75); opacity: 0.55; }
+      100% { transform: translate(-50%, -50%) scale(2.65); opacity: 0; }
+    }
+
+    .c-pointer {
+      position: relative;
+      z-index: 4;
+      width: 38px;
+      height: auto;
+      transform: translate(-4px, -2px);
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.18));
       display: block;
     }
 
-    .radar-hint {
+    .c-coord-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(8px);
+      font-size: 11.5px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--ink-soft);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      pointer-events: none;
+    }
+
+    .c-coord-pill span {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .c-hint-pill {
       position: absolute;
       right: 12px;
-      bottom: 10px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      font-size: 11px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.76);
-      pointer-events: none;
+      bottom: 12px;
       z-index: 5;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(8px);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--muted);
+      pointer-events: none;
     }
 
     /* Visual Frames inside Bento Cards */
@@ -790,39 +772,28 @@
       transform: scale(1.04);
     }
 
-    /* Card 4: Window Preview inside macOS Frame */
+    /* Card 4: Retina Window Preview inside Clean Stage */
     .b-window-frame {
       width: 100%;
-      border-radius: 18px;
+      height: 230px;
+      border-radius: 24px;
+      padding: 16px 18px 0;
       overflow: hidden;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-    }
-
-    .b-window-bar {
-      height: 26px;
-      padding: 0 12px;
       background: #f5f5f7;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.045);
       display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .b-win-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #d1d1d6;
+      align-items: flex-end;
+      justify-content: center;
     }
 
     .b-window-frame img {
       display: block;
       width: 100%;
-      height: 204px;
+      height: 214px;
       object-fit: cover;
-      object-position: center;
+      object-position: top center;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.09);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -1814,42 +1785,25 @@
       </div>
 
       <div class="bento-grid">
-        <!-- Bento 1 (Dark, 7 cols): Interactive Cursor Radar -->
-        <article class="b-card dark b-span-7">
+        <!-- Bento 1 (Light, 7 cols): Interactive Precision Cursor Canvas -->
+        <article class="b-card b-span-7">
           <div class="b-copy">
             <span class="b-tag" data-i18n="b1_tag">Tức thì</span>
             <h3 class="b-title" data-i18n="c1_t">Mở mọi nơi. Ngay tại đầu con trỏ.</h3>
             <p class="b-desc" data-i18n="b1_d">Không cần rê chuột xuống Dock. Gọi Module E ở bất kỳ góc màn hình nào — menu mở ra đúng vị trí bạn đang nhìn.</p>
           </div>
-          <div class="radar-stage" id="radar-stage">
-            <div class="radar-bg" aria-hidden="true"></div>
-            <div class="radar-menubar" aria-hidden="true">
-              <span>Finder &nbsp; File &nbsp; Edit</span>
-              <span>9:41</span>
+          <div class="cursor-stage" id="cursor-stage">
+            <div class="c-coord-pill" aria-hidden="true">Fn + ⇧ <span>·</span> <span id="c-coord-xy">X 312 &nbsp;Y 118</span></div>
+            <div class="cursor-guide-x" id="c-guide-x" aria-hidden="true"></div>
+            <div class="cursor-guide-y" id="c-guide-y" aria-hidden="true"></div>
+            <div class="cursor-anchor" id="c-anchor" aria-hidden="true">
+              <span class="c-ring r1"></span>
+              <span class="c-ring r2"></span>
+              <span class="c-ring r3"></span>
+              <span class="c-sonar" id="c-sonar"></span>
+              <img class="c-pointer" src="figma/cursor.svg" alt="macOS Cursor" />
             </div>
-            <div class="radar-dock" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <div class="radar-radial" id="radar-radial" aria-hidden="true">
-              <span class="radial-ripple" id="radial-ripple"></span>
-              <div class="radial-item" style="--tx: -58px; --ty: -28px; --rot: -26deg;">
-                <img src="assets/app-icon.png" alt="" />
-              </div>
-              <div class="radial-item" style="--tx: -32px; --ty: -58px; --rot: -12deg;">
-                <img src="figma/icon-framer.svg" alt="" />
-              </div>
-              <div class="radial-item" style="--tx: 0px; --ty: -66px; --rot: 0deg;">
-                <img src="figma/icon-siri.png" alt="" />
-              </div>
-              <div class="radial-item" style="--tx: 32px; --ty: -58px; --rot: 12deg;">
-                <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#1d1d1f"/><path d="M8 10.5L12.5 14L8 17.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 17.5H20" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/></svg>
-              </div>
-              <div class="radial-item" style="--tx: 58px; --ty: -28px; --rot: 26deg;">
-                <svg viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#f5f5f7"/><rect width="28" height="8" rx="4" fill="#d1d1d6"/><path d="M7 13H21M7 17.5H21M7 22H15" stroke="#6e6e73" stroke-width="1.6" stroke-linecap="round"/></svg>
-              </div>
-              <div class="radial-center-x">×</div>
-            </div>
-            <span class="radar-hint" data-i18n="b1_hint">Bấm bất kỳ đâu để mở thử</span>
+            <span class="c-hint-pill" data-i18n="b1_hint">Di chuột hoặc bấm để thử</span>
           </div>
         </article>
 
@@ -1885,12 +1839,7 @@
             <p class="b-desc" data-i18n="b4_d">Chuyển mượt giữa các ứng dụng và macOS Spaces mà không làm xáo trộn hay thay đổi vị trí cửa sổ đang làm việc.</p>
           </div>
           <div class="b-window-frame">
-            <div class="b-window-bar" aria-hidden="true">
-              <span class="b-win-dot"></span>
-              <span class="b-win-dot"></span>
-              <span class="b-win-dot"></span>
-            </div>
-            <img src="figma/card-window-desktop.png?v=3" alt="Giữ nguyên cửa sổ" />
+            <img src="figma/card-window-hd.jpg" alt="Giữ nguyên cửa sổ" />
           </div>
         </article>
 
@@ -2103,52 +2052,66 @@
       v.play().catch(() => {});
     });
 
-    // 1. Interactive Highlights Bento: Mini-Desktop Radial Summon & Tactile Shortcut Deck
-    const radarStage = document.getElementById('radar-stage');
-    const radarRadial = document.getElementById('radar-radial');
-    const radialRipple = document.getElementById('radial-ripple');
-    if (radarStage && radarRadial) {
-      let userControlling = false;
-      let autoIdx = 0;
-      const autoSpots = [
-        { x: '30%', y: '68%' },
-        { x: '52%', y: '62%' },
-        { x: '72%', y: '68%' }
-      ];
+    // 1. Interactive Highlights Bento: Light Precision Cursor Canvas & Tactile Shortcut Deck
+    const cStage = document.getElementById('cursor-stage');
+    const cAnchor = document.getElementById('c-anchor');
+    const cGuideX = document.getElementById('c-guide-x');
+    const cGuideY = document.getElementById('c-guide-y');
+    const cCoordXY = document.getElementById('c-coord-xy');
+    const cSonar = document.getElementById('c-sonar');
 
-      function triggerPop(xVal, yVal, isInstant) {
-        radarRadial.classList.toggle('instant', !!isInstant);
-        radarRadial.classList.add('collapsed');
-        radarRadial.style.left = xVal;
-        radarRadial.style.top = yVal;
-        if (radialRipple) {
-          radialRipple.classList.remove('pop');
-          void radialRipple.offsetWidth;
-          radialRipple.classList.add('pop');
-        }
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            radarRadial.classList.remove('collapsed');
-          });
-        });
+    if (cStage && cAnchor) {
+      let hovering = false;
+      let targetX = 0.5, targetY = 0.52;
+      let curX = 0.5, curY = 0.52;
+      let lastPulse = 0;
+
+      function fireSonar() {
+        if (!cSonar) return;
+        cSonar.classList.remove('pop');
+        void cSonar.offsetWidth;
+        cSonar.classList.add('pop');
       }
 
-      setInterval(() => {
-        if (userControlling) return;
-        autoIdx = (autoIdx + 1) % autoSpots.length;
-        triggerPop(autoSpots[autoIdx].x, autoSpots[autoIdx].y, false);
-      }, 2600);
+      function tickCursor(ts) {
+        const w = cStage.clientWidth || 560;
+        const h = cStage.clientHeight || 230;
+        if (!hovering) {
+          const t = ts * 0.00085;
+          targetX = 0.5 + 0.24 * Math.sin(t);
+          targetY = 0.52 + 0.17 * Math.sin(t * 2);
+          if (ts - lastPulse > 2400) {
+            lastPulse = ts;
+            fireSonar();
+          }
+        }
+        curX += (targetX - curX) * (hovering ? 0.22 : 0.08);
+        curY += (targetY - curY) * (hovering ? 0.22 : 0.08);
 
-      radarStage.addEventListener('click', e => {
-        userControlling = true;
-        const rect = radarStage.getBoundingClientRect();
-        const x = Math.max(82, Math.min(rect.width - 82, e.clientX - rect.left));
-        const y = Math.max(104, Math.min(rect.height - 34, e.clientY - rect.top));
-        triggerPop(x + 'px', y + 'px', true);
+        const px = curX * w;
+        const py = curY * h;
+        cAnchor.style.left = px + 'px';
+        cAnchor.style.top = py + 'px';
+        if (cGuideX) cGuideX.style.top = py + 'px';
+        if (cGuideY) cGuideY.style.left = px + 'px';
+        if (cCoordXY) cCoordXY.innerHTML = `X ${Math.round(px)} &nbsp;Y ${Math.round(py)}`;
+        requestAnimationFrame(tickCursor);
+      }
+      requestAnimationFrame(tickCursor);
+
+      cStage.addEventListener('mousemove', e => {
+        hovering = true;
+        const rect = cStage.getBoundingClientRect();
+        targetX = Math.max(0.12, Math.min(0.88, (e.clientX - rect.left) / rect.width));
+        targetY = Math.max(0.18, Math.min(0.84, (e.clientY - rect.top) / rect.height));
       });
 
-      radarStage.addEventListener('mouseleave', () => {
-        userControlling = false;
+      cStage.addEventListener('mouseleave', () => {
+        hovering = false;
+      });
+
+      cStage.addEventListener('click', () => {
+        fireSonar();
       });
     }
 
@@ -2238,7 +2201,7 @@
         b1_tag: 'Instant',
         c1_t: 'Opens anywhere. Right at your cursor.',
         b1_d: 'No more trips to the Dock. Summon Module E in any corner of the screen — right where your eyes already are.',
-        b1_hint: 'Click anywhere to summon',
+        b1_hint: 'Move or click to try',
         b2_tag: 'One tap',
         c2_t: 'Press to open — click to switch.',
         b2_d: 'Glide over your running apps and jump straight in with a single click.',
