@@ -1674,10 +1674,10 @@
       </a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#highlights" data-i18n="nav_hl">Điểm nổi bật</a>
-        <a href="#steps" data-i18n="nav_steps">Cài đặt</a>
+        <a href="#steps" data-i18n="nav_steps">Hướng dẫn</a>
         <a href="updates.html" data-i18n="nav_updates">Có gì mới</a>
         <a href="#faq">FAQ</a>
-        <a href="#feedback" data-i18n="nav_fb">Góp ý</a>
+        <a href="feedback.html" data-i18n="nav_fb">Góp ý</a>
         <a href="#support" data-i18n="nav_sup">Ủng hộ</a>
       </nav>
       <div class="topbar-right">
@@ -1869,7 +1869,7 @@
   <!-- SECTION 3: READY IN 3 STEPS -->
   <section id="steps" class="steps-section">
     <div class="wrap">
-      <h2 class="sec-title">Ready in 3 steps.</h2>
+      <h2 class="sec-title" data-i18n="steps_title">Hướng dẫn trong 3 bước.</h2>
 
       <div class="steps-card">
         <div class="steps-list" role="tablist">
@@ -1984,33 +1984,6 @@
     </div>
   </section>
 
-  <!-- SECTION 4.5: FEEDBACK -->
-  <section id="feedback" class="feedback-section">
-    <div class="wrap">
-      <div class="feedback-card">
-        <div class="feedback-info">
-          <h2 data-i18n="fb_title">Góp ý &amp; Báo lỗi.</h2>
-          <p data-i18n="fb_sub">Gặp lỗi khi sử dụng hoặc có ý tưởng tính năng mới cho Module E? Gửi góp ý trực tiếp để mình cải thiện nhanh nhất ở các bản cập nhật tiếp theo.</p>
-          <div class="fb-types" id="fb-types" role="group" aria-label="Loại góp ý">
-            <button type="button" class="fb-type-btn active" data-fbtype="bug" data-i18n="fb_t_bug">Báo lỗi</button>
-            <button type="button" class="fb-type-btn" data-fbtype="enhancement" data-i18n="fb_t_feat">Đề xuất tính năng</button>
-            <button type="button" class="fb-type-btn" data-fbtype="feedback" data-i18n="fb_t_gen">Góp ý chung</button>
-          </div>
-        </div>
-
-        <form class="feedback-form" id="feedback-form">
-          <input type="text" class="fb-field" id="fb-subject" placeholder="Tiêu đề ngắn gọn..." required />
-          <textarea class="fb-field" id="fb-body" placeholder="Mô tả chi tiết lỗi, phiên bản macOS hoặc tính năng bạn mong muốn..." required></textarea>
-          <div class="fb-actions">
-            <button type="submit" class="fb-btn-primary" id="fb-github-btn" data-i18n="fb_send_gh">Gửi qua GitHub Issue</button>
-            <button type="button" class="fb-btn-secondary" id="fb-email-btn" data-i18n="fb_send_mail">Gửi qua Email</button>
-          </div>
-          <div class="fb-status" id="fb-status" aria-live="polite"></div>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- SECTION 5: SUPPORT QR -->
   <section id="support" class="support-section">
     <div class="wrap">
@@ -2031,6 +2004,7 @@
       <div>© 2026 PhucVang · Module E for macOS.</div>
       <div class="footer-links">
         <a href="updates.html" data-i18n="nav_updates">Có gì mới</a>
+        <a href="feedback.html" data-i18n="nav_fb">Góp ý</a>
         <a href="https://github.com/Phucvang/HiPuSwitcher" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/Phucvang/HiPuSwitcher/releases" target="_blank" rel="noopener">Releases</a>
         <a class="download-link" href="https://github.com/Phucvang/HiPuSwitcher/releases/download/v1.0.0/HiPuSwitcher-1.0.0.dmg" data-i18n="dl_btn">Tải về</a>
@@ -2187,7 +2161,7 @@
     const dict = {
       en: {
         nav_hl: 'Highlights',
-        nav_steps: 'Install',
+        nav_steps: 'Guide',
         nav_updates: "What's New",
         nav_fb: 'Feedback',
         nav_sup: 'Support',
@@ -2216,6 +2190,7 @@
         b5_d: 'Supports one-hand modifiers, double-tap, middle click, or custom combos. Try pressing a key.',
         sc_mid: 'Middle Click',
         c5_custom: 'Custom hotkey',
+        steps_title: 'Ready in 3 steps.',
         st1_lbl: 'Drag to Applications',
         st2_lbl: 'Confirm first launch',
         st3_lbl: 'Enable Accessibility',
@@ -2263,65 +2238,6 @@
       viOriginals[el.dataset.i18n] = el.innerHTML;
     });
 
-    // 6. Feedback form (GitHub Issue + Email)
-    let fbType = 'bug';
-    const fbSubject = document.getElementById('fb-subject');
-    const fbBody = document.getElementById('fb-body');
-    const fbStatus = document.getElementById('fb-status');
-
-    function syncFeedbackPlaceholders() {
-      if (currentLang === 'en') {
-        fbSubject.placeholder = 'Short summary...';
-        fbBody.placeholder = 'Describe the bug, your macOS version, or the feature you would like to see...';
-      } else {
-        fbSubject.placeholder = 'Tiêu đề ngắn gọn...';
-        fbBody.placeholder = 'Mô tả chi tiết lỗi, phiên bản macOS hoặc tính năng bạn mong muốn...';
-      }
-    }
-
-    document.querySelectorAll('.fb-type-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        fbType = btn.dataset.fbtype;
-        document.querySelectorAll('.fb-type-btn').forEach(b => b.classList.toggle('active', b === btn));
-      });
-    });
-
-    function getFeedbackPayload() {
-      const title = fbSubject.value.trim();
-      const body = fbBody.value.trim();
-      if (!title || !body) {
-        fbStatus.textContent = currentLang === 'en'
-          ? 'Please enter both a short summary and details.'
-          : 'Vui lòng nhập đầy đủ tiêu đề và nội dung góp ý.';
-        return null;
-      }
-      const tagMap = { bug: '[Bug]', enhancement: '[Feature]', feedback: '[Feedback]' };
-      const fullTitle = `${tagMap[fbType] || '[Feedback]'} ${title}`;
-      const ver = document.getElementById('version-text')?.textContent || 'v1.0.0';
-      const fullBody = `${body}\n\n---\nVersion: ${ver}\nType: ${fbType}`;
-      return { fullTitle, fullBody };
-    }
-
-    document.getElementById('feedback-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const payload = getFeedbackPayload();
-      if (!payload) return;
-      const url = `https://github.com/Phucvang/HiPuSwitcher/issues/new?title=${encodeURIComponent(payload.fullTitle)}&body=${encodeURIComponent(payload.fullBody)}&labels=${encodeURIComponent(fbType)}`;
-      window.open(url, '_blank', 'noopener');
-      fbStatus.textContent = currentLang === 'en'
-        ? 'Opened GitHub Issue with your feedback pre-filled.'
-        : 'Đã mở trang GitHub Issue với nội dung góp ý điền sẵn.';
-    });
-
-    document.getElementById('fb-email-btn').addEventListener('click', () => {
-      const payload = getFeedbackPayload();
-      if (!payload) return;
-      window.location.href = `mailto:phucnv0103@gmail.com?subject=${encodeURIComponent('Module E — ' + payload.fullTitle)}&body=${encodeURIComponent(payload.fullBody)}`;
-      fbStatus.textContent = currentLang === 'en'
-        ? 'Opening your Mail app...'
-        : 'Đang mở ứng dụng Mail...';
-    });
-
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         currentLang = btn.dataset.lang;
@@ -2331,7 +2247,6 @@
           const k = el.dataset.i18n;
           el.innerHTML = currentLang === 'en' ? (dict.en[k] || viOriginals[k]) : viOriginals[k];
         });
-        syncFeedbackPlaceholders();
         renderScReadout();
       });
     });
